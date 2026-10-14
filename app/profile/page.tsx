@@ -4,6 +4,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Footer from '../components/Footer';
+import FloatingActions from '../components/FloatingActions';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -420,26 +422,26 @@ export default function ProfilePage() {
   });
 
   return (
-    <div style={{ background: '#f8fafc', minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Segoe UI', sans-serif" }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Segoe UI', sans-serif" }}>
       
       <style>{`
         .avatar-container:hover .avatar-overlay { opacity: 1 !important; }
-        .profile-input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; margin-bottom: 20px; transition: 0.3s; }
-        .profile-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
-        .btn-outline:hover { background: #f1f5f9 !important; }
-        .invoice-table th { padding: 12px 10px; text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; }
-        .invoice-table td { padding: 15px 10px; border-bottom: 1px dashed #e2e8f0; font-size: 14px; color: #334155; vertical-align: middle; }
-        .fav-card { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: 0.3s; position: relative; }
-        .fav-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
-        .chat-bubble-user { background: #3b82f6; color: white; padding: 12px 18px; border-radius: 18px 18px 0 18px; max-width: 70%; font-size: 14px; align-self: flex-end; box-shadow: 0 2px 5px rgba(59,130,246,0.2); }
-        .chat-bubble-admin { background: #f1f5f9; color: #1e293b; padding: 12px 18px; border-radius: 18px 18px 18px 0; max-width: 70%; font-size: 14px; border: 1px solid #e2e8f0; }
+        .profile-input { width: 100%; padding: 12px; border: 1px solid #bae6fd; border-radius: 8px; font-size: 14px; outline: none; margin-bottom: 20px; transition: 0.3s; background: rgba(255, 255, 255, 0.85); }
+        .profile-input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+        .btn-outline:hover { background: #e0f2fe !important; }
+        .invoice-table th { padding: 12px 10px; text-align: left; color: #0369a1; font-size: 11px; text-transform: uppercase; border-bottom: 2px solid #bae6fd; font-weight: 800; }
+        .invoice-table td { padding: 15px 10px; border-bottom: 1px dashed rgba(186, 230, 253, 0.6); font-size: 14px; color: #334155; vertical-align: middle; }
+        .fav-card { border: 1px solid #bae6fd; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative; background: rgba(255, 255, 255, 0.7); }
+        .fav-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.15); border-color: #38bdf8; }
+        .chat-bubble-user { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 18px; border-radius: 18px 18px 0 18px; max-width: 70%; font-size: 14px; align-self: flex-end; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25); }
+        .chat-bubble-admin { background: rgba(240, 249, 255, 0.9); color: #0c4a6e; padding: 12px 18px; border-radius: 18px 18px 18px 0; max-width: 70%; font-size: 14px; border: 1px solid #bae6fd; }
 
         /* CSS CHO MODAL QUÊN MẬT KHẨU */
         .forgot-modal-overlay {
-          position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; backdrop-filter: blur(5px);
+          position: fixed; inset: 0; background: rgba(12, 74, 110, 0.8); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; backdrop-filter: blur(8px);
         }
         .forgot-modal-content {
-          background: white; border-radius: 12px; width: 100%; max-width: 450px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative;
+          background: rgba(240, 249, 255, 0.95); backdrop-filter: blur(16px); border-radius: 16px; width: 100%; max-width: 450px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.35); border: 1px solid #bae6fd; position: relative;
         }
         .forgot-btn {
           width: 100%; padding: 14px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
@@ -567,19 +569,61 @@ export default function ProfilePage() {
         </div>
       )}
 
-      <header style={{ background: '#1e293b', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link href="/" style={{ color: 'white', fontWeight: 'bold', fontSize: '20px', textDecoration: 'none' }}><i className="fas fa-video"></i> CIOs - impossible is nothing</Link>
-        <Link href="/" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '14px' }}><i className="fas fa-home"></i> Về trang chủ</Link>
+      {/* 0. TOP UTILITY BAR */}
+      <div className="top-utility-bar">
+        <div className="top-bar-container">
+          <div className="top-bar-left">
+            <span><i className="fas fa-phone-alt"></i> Hotline tư vấn: <strong style={{ color: '#ffffff' }}>0971.024.173</strong></span>
+            <span><i className="fas fa-map-marker-alt"></i> 12 Trịnh Đình Thảo, Tân Phú, TP. HCM</span>
+          </div>
+          <div className="top-bar-right">
+            <span><i className="fas fa-truck"></i> Miễn phí lắp đặt nội thành</span>
+            <span><i className="fas fa-shield-alt"></i> Bảo hành chính hãng 24 tháng</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 1. HEADER */}
+      <header className="site-header">
+        <div className="header-container">
+          <Link href="/" className="brand-logo">
+            <div className="brand-icon">
+              <i className="fas fa-video"></i>
+            </div>
+            <div className="brand-info">
+              <div className="brand-name">CIOs <span>Camera</span></div>
+              <div className="brand-tagline">Security & Smart Solutions</div>
+            </div>
+          </Link>
+
+          <nav className="nav-menu">
+            <Link href="/" className="nav-item-link">
+              <i className="fas fa-home"></i> Trang chủ
+            </Link>
+            <Link href="/projects" className="nav-item-link">
+              <i className="fas fa-tools"></i> Dự án
+            </Link>
+            <Link href="/contact" className="nav-item-link">
+              <i className="fas fa-headset"></i> Liên hệ
+            </Link>
+            <Link href="/cart" className="nav-item-link">
+              <i className="fas fa-shopping-cart"></i> Giỏ hàng
+            </Link>
+            <button onClick={handleLogout} style={{ background: 'rgba(244, 63, 94, 0.1)', color: '#f43f5e', border: '1px solid #fecdd3', padding: '6px 14px', borderRadius: '20px', fontWeight: 'bold', cursor: 'pointer', fontSize: '13px' }}>
+              <i className="fas fa-sign-out-alt"></i> Thoát
+            </button>
+          </nav>
+        </div>
       </header>
 
       <div className="profile-layout" style={{ maxWidth: '1200px', width: '95%', margin: '30px auto', display: 'flex', gap: '30px', flex: 1, alignItems: 'flex-start' }}>
         
-        <aside className="profile-sidebar" style={{ width: '280px', background: 'white', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+        <aside className="profile-sidebar" style={{ width: '280px', background: 'rgba(240, 249, 255, 0.8)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: '16px', boxShadow: '0 8px 30px rgba(2, 132, 199, 0.1)', border: '1px solid rgba(186, 230, 253, 0.75)', overflow: 'hidden' }}>
           
-          <div style={{ padding: '30px 20px', textAlign: 'center', borderBottom: '1px solid #f1f5f9' }}>
+          <div style={{ padding: '30px 20px', textAlign: 'center', borderBottom: '1px solid rgba(186, 230, 253, 0.6)' }}>
             <div style={{ position: 'relative', width: '100px', height: '100px', margin: '0 auto 15px' }}>
               <div 
-                style={{ width: '100%', height: '100%', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', cursor: 'pointer', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)', overflow: 'hidden' }}
+                style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #0284c7, #0369a1)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', cursor: 'pointer', boxShadow: '0 4px 15px rgba(2, 132, 199, 0.35)', overflow: 'hidden' }}
                 onClick={() => fileInputRef.current?.click()}
                 className="avatar-container"
               >
@@ -601,32 +645,32 @@ export default function ProfilePage() {
               )}
             </div>
 
-            <h3 style={{ fontSize: '18px', color: '#1e293b', margin: '0 0 5px', fontWeight: '800' }}>{user.username}</h3>
-            <span style={{ display: 'inline-block', padding: '4px 12px', background: '#eff6ff', color: '#2563eb', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>Thành viên thân thiết</span>
+            <h3 style={{ fontSize: '18px', color: '#0c4a6e', margin: '0 0 5px', fontWeight: '800' }}>{user.username}</h3>
+            <span style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(224, 242, 254, 0.8)', color: '#0284c7', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold', border: '1px solid #bae6fd' }}>Thành viên thân thiết</span>
           </div>
 
           <ul style={{ listStyle: 'none', padding: '15px 0', margin: 0 }}>
-            <li onClick={() => setActiveTab('orders')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'orders' ? '#2563eb' : '#475569', background: activeTab === 'orders' ? '#eff6ff' : 'transparent', borderLeft: activeTab === 'orders' ? '4px solid #2563eb' : '4px solid transparent' }}>
-              <i className="fas fa-box" style={{ width: '20px', color: '#b45309' }}></i> Lịch sử đơn hàng
+            <li onClick={() => setActiveTab('orders')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'orders' ? '#0284c7' : '#475569', background: activeTab === 'orders' ? 'rgba(224, 242, 254, 0.8)' : 'transparent', borderLeft: activeTab === 'orders' ? '4px solid #0284c7' : '4px solid transparent' }}>
+              <i className="fas fa-box" style={{ width: '20px', color: '#0284c7' }}></i> Lịch sử đơn hàng
             </li>
-            <li onClick={() => setActiveTab('favorites')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'favorites' ? '#2563eb' : '#475569', background: activeTab === 'favorites' ? '#eff6ff' : 'transparent', borderLeft: activeTab === 'favorites' ? '4px solid #2563eb' : '4px solid transparent' }}>
-              <i className="fas fa-heart" style={{ width: '20px', color: '#e11d48' }}></i> Sản phẩm yêu thích
+            <li onClick={() => setActiveTab('favorites')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'favorites' ? '#0284c7' : '#475569', background: activeTab === 'favorites' ? 'rgba(224, 242, 254, 0.8)' : 'transparent', borderLeft: activeTab === 'favorites' ? '4px solid #0284c7' : '4px solid transparent' }}>
+              <i className="fas fa-heart" style={{ width: '20px', color: '#f43f5e' }}></i> Sản phẩm yêu thích
             </li>
-            <li onClick={() => setActiveTab('support')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'support' ? '#2563eb' : '#475569', background: activeTab === 'support' ? '#eff6ff' : 'transparent', borderLeft: activeTab === 'support' ? '4px solid #2563eb' : '4px solid transparent' }}>
-              <i className="fas fa-comments" style={{ width: '20px', color: '#94a3b8' }}></i> Chat với Admin
+            <li onClick={() => setActiveTab('support')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'support' ? '#0284c7' : '#475569', background: activeTab === 'support' ? 'rgba(224, 242, 254, 0.8)' : 'transparent', borderLeft: activeTab === 'support' ? '4px solid #0284c7' : '4px solid transparent' }}>
+              <i className="fas fa-comments" style={{ width: '20px', color: '#0284c7' }}></i> Chat với Admin
             </li>
-            <li onClick={() => setActiveTab('settings')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'settings' ? '#2563eb' : '#475569', background: activeTab === 'settings' ? '#eff6ff' : 'transparent', borderLeft: activeTab === 'settings' ? '4px solid #2563eb' : '4px solid transparent' }}>
+            <li onClick={() => setActiveTab('settings')} style={{ padding: '15px 25px', cursor: 'pointer', display: 'flex', gap: '10px', alignItems: 'center', fontWeight: '600', color: activeTab === 'settings' ? '#0284c7' : '#475569', background: activeTab === 'settings' ? 'rgba(224, 242, 254, 0.8)' : 'transparent', borderLeft: activeTab === 'settings' ? '4px solid #0284c7' : '4px solid transparent' }}>
               <i className="fas fa-cog" style={{ width: '20px', color: '#64748b' }}></i> Cài đặt tài khoản
             </li>
           </ul>
 
           <div style={{ padding: '20px' }}>
-            <Link href="/" style={{ display: 'block', textAlign: 'center', padding: '10px', color: '#2563eb', border: '1px solid #bfdbfe', borderRadius: '6px', fontWeight: 'bold', textDecoration: 'none', marginBottom: '10px' }}><i className="fas fa-arrow-left"></i> Về Trang chủ</Link>
-            <button onClick={handleLogout} style={{ width: '100%', padding: '10px', background: '#fff1f2', color: '#e11d48', border: '1px solid #fecdd3', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}>Đăng xuất</button>
+            <Link href="/" style={{ display: 'block', textAlign: 'center', padding: '10px', color: '#0284c7', border: '1px solid #bae6fd', borderRadius: '8px', fontWeight: 'bold', textDecoration: 'none', marginBottom: '10px', background: 'rgba(255, 255, 255, 0.8)' }}><i className="fas fa-arrow-left"></i> Về Trang chủ</Link>
+            <button onClick={handleLogout} style={{ width: '100%', padding: '10px', background: 'rgba(224, 242, 254, 0.8)', color: '#0369a1', border: '1px solid #bae6fd', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Đăng xuất</button>
           </div>
         </aside>
 
-        <main className="profile-main" style={{ flex: 1, background: 'white', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #e2e8f0', padding: '40px', minHeight: '600px', position: 'relative' }}>
+        <main className="profile-main" style={{ flex: 1, background: 'rgba(240, 249, 255, 0.8)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: '16px', boxShadow: '0 8px 30px rgba(2, 132, 199, 0.1)', border: '1px solid rgba(186, 230, 253, 0.75)', padding: '40px', minHeight: '600px', position: 'relative' }}>
           
           {activeTab === 'orders' && (
             <div>
@@ -814,15 +858,15 @@ export default function ProfilePage() {
       </div>
 
       {viewOrder && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)' }}>
-          <div style={{ background: 'white', borderRadius: '12px', width: '700px', maxWidth: '95%', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', overflow: 'hidden' }}>
-            <div style={{ background: '#1e293b', color: 'white', padding: '15px 25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(12, 74, 110, 0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(8px)' }}>
+          <div style={{ background: 'rgba(240, 249, 255, 0.95)', backdropFilter: 'blur(16px)', borderRadius: '16px', width: '700px', maxWidth: '95%', boxShadow: '0 25px 50px -12px rgba(2, 132, 199, 0.4)', border: '1px solid #bae6fd', overflow: 'hidden' }}>
+            <div style={{ background: 'linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)', color: 'white', padding: '15px 25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>HÓA ĐƠN #{viewOrder.id}</h3>
-              <button onClick={() => setViewOrder(null)} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white', width: '30px', height: '30px', borderRadius: '50%', cursor: 'pointer' }}>&times;</button>
+              <button onClick={() => setViewOrder(null)} style={{ background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white', width: '30px', height: '30px', borderRadius: '50%', cursor: 'pointer' }}>&times;</button>
             </div>
 
             <div style={{ padding: '25px', maxHeight: '75vh', overflowY: 'auto' }}>
-              <div style={{ border: '1px dashed #cbd5e1', padding: '20px', borderRadius: '8px', background: '#f8fafc', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '25px' }}>
+              <div style={{ border: '1px dashed #bae6fd', padding: '20px', borderRadius: '12px', background: 'rgba(224, 242, 254, 0.6)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '25px' }}>
                 <div><span style={{ fontSize: '11px', color: '#64748b', fontWeight: '700', display: 'block' }}>NGƯỜI NHẬN</span><strong style={{ color: '#1e293b', fontSize: '14px' }}>{viewOrder.customer}</strong></div>
                 <div><span style={{ fontSize: '11px', color: '#64748b', fontWeight: '700', display: 'block' }}>ĐIỆN THOẠI</span><strong style={{ color: '#1e293b', fontSize: '14px' }}>{viewOrder.phone}</strong></div>
                 <div><span style={{ fontSize: '11px', color: '#64748b', fontWeight: '700', display: 'block' }}>ĐỊA CHỈ</span><span style={{ color: '#334155', fontSize: '14px' }}>{viewOrder.address}</span></div>
@@ -865,6 +909,12 @@ export default function ProfilePage() {
           </div>
         </div>
       )}
+
+      {/* FLOATING SPEED DIAL */}
+      <FloatingActions />
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }

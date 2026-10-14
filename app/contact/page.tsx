@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import NotifBadge from '../components/NotifBadge';
+import Footer from '../components/Footer';
+import FloatingActions from '../components/FloatingActions';
 
 export default function ContactPage() {
   const { totalItems } = useCart();
@@ -20,11 +22,12 @@ export default function ContactPage() {
     }
   }, []);
 
-const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('camera_bn_cart'); 
     localStorage.removeItem('currentUser'); 
     window.location.href = '/'; 
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.issue) return alert("Vui lòng điền đủ thông tin!");
@@ -38,7 +41,7 @@ const handleLogout = () => {
       });
       if (res.ok) {
         alert("Đã gửi yêu cầu liên hệ thành công! Quản trị viên sẽ phản hồi sớm nhất.");
-        setFormData({ ...formData, issue: '' }); // Xóa trắng khung chat
+        setFormData({ ...formData, issue: '' });
       }
     } catch (error) {
       alert("Lỗi kết nối máy chủ!");
@@ -47,113 +50,172 @@ const handleLogout = () => {
   };
 
   return (
-    <div style={{ background: '#f8fafc', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      
-      {/* 1. HEADER ĐÃ ĐỒNG BỘ */}
-      <header style={{ background: '#1e293b', padding: '12px 0', borderBottom: '1px solid #0f172a' }}>
-        <div style={{ maxWidth: '1140px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '96%' }}>
-          <Link href="/" style={{ color: 'white', fontWeight: 'bold', fontSize: '20px', display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <i className="fas fa-video"></i> CIOs - impossible is nothing
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* 0. TOP UTILITY BAR */}
+      <div className="top-utility-bar">
+        <div className="top-bar-container">
+          <div className="top-bar-left">
+            <span><i className="fas fa-phone-alt"></i> Hotline tư vấn: <strong style={{ color: '#ffffff' }}>0971.024.173</strong></span>
+            <span><i className="fas fa-map-marker-alt"></i> 12 Trịnh Đình Thảo, Tân Phú, TP. HCM</span>
+          </div>
+          <div className="top-bar-right">
+            <span><i className="fas fa-truck"></i> Miễn phí lắp đặt nội thành</span>
+            <span><i className="fas fa-shield-alt"></i> Bảo hành chính hãng 24 tháng</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 1. HEADER */}
+      <header className="site-header">
+        <div className="header-container">
+          <Link href="/" className="brand-logo">
+            <div className="brand-icon">
+              <i className="fas fa-video"></i>
+            </div>
+            <div className="brand-info">
+              <div className="brand-name">CIOs <span>Camera</span></div>
+              <div className="brand-tagline">Security & Smart Solutions</div>
+            </div>
           </Link>
-          <nav style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Link href="/" className="nav-link" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' }}><i className="fas fa-home"></i> Trang chủ</Link>
-            <Link href="/contact" className="nav-link" style={{ color: '#38bdf8', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' }}><i className="fas fa-phone-alt"></i> Liên hệ</Link>
-            
-            <Link href="/notifications" className="nav-link" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold', position: 'relative' }}>
-              <i className="fas fa-bell"></i> Thông báo <NotifBadge />
+
+          <nav className="nav-menu">
+            <Link href="/" className="nav-item-link">
+              <i className="fas fa-home"></i> Trang chủ
+            </Link>
+            <Link href="/projects" className="nav-item-link">
+              <i className="fas fa-tools"></i> Dự án
+            </Link>
+            <Link href="/contact" className="nav-item-link active">
+              <i className="fas fa-headset"></i> Liên hệ
             </Link>
             
-            <Link href="/cart" className="nav-link" style={{ position: 'relative', color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' }}>
+            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }}>
+              <i className="fas fa-bell"></i>
+              <NotifBadge />
+            </Link>
+
+            <Link href="/cart" className="nav-item-link" style={{ position: 'relative' }}>
               <i className="fas fa-shopping-cart"></i> Giỏ hàng
-              {totalItems > 0 && <span style={{ position: 'absolute', top: '-8px', right: '-12px', background: '#e11d48', color: 'white', fontSize: '10px', padding: '2px 6px', borderRadius: '50%' }}>{totalItems}</span>}
+              {totalItems > 0 && <span className="nav-badge-pill">{totalItems}</span>}
             </Link>
-            
-            {/* THAY THẾ DÒNG ĐĂNG NHẬP BẰNG TÀI KHOẢN ĐỘNG */}
+
             {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Link href="/profile" style={{ textAlign: 'right', fontSize: '12px', color: '#94a3b8', textDecoration: 'none' }}>
-                  Xin chào,<br/><strong style={{ color: '#4ade80', fontSize: '14px', textTransform: 'uppercase' }}>{user.username}</strong>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px' }}>
+                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn">
+                  <div className="header-user-avatar">
+                    {user.username.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="header-user-text">
+                    <span className="header-user-name">{user.username}</span>
+                    <span className="header-user-role">{String(user.role) === "1" ? "Quản trị viên" : "Khách hàng"}</span>
+                  </div>
                 </Link>
-                <button onClick={handleLogout} style={{ background: '#ef4444', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer', transition: '0.2s' }}>Thoát</button>
+                <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', padding: '6px' }} title="Đăng xuất">
+                  <i className="fas fa-sign-out-alt"></i>
+                </button>
               </div>
             ) : (
-              <Link href="/login" className="nav-link" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' }}>
-                <i className="fas fa-user"></i> Đăng nhập
-              </Link>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px' }}>
+                <Link href="/login" className="nav-item-link">Đăng nhập</Link>
+                <Link href="/register" className="nav-item-link highlight">Đăng ký</Link>
+              </div>
             )}
           </nav>
         </div>
       </header>
 
       {/* MAIN CONTENT */}
-      <main style={{ maxWidth: '1140px', width: '95%', margin: '40px auto', flex: 1 }}>
+      <main style={{ maxWidth: '1240px', width: '95%', margin: '40px auto 60px', flex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '32px', color: '#1e293b', fontWeight: '900', textTransform: 'uppercase', marginBottom: '10px' }}>Liên hệ với chúng tôi</h1>
-          <p style={{ color: '#64748b' }}>Đội ngũ CIOs - impossible is nothing luôn sẵn sàng hỗ trợ bạn 24/7</p>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#e0f2fe', color: '#0369a1', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: '700', marginBottom: '12px' }}>
+            <i className="fas fa-headset"></i> TRUNG TÂM HỖ TRỢ KHÁCH HÀNG
+          </div>
+          <h1 style={{ fontSize: '34px', color: '#0c4a6e', fontWeight: '900', letterSpacing: '-0.02em', marginBottom: '10px' }}>
+            Liên Hệ Với Chúng Tôi
+          </h1>
+          <p style={{ color: '#64748b', fontSize: '15px', maxWidth: '600px', margin: '0 auto' }}>
+            Đội ngũ chuyên viên kỹ thuật của CIOs Camera luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc 24/7.
+          </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', alignItems: 'start' }}>
           {/* Box Thông tin liên hệ */}
-          <div style={{ flex: 1, minWidth: '300px', background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #e2e8f0' }}>
-            <h3 style={{ fontSize: '18px', color: '#1e293b', marginBottom: '25px', borderBottom: '2px solid #f1f5f9', paddingBottom: '10px' }}>Thông tin cửa hàng</h3>
+          <div className="sidebar-box-clean" style={{ padding: '32px' }}>
+            <div className="sidebar-title" style={{ fontSize: '18px', marginBottom: '25px' }}>
+              <i className="fas fa-store"></i> Thông Tin Cửa Hàng
+            </div>
             
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
-              <div style={{ width: '40px', height: '40px', background: '#eff6ff', color: '#3b82f6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}><i className="fas fa-map-marker-alt"></i></div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '22px' }}>
+              <div style={{ width: '44px', height: '44px', background: '#e0f2fe', color: '#0284c7', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>
+                <i className="fas fa-map-marker-alt"></i>
+              </div>
               <div>
-                <h4 style={{ margin: '0 0 5px 0', color: '#1e293b', fontSize: '15px' }}>Địa chỉ</h4>
+                <h4 style={{ margin: '0 0 4px 0', color: '#0f172a', fontSize: '15px', fontWeight: '700' }}>Địa chỉ showroom</h4>
                 <p style={{ margin: 0, color: '#64748b', fontSize: '14px', lineHeight: '1.5' }}>12 Trịnh Đình Thảo, P. Hòa Thạnh, Q. Tân Phú, TP. Hồ Chí Minh</p>
               </div>
             </div>
             
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
-              <div style={{ width: '40px', height: '40px', background: '#fef2f2', color: '#ef4444', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}><i className="fas fa-phone-alt"></i></div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '22px' }}>
+              <div style={{ width: '44px', height: '44px', background: '#e0f2fe', color: '#0284c7', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>
+                <i className="fas fa-phone-alt"></i>
+              </div>
               <div>
-                <h4 style={{ margin: '0 0 5px 0', color: '#1e293b', fontSize: '15px' }}>Hotline hỗ trợ</h4>
-                <p style={{ margin: 0, color: '#ef4444', fontSize: '16px', fontWeight: 'bold' }}>0971.024.173</p>
+                <h4 style={{ margin: '0 0 4px 0', color: '#0f172a', fontSize: '15px', fontWeight: '700' }}>Hotline kỹ thuật & bảo hành</h4>
+                <p style={{ margin: 0, color: '#0284c7', fontSize: '18px', fontWeight: '800' }}>0971.024.173</p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '30px' }}>
-              <div style={{ width: '40px', height: '40px', background: '#f0fdf4', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}><i className="fas fa-envelope"></i></div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '25px' }}>
+              <div style={{ width: '44px', height: '44px', background: '#e0f2fe', color: '#0284c7', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>
+                <i className="fas fa-envelope"></i>
+              </div>
               <div>
-                <h4 style={{ margin: '0 0 5px 0', color: '#1e293b', fontSize: '15px' }}>Email</h4>
-                <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>hotro@cameracb.com</p>
+                <h4 style={{ margin: '0 0 4px 0', color: '#0f172a', fontSize: '15px', fontWeight: '700' }}>Email hỗ trợ</h4>
+                <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>hotro@cios-camera.vn</p>
               </div>
             </div>
 
             {/* Bản đồ */}
-            <div style={{ borderRadius: '8px', overflow: 'hidden', height: '200px', border: '1px solid #e2e8f0' }}>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', height: '220px', border: '1px solid #bae6fd' }}>
               <iframe src="https://maps.google.com/maps?q=12%20Tr%E1%BB%8Bnh%20%C4%90%C3%ACnh%20Th%E1%BA%A3o%2C%20Ho%C3%A0%20Th%E1%BA%A1nh%2C%20T%C3%A2n%20Ph%C3%BA%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style={{ border: 0 }} allowFullScreen={false} loading="lazy"></iframe>
             </div>
           </div>
 
           {/* Form Gửi yêu cầu */}
-          <div style={{ flex: 1.5, minWidth: '350px', background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #e2e8f0' }}>
-            <h3 style={{ fontSize: '18px', color: '#1e293b', marginBottom: '25px', borderBottom: '2px solid #f1f5f9', paddingBottom: '10px' }}>Gửi tin nhắn cho chúng tôi</h3>
+          <div className="sidebar-box-clean" style={{ padding: '32px' }}>
+            <div className="sidebar-title" style={{ fontSize: '18px', marginBottom: '25px' }}>
+              <i className="fas fa-paper-plane"></i> Gửi Tin Nhắn / Yêu Cầu Báo Giá
+            </div>
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '13px', color: '#475569', fontWeight: 'bold', marginBottom: '8px' }}>Họ và tên *</label>
-                  <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Nhập tên của bạn" style={{ width: '100%', padding: '12px 15px', borderRadius: '6px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '14px' }} />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '18px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', color: '#0c4a6e', fontWeight: '700', marginBottom: '8px' }}>Họ và tên *</label>
+                  <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Nhập tên của bạn" />
                 </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '13px', color: '#475569', fontWeight: 'bold', marginBottom: '8px' }}>Số điện thoại *</label>
-                  <input type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} placeholder="Nhập số điện thoại" style={{ width: '100%', padding: '12px 15px', borderRadius: '6px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '14px' }} />
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', color: '#0c4a6e', fontWeight: '700', marginBottom: '8px' }}>Số điện thoại *</label>
+                  <input type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} placeholder="Số điện thoại liên hệ" />
                 </div>
               </div>
               
               <div style={{ marginBottom: '25px' }}>
-                <label style={{ display: 'block', fontSize: '13px', color: '#475569', fontWeight: 'bold', marginBottom: '8px' }}>Nội dung vấn đề về sản phẩm *</label>
-                <textarea required value={formData.issue} onChange={e => setFormData({...formData, issue: e.target.value})} rows={5} placeholder="Ví dụ: Hướng dẫn mình cài đặt đầu ghi Vantech hoặc cấu hình mạng cho switch Hikvision với..." style={{ width: '100%', padding: '15px', borderRadius: '6px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '14px', resize: 'vertical' }}></textarea>
+                <label style={{ display: 'block', fontSize: '13px', color: '#0c4a6e', fontWeight: '700', marginBottom: '8px' }}>Nội dung cần hỗ trợ *</label>
+                <textarea required value={formData.issue} onChange={e => setFormData({...formData, issue: e.target.value})} rows={6} placeholder="Mô tả nhu cầu của bạn (Ví dụ: Tư vấn lắp đặt trọn gói 4 camera ngoài trời cho nhà phố, cấu hình đầu ghi...)" style={{ width: '100%', resize: 'vertical' }}></textarea>
               </div>
 
-              <button type="submit" disabled={isSubmitting} style={{ width: '100%', padding: '15px', background: isSubmitting ? '#94a3b8' : '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', fontSize: '15px', cursor: isSubmitting ? 'not-allowed' : 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: '0.3s' }}>
+              <button type="submit" disabled={isSubmitting} className="btn-card-action" style={{ padding: '14px', fontSize: '15px' }}>
                 <i className="fas fa-paper-plane"></i> {isSubmitting ? 'ĐANG GỬI...' : 'GỬI YÊU CẦU NGAY'}
               </button>
             </form>
           </div>
         </div>
       </main>
+
+      {/* FLOATING SPEED DIAL */}
+      <FloatingActions />
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }

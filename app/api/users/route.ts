@@ -4,13 +4,26 @@ import User from '../../../models/User';
 // Import cỗ máy gửi mail bạn vừa tạo ở Bước 4
 import { sendEmail } from '../../../lib/sendEmail'; 
 
+import db from '../../../db.json';
+
 export async function GET() {
   try {
     await connectDB();
-    const data = await User.find({});
-    return NextResponse.json(data);
+    let data = await User.find({});
+    if (!data || data.length === 0) {
+      if (db.users && db.users.length > 0) {
+        try {
+          await User.insertMany(db.users);
+          data = await User.find({});
+        } catch (e) {
+          return NextResponse.json(db.users);
+        }
+      }
+    }
+    return NextResponse.json(data && data.length > 0 ? data : db.users);
   } catch (error) {
-    return NextResponse.json({ error: 'Lỗi server' }, { status: 500 });
+    console.error("Lỗi kết nối User DB, dùng db.json dự phòng:", error);
+    return NextResponse.json(db.users || []);
   }
 }
 

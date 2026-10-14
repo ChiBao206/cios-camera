@@ -2,14 +2,31 @@ import { NextResponse } from 'next/server';
 import connectDB from '../../../lib/mongodb';
 import Product from '../../../models/Product';
 
-// LẤY DANH SÁCH SẢN PHẨM TỪ MONGODB
+import db from '../../../db.json';
+
+// LẤY DANH SÁCH SẢN PHẨM TỪ MONGODB (KÈM FALLBACK TỰ ĐỘNG KHÔNG LO MẤT DỮ LIỆU)
 export async function GET() {
   try {
     await connectDB();
-    const products = await Product.find({}).sort({ createdAt: -1 }); // Lấy tất cả, sắp xếp mới nhất lên đầu
-    return NextResponse.json(products);
+    let products = await Product.find({}).sort({ createdAt: -1 });
+    
+    // Nếu MongoDB kết nối được nhưng chưa có sản phẩm, nạp tự động từ db.json
+    if (!products || products.length === 0) {
+      if (db.products && db.products.length > 0) {
+        try {
+          await Product.insertMany(db.products);
+          products = await Product.find({}).sort({ createdAt: -1 });
+        } catch (e) {
+          return NextResponse.json(db.products);
+        }
+      }
+    }
+    
+    return NextResponse.json(products && products.length > 0 ? products : db.products);
   } catch (error) {
-    return NextResponse.json({ message: "Lỗi kết nối database" }, { status: 500 });
+    console.error("Lỗi kết nối MongoDB, chuyển sang nạp dữ liệu từ db.json dự phòng:", error);
+    // Luôn trả về dữ liệu từ db.json dự phòng để website không bao giờ bị mất sản phẩm
+    return NextResponse.json(db.products || []);
   }
 }
 

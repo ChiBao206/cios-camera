@@ -171,35 +171,31 @@ export default function LoginPage() {
 
   return (
     <div style={{ 
-      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
       minHeight: '100vh', 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center', 
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" 
+      padding: '20px'
     }}>
       
       {/* CSS DÀNH RIÊNG CHO MODAL QUÊN MẬT KHẨU */}
       <style>{`
         .forgot-modal-overlay {
-          position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(5px);
+          position: fixed; inset: 0; background: rgba(12, 74, 110, 0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(8px);
         }
         .forgot-modal-content {
-          background: white; border-radius: 12px; width: 100%; max-width: 450px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative;
+          background: rgba(240, 249, 255, 0.95); backdrop-filter: blur(16px); border-radius: 16px; width: 100%; max-width: 450px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.35); border: 1px solid #bae6fd; position: relative;
         }
         .forgot-input {
-          width: 100%; padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; margin-bottom: 20px; transition: border-color 0.2s;
+          width: 100%; padding: 12px 15px; border: 1px solid #bae6fd; border-radius: 8px; font-size: 14px; outline: none; margin-bottom: 20px; transition: border-color 0.2s; background: rgba(255, 255, 255, 0.85);
         }
         .forgot-input:focus {
-          border-color: #3b82f6;
+          border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
         }
         .forgot-btn {
-          width: 100%; padding: 14px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
+          width: 100%; padding: 14px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
         }
-        .forgot-btn:hover { background: #2563eb; }
+        .forgot-btn:hover { background: linear-gradient(135deg, #0369a1, #0c4a6e); }
         .forgot-btn:disabled { background: #94a3b8; cursor: not-allowed; }
       `}</style>
 
@@ -315,25 +311,28 @@ export default function LoginPage() {
 
       {/* FORM ĐĂNG NHẬP CHÍNH */}
       <div style={{ 
-        background: 'white', 
+        background: 'rgba(240, 249, 255, 0.82)', 
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         padding: '40px 30px', 
-        borderRadius: '12px', 
-        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+        borderRadius: '16px', 
+        boxShadow: '0 20px 50px rgba(2, 132, 199, 0.25)',
+        border: '1px solid rgba(186, 230, 253, 0.85)',
         width: '100%', 
-        maxWidth: '400px' 
+        maxWidth: '420px' 
       }}>
         
         {/* TIÊU ĐỀ */}
         <div style={{ textAlign: 'center', marginBottom: '35px' }}>
-          <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#0f172a', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#0c4a6e', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
             <span>👋</span> CHÀO MỪNG TRỞ LẠI!
           </h2>
-          <p style={{ color: '#64748b', fontSize: '13px' }}>Vui lòng đăng nhập để tiếp tục</p>
+          <p style={{ color: '#0369a1', fontSize: '13px', fontWeight: '600' }}>Vui lòng đăng nhập để tiếp tục</p>
         </div>
 
         {/* THÔNG BÁO LỖI (Sẽ hiện ra nếu nhập sai) */}
         {error && (
-          <div style={{ background: '#fef2f2', color: '#ef4444', padding: '10px', borderRadius: '6px', fontSize: '13px', marginBottom: '20px', textAlign: 'center', border: '1px solid #fecdd3' }}>
+          <div style={{ background: '#fef2f2', color: '#ef4444', padding: '10px', borderRadius: '8px', fontSize: '13px', marginBottom: '20px', textAlign: 'center', border: '1px solid #fecdd3' }}>
             {error}
           </div>
         )}
@@ -341,7 +340,7 @@ export default function LoginPage() {
         {/* FORM ĐĂNG NHẬP */}
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#334155', fontWeight: '600' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#0c4a6e', fontWeight: '700' }}>
               Tên đăng nhập hoặc Email
             </label>
             <input 
@@ -350,31 +349,32 @@ export default function LoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              style={{ width: '100%', padding: '12px 15px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', outline: 'none', transition: 'border-color 0.2s' }} 
-              onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-              onBlur={(e) => e.target.style.borderColor = '#cbd5e1'}
+              style={{ width: '100%', padding: '12px 15px', border: '1px solid #bae6fd', borderRadius: '8px', fontSize: '14px', outline: 'none', background: 'rgba(255, 255, 255, 0.85)', transition: 'border-color 0.2s' }} 
+              onFocus={(e) => e.target.style.borderColor = '#0284c7'}
+              onBlur={(e) => e.target.style.borderColor = '#bae6fd'}
             />
           </div>
 
           <div style={{ marginBottom: '25px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#334155', fontWeight: '600' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#0c4a6e', fontWeight: '700' }}>
               Mật khẩu
             </label>
             <input 
               type="password" 
-              placeholder="******" 
+              placeholder="Nhập mật khẩu..." 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ width: '100%', padding: '12px 15px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', outline: 'none', transition: 'border-color 0.2s' }} 
-              onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-              onBlur={(e) => e.target.style.borderColor = '#cbd5e1'}
+              style={{ width: '100%', padding: '12px 15px', border: '1px solid #bae6fd', borderRadius: '8px', fontSize: '14px', outline: 'none', background: 'rgba(255, 255, 255, 0.85)', transition: 'border-color 0.2s' }} 
+              onFocus={(e) => e.target.style.borderColor = '#0284c7'}
+              onBlur={(e) => e.target.style.borderColor = '#bae6fd'}
             />
           </div>
 
+
           <button 
             type="submit" 
-            style={{ width: '100%', padding: '14px', background: '#0f172a', color: 'white', border: 'none', borderRadius: '6px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', transition: 'opacity 0.2s' }}
+            style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg, #0ea5e9, #0284c7)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', transition: 'opacity 0.2s', boxShadow: '0 4px 15px rgba(14, 165, 233, 0.4)' }}
             onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
           >
@@ -387,7 +387,7 @@ export default function LoginPage() {
           <Link 
             href="#" 
             onClick={(e) => { e.preventDefault(); setShowForgotModal(true); }} 
-            style={{ color: '#ef4444', fontSize: '13px', textDecoration: 'none', fontWeight: '600', display: 'block', marginBottom: '20px' }}
+            style={{ color: '#0ea5e9', fontSize: '13px', textDecoration: 'none', fontWeight: '600', display: 'block', marginBottom: '20px' }}
           >
             Quên mật khẩu?
           </Link>

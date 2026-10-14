@@ -2,13 +2,26 @@ import { NextResponse } from 'next/server';
 import connectDB from '../../../lib/mongodb';
 import Category from '../../../models/Category';
 
+import db from '../../../db.json';
+
 export async function GET() {
   try {
     await connectDB();
-    const data = await Category.find({});
-    return NextResponse.json(data);
+    let data = await Category.find({});
+    if (!data || data.length === 0) {
+      if (db.categories && db.categories.length > 0) {
+        try {
+          await Category.insertMany(db.categories);
+          data = await Category.find({});
+        } catch (e) {
+          return NextResponse.json(db.categories);
+        }
+      }
+    }
+    return NextResponse.json(data && data.length > 0 ? data : db.categories);
   } catch (error) {
-    return NextResponse.json({ message: "Lỗi kết nối DB" }, { status: 500 });
+    console.error("Lỗi kết nối DB danh mục, dùng dự phòng:", error);
+    return NextResponse.json(db.categories || []);
   }
 }
 
