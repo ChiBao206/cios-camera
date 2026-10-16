@@ -40,6 +40,7 @@ export default function Home() {
   const [minPrice, setMinPrice] = useState(0); 
   const [maxPrice, setMaxPrice] = useState(5000000); 
   const [searchTerm, setSearchTerm] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 2. TỰ ĐỘNG GỌI API ĐỒNG BỘ DỮ LIỆU
   useEffect(() => {
@@ -265,6 +266,14 @@ export default function Home() {
       )}
 
       {/* 1. STICKY MODERN HEADER */}
+      {/* Mobile Nav Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="mobile-nav-overlay" 
+          style={{ display: 'block' }}
+          onClick={() => setMobileMenuOpen(false)} 
+        />
+      )}
       <header className="site-header">
         <div className="header-container">
           {/* Logo */}
@@ -311,23 +320,23 @@ export default function Home() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="nav-menu">
-            <Link href="/" className="nav-item-link active">
+          <nav className={`nav-menu${mobileMenuOpen ? ' is-open' : ''}`}>
+            <Link href="/" className="nav-item-link active" onClick={() => setMobileMenuOpen(false)}>
               <i className="fas fa-home"></i> Trang chủ
             </Link>
-            <Link href="/projects" className="nav-item-link">
+            <Link href="/projects" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
               <i className="fas fa-tools"></i> Dự án
             </Link>
-            <Link href="/contact" className="nav-item-link">
+            <Link href="/contact" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
               <i className="fas fa-headset"></i> Liên hệ
             </Link>
             
-            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }}>
+            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }} onClick={() => setMobileMenuOpen(false)}>
               <i className="fas fa-bell"></i>
               <NotifBadge />
             </Link>
 
-            <Link href="/cart" className="nav-item-link" style={{ position: 'relative' }}>
+            <Link href="/cart" className="nav-item-link" style={{ position: 'relative' }} onClick={() => setMobileMenuOpen(false)}>
               <i className="fas fa-shopping-cart"></i> Giỏ hàng
               {totalItems > 0 && (
                 <span className="nav-badge-pill">{totalItems}</span>
@@ -335,8 +344,8 @@ export default function Home() {
             </Link>
 
             {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px' }}>
-                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px', padding: '8px 16px' }}>
+                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn" onClick={() => setMobileMenuOpen(false)}>
                   <div className="header-user-avatar">
                     {user.username.charAt(0).toUpperCase()}
                   </div>
@@ -354,18 +363,49 @@ export default function Home() {
                 </button>
               </div>
             ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px' }}>
-                <Link href="/login" className="nav-item-link">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px', padding: '8px 16px' }}>
+                <Link href="/login" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
                   Đăng nhập
                 </Link>
-                <Link href="/register" className="nav-item-link highlight">
+                <Link href="/register" className="nav-item-link highlight" onClick={() => setMobileMenuOpen(false)}>
                   Đăng ký
                 </Link>
               </div>
             )}
           </nav>
+
+          {/* Hamburger Button - chỉ hiện trên mobile */}
+          <button 
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Mở menu"
+          >
+            <span style={{ transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }}></span>
+            <span style={{ opacity: mobileMenuOpen ? 0 : 1 }}></span>
+            <span style={{ transform: mobileMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }}></span>
+          </button>
         </div>
       </header>
+
+      {/* MOBILE SEARCH BAR - chỉ hiện trên mobile thay thế header search */}
+      <div className="mobile-search-bar">
+        <i className="fas fa-search" style={{ color: '#0284c7', marginRight: '8px' }}></i>
+        <input 
+          type="text" 
+          placeholder="Tìm camera, thiết bị an ninh..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              scrollToProducts();
+            }
+          }}
+        />
+        <button type="button" onClick={scrollToProducts}>
+          <i className="fas fa-arrow-right"></i>
+        </button>
+      </div>
 
       {/* 2. MODERN HERO BANNER */}
       <section className="modern-hero">

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useCart } from '../../context/CartContext';
 import NotifBadge from '@/app/components/NotifBadge';
+import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import FloatingActions from '@/app/components/FloatingActions';
 import db from '@/db.json';

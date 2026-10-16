@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FloatingActions from '../components/FloatingActions';
 
@@ -584,37 +585,7 @@ export default function ProfilePage() {
       </div>
 
       {/* 1. HEADER */}
-      <header className="site-header">
-        <div className="header-container">
-          <Link href="/" className="brand-logo">
-            <div className="brand-icon">
-              <i className="fas fa-video"></i>
-            </div>
-            <div className="brand-info">
-              <div className="brand-name">CIOs <span>Camera</span></div>
-              <div className="brand-tagline">Security & Smart Solutions</div>
-            </div>
-          </Link>
-
-          <nav className="nav-menu">
-            <Link href="/" className="nav-item-link">
-              <i className="fas fa-home"></i> Trang chủ
-            </Link>
-            <Link href="/projects" className="nav-item-link">
-              <i className="fas fa-tools"></i> Dự án
-            </Link>
-            <Link href="/contact" className="nav-item-link">
-              <i className="fas fa-headset"></i> Liên hệ
-            </Link>
-            <Link href="/cart" className="nav-item-link">
-              <i className="fas fa-shopping-cart"></i> Giỏ hàng
-            </Link>
-            <button onClick={handleLogout} style={{ background: 'rgba(244, 63, 94, 0.1)', color: '#f43f5e', border: '1px solid #fecdd3', padding: '6px 14px', borderRadius: '20px', fontWeight: 'bold', cursor: 'pointer', fontSize: '13px' }}>
-              <i className="fas fa-sign-out-alt"></i> Thoát
-            </button>
-          </nav>
-        </div>
-      </header>
+      <Header user={user} activePage="profile" onLogout={handleLogout} />
 
       <div className="profile-layout" style={{ maxWidth: '1200px', width: '95%', margin: '30px auto', display: 'flex', gap: '30px', flex: 1, alignItems: 'flex-start' }}>
         

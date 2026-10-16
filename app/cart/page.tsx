@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { useState, useEffect } from 'react'; 
 import NotifBadge from '@/app/components/NotifBadge';
+import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import FloatingActions from '@/app/components/FloatingActions';
 
@@ -464,61 +465,7 @@ export default function CartPage() {
       </div>
 
       {/* 1. HEADER */}
-      <header className="site-header">
-        <div className="header-container">
-          <Link href="/" className="brand-logo">
-            <div className="brand-icon">
-              <i className="fas fa-video"></i>
-            </div>
-            <div className="brand-info">
-              <div className="brand-name">CIOs <span>Camera</span></div>
-              <div className="brand-tagline">Security & Smart Solutions</div>
-            </div>
-          </Link>
-
-          <nav className="nav-menu">
-            <Link href="/" className="nav-item-link">
-              <i className="fas fa-home"></i> Trang chủ
-            </Link>
-            <Link href="/projects" className="nav-item-link">
-              <i className="fas fa-tools"></i> Dự án
-            </Link>
-            <Link href="/contact" className="nav-item-link">
-              <i className="fas fa-headset"></i> Liên hệ
-            </Link>
-            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }}>
-              <i className="fas fa-bell"></i>
-              <NotifBadge />
-            </Link>
-            <Link href="/cart" className="nav-item-link active" style={{ position: 'relative' }}>
-              <i className="fas fa-shopping-cart"></i> Giỏ hàng
-              {totalItems > 0 && <span className="nav-badge-pill">{totalItems}</span>}
-            </Link>
-
-            {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px' }}>
-                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn">
-                  <div className="header-user-avatar">
-                    {user.username.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="header-user-text">
-                    <span className="header-user-name">{user.username}</span>
-                    <span className="header-user-role">{String(user.role) === "1" ? "Quản trị viên" : "Khách hàng"}</span>
-                  </div>
-                </Link>
-                <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', padding: '6px' }} title="Đăng xuất">
-                  <i className="fas fa-sign-out-alt"></i>
-                </button>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px' }}>
-                <Link href="/login" className="nav-item-link">Đăng nhập</Link>
-                <Link href="/register" className="nav-item-link highlight">Đăng ký</Link>
-              </div>
-            )}
-          </nav>
-        </div>
-      </header>
+      <Header user={user} activePage="cart" onLogout={handleLogout} />
 
       <main style={{ maxWidth: '1200px', width: '95%', margin: '30px auto', flex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
@@ -537,9 +484,9 @@ export default function CartPage() {
             <Link href="/" style={{ display: 'inline-block', background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)', color: 'white', padding: '12px 30px', borderRadius: '30px', fontWeight: 'bold', textDecoration: 'none', boxShadow: '0 4px 15px rgba(2, 132, 199, 0.35)' }}>MUA SẮM NGAY</Link>
           </div>
         ) : (
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+          <div className="cart-layout-flex" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
 
-            <div style={{ flex: hasCheckedItems ? '1 1 60%' : '1 1 100%', width: '100%', background: 'rgba(240, 249, 255, 0.78)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: '16px', padding: '0 20px 20px 20px', boxShadow: '0 8px 30px rgba(2, 132, 199, 0.1)', border: '1px solid rgba(186, 230, 253, 0.75)', transition: 'all 0.3s ease' }}>
+            <div className="cart-items-col" style={{ flex: hasCheckedItems ? '1 1 60%' : '1 1 100%', width: '100%', background: 'rgba(240, 249, 255, 0.78)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: '16px', padding: '0 20px 20px 20px', boxShadow: '0 8px 30px rgba(2, 132, 199, 0.1)', border: '1px solid rgba(186, 230, 253, 0.75)', transition: 'all 0.3s ease' }}>
               
               <div style={{ display: 'flex', alignItems: 'center', padding: '15px 0', borderBottom: '2px solid rgba(186, 230, 253, 0.8)', gap: '12px', marginBottom: '5px' }}>
                 <input 
@@ -589,7 +536,7 @@ export default function CartPage() {
             </div>
 
             {hasCheckedItems && (
-              <div style={{ flex: '1 1 35%', minWidth: '300px', width: '100%', transition: 'all 0.3s ease' }}>
+              <div className="cart-summary-col" style={{ flex: '1 1 35%', minWidth: '300px', width: '100%', transition: 'all 0.3s ease' }}>
                 <div style={{ background: 'rgba(240, 249, 255, 0.82)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: '16px', padding: '25px', boxShadow: '0 8px 30px rgba(2, 132, 199, 0.1)', border: '1px solid rgba(186, 230, 253, 0.75)' }}>
                   <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase', marginBottom: '20px' }}>THÔNG TIN GIAO HÀNG</h3>
 
