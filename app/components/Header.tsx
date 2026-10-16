@@ -19,16 +19,16 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
 
   return (
     <>
-      {/* Mobile Nav Overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="mobile-nav-overlay"
-          style={{ display: "block" }}
-          onClick={close}
-        />
-      )}
-
       <header className="site-header">
+        {/* Mobile Nav Overlay - Nằm trong site-header cùng context với nav-menu */}
+        {mobileMenuOpen && (
+          <div
+            className="mobile-nav-overlay"
+            style={{ display: "block" }}
+            onClick={close}
+          />
+        )}
+
         <div className="header-container">
           {/* Logo */}
           <Link href="/" className="brand-logo" onClick={close}>
