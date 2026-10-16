@@ -677,15 +677,24 @@ export default function AdminDashboard() {
         }
         
         .status-select { 
-          padding: 6px 10px; 
-          border-radius: 20px; 
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          padding: 4px 24px 4px 10px; 
+          border-radius: 9999px; 
           border: 1.5px solid #cbd5e1; 
           outline: none; 
           font-weight: 700; 
-          font-size: 12px; 
+          font-size: 11.5px; 
           cursor: pointer; 
-          background: #ffffff;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: right 7px center;
+          background-size: 11px;
           transition: all 0.2s ease;
+          line-height: 1.4;
+          display: inline-block;
+          white-space: nowrap;
         }
         .status-select:focus {
           box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
@@ -942,13 +951,13 @@ export default function AdminDashboard() {
                     <table className="admin-table">
                       <thead>
                         <tr>
-                          <th>Mã Đơn</th>
-                          <th>Khách hàng</th>
-                          <th>Ngày đặt</th>
-                          <th>Thanh toán</th>
-                          <th>Tổng tiền</th>
-                          <th>Trạng thái</th>
-                          <th style={{ textAlign: 'right' }}>Hành động</th>
+                          <th style={{ width: '80px', whiteSpace: 'nowrap' }}>Mã Đơn</th>
+                          <th style={{ minWidth: '130px', whiteSpace: 'nowrap' }}>Khách hàng</th>
+                          <th style={{ minWidth: '100px', whiteSpace: 'nowrap' }}>Ngày đặt</th>
+                          <th style={{ minWidth: '90px', whiteSpace: 'nowrap' }}>Thanh toán</th>
+                          <th style={{ minWidth: '120px', whiteSpace: 'nowrap' }}>Tổng tiền</th>
+                          <th style={{ minWidth: '130px', whiteSpace: 'nowrap' }}>Trạng thái</th>
+                          <th style={{ textAlign: 'right', minWidth: '120px', whiteSpace: 'nowrap' }}>Hành động</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -960,31 +969,33 @@ export default function AdminDashboard() {
                           })
                           .map((order: any) => (
                           <tr key={order._id || order.id}>
-                            <td style={{ color: '#0284c7', fontWeight: '700' }}>#{String(order._id || order.id).slice(-4)}</td>
-                            <td style={{ fontWeight: '600', color: '#1e293b' }}>{order.user_id === 1 ? 'ADMIN' : (order.customer_name || 'Khách vãng lai')}</td>
-                            <td style={{ color: '#64748b', fontSize: '13px' }}>{order.createdAt ? new Date(order.createdAt).toLocaleDateString('vi-VN') : 'Mới đây'}</td>
-                            <td>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: '#f0fdf4', color: '#16a34a', padding: '3px 8px', borderRadius: '4px', fontSize: '11.5px', fontWeight: '700', border: '1px solid #bbf7d0' }}>
+                            <td style={{ color: '#0284c7', fontWeight: '700', whiteSpace: 'nowrap' }}>#{String(order._id || order.id).slice(-4)}</td>
+                            <td style={{ fontWeight: '600', color: '#1e293b', whiteSpace: 'nowrap' }}>{order.user_id === 1 ? 'ADMIN' : (order.customer_name || 'Khách vãng lai')}</td>
+                            <td style={{ color: '#64748b', fontSize: '12.5px', whiteSpace: 'nowrap' }}>{order.createdAt ? new Date(order.createdAt).toLocaleDateString('vi-VN') : 'Mới đây'}</td>
+                            <td style={{ whiteSpace: 'nowrap' }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: '#f0fdf4', color: '#16a34a', padding: '3px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: '700', border: '1px solid #bbf7d0', whiteSpace: 'nowrap' }}>
                                 <i className="fas fa-money-bill-wave" style={{ fontSize: '10px' }}></i> COD
                               </span>
                             </td>
-                            <td style={{ color: '#e11d48', fontWeight: '800', fontSize: '14px' }}>{Number(order.total_money || order.total || 0).toLocaleString('vi-VN')} đ</td>
-                            <td>
+                            <td style={{ color: '#e11d48', fontWeight: '800', fontSize: '13.5px', whiteSpace: 'nowrap' }}>
+                              {Number(order.total_money || order.total || 0).toLocaleString('vi-VN')}&nbsp;đ
+                            </td>
+                            <td style={{ whiteSpace: 'nowrap' }}>
                               <select 
                                 className="status-select" 
                                 value={order.status || "Chờ xử lý"} 
                                 onChange={(e) => handleUpdateOrderStatus(order._id || order.id, e.target.value)}
                                 style={{ 
-                                  color: order.status === 'Thành công' ? '#16a34a' : order.status === 'Đã hủy' ? '#ef4444' : '#d97706',
-                                  borderColor: order.status === 'Thành công' ? '#bbf7d0' : order.status === 'Đã hủy' ? '#fecdd3' : '#fed7aa',
-                                  background: order.status === 'Thành công' ? '#f0fdf4' : order.status === 'Đã hủy' ? '#fff1f2' : '#fffbeb'
+                                  color: order.status === 'Thành công' ? '#15803d' : order.status === 'Đã hủy' ? '#b91c1c' : '#b45309',
+                                  borderColor: order.status === 'Thành công' ? '#86efac' : order.status === 'Đã hủy' ? '#fca5a5' : '#fde047',
+                                  background: order.status === 'Thành công' ? '#f0fdf4' : order.status === 'Đã hủy' ? '#fef2f2' : '#fefce8'
                                 }}
                               >
-                                <option value="Chờ xử lý">⏳ Chờ xử lý</option>
-                                <option value="Đã vận chuyển">📦 Đã vận chuyển</option>
-                                <option value="Đang giao hàng">🚚 Đang giao hàng</option>
-                                <option value="Thành công">✅ Thành công</option>
-                                <option value="Đã hủy">❌ Đã hủy</option>
+                                <option value="Chờ xử lý">Chờ xử lý</option>
+                                <option value="Đã vận chuyển">Đã vận chuyển</option>
+                                <option value="Đang giao hàng">Đang giao hàng</option>
+                                <option value="Thành công">Thành công</option>
+                                <option value="Đã hủy">Đã hủy</option>
                               </select>
                             </td>
                             <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
