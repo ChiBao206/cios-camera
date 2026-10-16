@@ -47,9 +47,24 @@ export default function NotifBadge() {
 
     checkUnread();
     
-    // Tự động quét tìm thông báo mới mỗi 5 giây (như web thật)
-    const interval = setInterval(checkUnread, 5000);
-    return () => clearInterval(interval);
+    // Tự động quét tìm thông báo mới mỗi 35 giây khi tab đang mở
+    const interval = setInterval(() => {
+      if (typeof document !== "undefined" && !document.hidden) {
+        checkUnread();
+      }
+    }, 35000);
+
+    const onVisibilityChange = () => {
+      if (typeof document !== "undefined" && !document.hidden) {
+        checkUnread();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, []);
 
   // Nếu không có thông báo mới thì ẩn luôn cục màu đỏ

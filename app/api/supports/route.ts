@@ -16,7 +16,7 @@ const Support = mongoose.models.Support || mongoose.model('Support', SupportSche
 export async function GET() {
   try {
     await connectDB();
-    const data = await Support.find({}).sort({ createdAt: 1 }); // Sắp xếp theo thứ tự thời gian cũ -> mới
+    const data = await Support.find({}).sort({ createdAt: 1 }).lean(); // Sắp xếp theo thứ tự thời gian cũ -> mới
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ message: "Lỗi lấy dữ liệu hỗ trợ" }, { status: 500 });

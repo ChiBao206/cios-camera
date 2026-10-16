@@ -82,7 +82,7 @@ export async function GET() {
       await Project.insertMany(initialProjects);
     }
 
-    const data = await Project.find({}).sort({ createdAt: -1 });
+    const data = await Project.find({}).sort({ createdAt: -1 }).lean();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ message: "Lỗi lấy dữ liệu dự án" }, { status: 500 });

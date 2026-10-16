@@ -8,7 +8,7 @@ export async function GET() {
   try {
     await connectDB();
     // Hệ thống chỉ cần duy nhất 1 dòng cấu hình, nên ta dùng findOne()
-    let settings = await Setting.findOne({});
+    let settings = await Setting.findOne({}).lean();
     
     // Nếu lần đầu tiên chạy web chưa có data, tự động tạo mặc định
     if (!settings) {

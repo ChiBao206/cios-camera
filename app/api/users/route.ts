@@ -9,12 +9,12 @@ import db from '../../../db.json';
 export async function GET() {
   try {
     await connectDB();
-    let data = await User.find({});
+    let data = await User.find({}).lean();
     if (!data || data.length === 0) {
       if (db.users && db.users.length > 0) {
         try {
           await User.insertMany(db.users);
-          data = await User.find({});
+          data = await User.find({}).lean();
         } catch (e) {
           return NextResponse.json(db.users);
         }

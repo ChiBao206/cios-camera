@@ -68,12 +68,11 @@ export default function Home() {
 
     const fetchRealData = async () => {
       try {
-        const timestamp = new Date().getTime();
         const [prodRes, catRes, setRes, vouRes] = await Promise.all([
-          fetch(`/api/products?t=${timestamp}`).catch(() => null),
-          fetch(`/api/categories?t=${timestamp}`).catch(() => null),
-          fetch(`/api/settings?t=${timestamp}`).catch(() => null),
-          fetch(`/api/vouchers?t=${timestamp}`).catch(() => null)
+          fetch(`/api/products`).catch(() => null),
+          fetch(`/api/categories`).catch(() => null),
+          fetch(`/api/settings`).catch(() => null),
+          fetch(`/api/vouchers`).catch(() => null)
         ]);
         
         if (prodRes && prodRes.ok) {

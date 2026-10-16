@@ -12,7 +12,7 @@ export async function GET(req: Request) {
 
     // Dành cho khách: Truyền code lên để check xem mã có xài được không
     if (code) {
-      const voucher = await Voucher.findOne({ code: code.toUpperCase() });
+      const voucher = await Voucher.findOne({ code: code.toUpperCase() }).lean();
       if (!voucher) return NextResponse.json({ message: "Mã giảm giá không tồn tại!" }, { status: 404 });
       if (!voucher.isActive) return NextResponse.json({ message: "Mã giảm giá đã bị khóa!" }, { status: 400 });
       if (new Date(voucher.expireDate) < new Date()) return NextResponse.json({ message: "Mã giảm giá đã hết hạn!" }, { status: 400 });
@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     }
 
     // Dành cho Admin: Lấy toàn bộ danh sách mã
-    const vouchers = await Voucher.find({}).sort({ createdAt: -1 });
+    const vouchers = await Voucher.find({}).sort({ createdAt: -1 }).lean();
     return NextResponse.json(vouchers, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: "Lỗi Server" }, { status: 500 });

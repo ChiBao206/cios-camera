@@ -680,17 +680,17 @@ export default function AdminDashboard() {
           appearance: none;
           -webkit-appearance: none;
           -moz-appearance: none;
-          padding: 4px 24px 4px 10px; 
+          padding: 5px 28px 5px 12px; 
           border-radius: 9999px; 
           border: 1.5px solid #cbd5e1; 
           outline: none; 
           font-weight: 700; 
-          font-size: 11.5px; 
+          font-size: 12px; 
           cursor: pointer; 
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='7 15 12 20 17 15'%3e%3c/polyline%3e%3cpolyline points='7 9 12 4 17 9'%3e%3c/polyline%3e%3c/svg%3e");
           background-repeat: no-repeat;
-          background-position: right 7px center;
-          background-size: 11px;
+          background-position: right 8px center;
+          background-size: 13px;
           transition: all 0.2s ease;
           line-height: 1.4;
           display: inline-block;
@@ -988,7 +988,7 @@ export default function AdminDashboard() {
                                 style={{ 
                                   color: order.status === 'Thành công' ? '#15803d' : order.status === 'Đã hủy' ? '#b91c1c' : '#b45309',
                                   borderColor: order.status === 'Thành công' ? '#86efac' : order.status === 'Đã hủy' ? '#fca5a5' : '#fde047',
-                                  background: order.status === 'Thành công' ? '#f0fdf4' : order.status === 'Đã hủy' ? '#fef2f2' : '#fefce8'
+                                  backgroundColor: order.status === 'Thành công' ? '#f0fdf4' : order.status === 'Đã hủy' ? '#fef2f2' : '#fefce8'
                                 }}
                               >
                                 <option value="Chờ xử lý">Chờ xử lý</option>

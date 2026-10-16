@@ -3,9 +3,7 @@
    Font: Plus Jakarta Sans / Inter chuẩn tiếng Việt
    Tông màu: Trắng sứ - Kính mờ - Xanh nước biển công nghệ cao
    Đáp ứng hoàn hảo mọi thiết bị (Mobile, Tablet, Desktop)
-   ======================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+/* Font Plus Jakarta Sans được tối ưu hóa qua next/font/google trong layout.tsx */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -1355,12 +1353,18 @@ input:focus, select:focus, textarea:focus {
   transition: all 0.3s ease;
 }
 
+.mobile-menu-toggle.is-open {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
 .mobile-nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(12, 74, 110, 0.6);
-  z-index: 998;
+  z-index: 1150;
   backdrop-filter: blur(4px);
 }
 
@@ -1414,7 +1418,7 @@ input:focus, select:focus, textarea:focus {
     height: 100vh;
     background: #ffffff;
     box-shadow: -8px 0 30px rgba(2, 132, 199, 0.2);
-    z-index: 999;
+    z-index: 1200;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -1440,7 +1444,8 @@ input:focus, select:focus, textarea:focus {
     font-size: 15px;
     font-weight: 800;
     color: var(--primary-900);
-    letter-spacing: -0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .mobile-drawer-close {

@@ -7,12 +7,12 @@ import db from '../../../db.json';
 export async function GET() {
   try {
     await connectDB();
-    let data = await Category.find({});
+    let data = await Category.find({}).lean();
     if (!data || data.length === 0) {
       if (db.categories && db.categories.length > 0) {
         try {
           await Category.insertMany(db.categories);
-          data = await Category.find({});
+          data = await Category.find({}).lean();
         } catch (e) {
           return NextResponse.json(db.categories);
         }

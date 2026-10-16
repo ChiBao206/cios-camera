@@ -8,14 +8,14 @@ import db from '../../../db.json';
 export async function GET() {
   try {
     await connectDB();
-    let products = await Product.find({}).sort({ createdAt: -1 });
+    let products = await Product.find({}).sort({ createdAt: -1 }).lean();
     
     // Nếu MongoDB kết nối được nhưng chưa có sản phẩm, nạp tự động từ db.json
     if (!products || products.length === 0) {
       if (db.products && db.products.length > 0) {
         try {
           await Product.insertMany(db.products);
-          products = await Product.find({}).sort({ createdAt: -1 });
+          products = await Product.find({}).sort({ createdAt: -1 }).lean();
         } catch (e) {
           return NextResponse.json(db.products);
         }

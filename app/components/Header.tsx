@@ -47,7 +47,7 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
           <nav className={`nav-menu${mobileMenuOpen ? " is-open" : ""}`}>
             {/* Header top inside mobile drawer */}
             <div className="mobile-drawer-header">
-              <span className="mobile-drawer-title">Menu Điều Hướng</span>
+              <span className="mobile-drawer-title">MENU</span>
               <button 
                 className="mobile-drawer-close"
                 onClick={close}
@@ -155,25 +155,18 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
 
           {/* Hamburger Button - chỉ hiện trên mobile */}
           <button
-            className="mobile-menu-toggle"
+            className={`mobile-menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Mở menu điều hướng"
+            aria-label={mobileMenuOpen ? "Đóng menu" : "Mở menu"}
+            style={
+              mobileMenuOpen
+                ? { opacity: 0, pointerEvents: "none", visibility: "hidden" }
+                : undefined
+            }
           >
-            <span
-              style={{
-                transform: mobileMenuOpen
-                  ? "rotate(45deg) translate(5px, 5px)"
-                  : "none",
-              }}
-            ></span>
-            <span style={{ opacity: mobileMenuOpen ? 0 : 1 }}></span>
-            <span
-              style={{
-                transform: mobileMenuOpen
-                  ? "rotate(-45deg) translate(5px, -5px)"
-                  : "none",
-              }}
-            ></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </header>
