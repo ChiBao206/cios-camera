@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "./context/CartContext";
 import NotifBadge from "@/app/components/NotifBadge";
+import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import FloatingActions from "@/app/components/FloatingActions";
 import db from "../db.json";
@@ -266,126 +267,7 @@ export default function Home() {
       )}
 
       {/* 1. STICKY MODERN HEADER */}
-      {/* Mobile Nav Overlay */}
-      {mobileMenuOpen && (
-        <div 
-          className="mobile-nav-overlay" 
-          style={{ display: 'block' }}
-          onClick={() => setMobileMenuOpen(false)} 
-        />
-      )}
-      <header className="site-header">
-        <div className="header-container">
-          {/* Logo */}
-          <Link href="/" className="brand-logo">
-            <div className="brand-icon">
-              <i className="fas fa-video"></i>
-            </div>
-            <div className="brand-info">
-              <div className="brand-name">CIOs <span>Camera</span></div>
-              <div className="brand-tagline">Security & Smart Solutions</div>
-            </div>
-          </Link>
-
-          {/* Search Bar in Header */}
-          <div className="header-search-wrapper">
-            <form onSubmit={handleSearchSubmit} className="header-search-box">
-              <i className="fas fa-search" style={{ color: '#0284c7', marginRight: '6px' }}></i>
-              <input 
-                type="text" 
-                placeholder="Tìm camera wifi, ngoài trời, 4K AI..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    scrollToProducts();
-                  }
-                }}
-              />
-              {searchTerm && (
-                <button 
-                  type="button" 
-                  onClick={() => setSearchTerm('')}
-                  style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0 6px', fontSize: '13px' }}
-                  title="Xóa tìm kiếm"
-                >
-                  <i className="fas fa-times-circle"></i>
-                </button>
-              )}
-              <button type="submit" title="Tìm kiếm" onClick={scrollToProducts}>
-                <i className="fas fa-arrow-right"></i>
-              </button>
-            </form>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className={`nav-menu${mobileMenuOpen ? ' is-open' : ''}`}>
-            <Link href="/" className="nav-item-link active" onClick={() => setMobileMenuOpen(false)}>
-              <i className="fas fa-home"></i> Trang chủ
-            </Link>
-            <Link href="/projects" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
-              <i className="fas fa-tools"></i> Dự án
-            </Link>
-            <Link href="/contact" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
-              <i className="fas fa-headset"></i> Liên hệ
-            </Link>
-            
-            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }} onClick={() => setMobileMenuOpen(false)}>
-              <i className="fas fa-bell"></i>
-              <NotifBadge />
-            </Link>
-
-            <Link href="/cart" className="nav-item-link" style={{ position: 'relative' }} onClick={() => setMobileMenuOpen(false)}>
-              <i className="fas fa-shopping-cart"></i> Giỏ hàng
-              {totalItems > 0 && (
-                <span className="nav-badge-pill">{totalItems}</span>
-              )}
-            </Link>
-
-            {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px', padding: '8px 16px' }}>
-                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="header-user-avatar">
-                    {user.username.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="header-user-text">
-                    <span className="header-user-name">{user.username}</span>
-                    <span className="header-user-role">{String(user.role) === "1" ? "Quản trị viên" : "Khách hàng"}</span>
-                  </div>
-                </Link>
-                <button 
-                  onClick={handleLogout}
-                  style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '16px', padding: '6px' }}
-                  title="Đăng xuất"
-                >
-                  <i className="fas fa-sign-out-alt"></i>
-                </button>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px', padding: '8px 16px' }}>
-                <Link href="/login" className="nav-item-link" onClick={() => setMobileMenuOpen(false)}>
-                  Đăng nhập
-                </Link>
-                <Link href="/register" className="nav-item-link highlight" onClick={() => setMobileMenuOpen(false)}>
-                  Đăng ký
-                </Link>
-              </div>
-            )}
-          </nav>
-
-          {/* Hamburger Button - chỉ hiện trên mobile */}
-          <button 
-            className="mobile-menu-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Mở menu"
-          >
-            <span style={{ transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }}></span>
-            <span style={{ opacity: mobileMenuOpen ? 0 : 1 }}></span>
-            <span style={{ transform: mobileMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }}></span>
-          </button>
-        </div>
-      </header>
+      <Header user={user} activePage="home" onLogout={handleLogout} />
 
       {/* MOBILE SEARCH BAR - chỉ hiện trên mobile thay thế header search */}
       <div className="mobile-search-bar">

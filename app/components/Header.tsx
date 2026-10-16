@@ -45,36 +45,51 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
 
           {/* Navigation */}
           <nav className={`nav-menu${mobileMenuOpen ? " is-open" : ""}`}>
+            {/* Header top inside mobile drawer */}
+            <div className="mobile-drawer-header">
+              <span className="mobile-drawer-title">Menu Điều Hướng</span>
+              <button 
+                className="mobile-drawer-close"
+                onClick={close}
+                aria-label="Đóng menu"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+
             <Link
               href="/"
               className={`nav-item-link${activePage === "home" ? " active" : ""}`}
               onClick={close}
             >
-              <i className="fas fa-home"></i> Trang chủ
+              <i className="fas fa-home"></i> <span>Trang chủ</span>
             </Link>
             <Link
               href="/projects"
               className={`nav-item-link${activePage === "projects" ? " active" : ""}`}
               onClick={close}
             >
-              <i className="fas fa-tools"></i> Dự án
+              <i className="fas fa-tools"></i> <span>Dự án</span>
             </Link>
             <Link
               href="/contact"
               className={`nav-item-link${activePage === "contact" ? " active" : ""}`}
               onClick={close}
             >
-              <i className="fas fa-headset"></i> Liên hệ
+              <i className="fas fa-headset"></i> <span>Liên hệ</span>
             </Link>
 
             <Link
               href="/notifications"
-              className="nav-item-link"
+              className={`nav-item-link${activePage === "notifications" ? " active" : ""}`}
               style={{ position: "relative" }}
               onClick={close}
             >
-              <i className="fas fa-bell"></i>
-              <NotifBadge />
+              <span style={{ position: "relative", display: "inline-flex", alignItems: "center" }}>
+                <i className="fas fa-bell"></i>
+                <NotifBadge />
+              </span>
+              <span>Thông báo</span>
             </Link>
 
             <Link
@@ -83,22 +98,17 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
               style={{ position: "relative" }}
               onClick={close}
             >
-              <i className="fas fa-shopping-cart"></i> Giỏ hàng
-              {totalItems > 0 && (
-                <span className="nav-badge-pill">{totalItems}</span>
-              )}
+              <span style={{ position: "relative", display: "inline-flex", alignItems: "center" }}>
+                <i className="fas fa-shopping-cart"></i>
+                {totalItems > 0 && (
+                  <span className="nav-badge-pill">{totalItems}</span>
+                )}
+              </span>
+              <span>Giỏ hàng</span>
             </Link>
 
             {user ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  marginLeft: "6px",
-                  padding: "8px 16px",
-                }}
-              >
+              <div className="nav-auth-user-box">
                 <Link
                   href={String(user.role) === "1" ? "/admin" : "/profile"}
                   className="header-user-btn"
@@ -120,14 +130,7 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
                       close();
                       onLogout();
                     }}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "#64748b",
-                      cursor: "pointer",
-                      fontSize: "16px",
-                      padding: "6px",
-                    }}
+                    className="header-logout-btn"
                     title="Đăng xuất"
                   >
                     <i className="fas fa-sign-out-alt"></i>
@@ -135,24 +138,16 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
                 )}
               </div>
             ) : (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  marginLeft: "6px",
-                  padding: "8px 16px",
-                }}
-              >
-                <Link href="/login" className="nav-item-link" onClick={close}>
-                  Đăng nhập
+              <div className="nav-auth-buttons">
+                <Link href="/login" className="btn-auth-login" onClick={close}>
+                  <i className="fas fa-sign-in-alt"></i> Đăng nhập
                 </Link>
                 <Link
                   href="/register"
-                  className="nav-item-link highlight"
+                  className="btn-auth-register"
                   onClick={close}
                 >
-                  Đăng ký
+                  <i className="fas fa-user-plus"></i> Đăng ký
                 </Link>
               </div>
             )}

@@ -805,61 +805,7 @@ export default function ProductDetail() {
       </div>
 
       {/* 1. HEADER */}
-      <header className="site-header">
-        <div className="header-container">
-          <Link href="/" className="brand-logo">
-            <div className="brand-icon">
-              <i className="fas fa-video"></i>
-            </div>
-            <div className="brand-info">
-              <div className="brand-name">CIOs <span>Camera</span></div>
-              <div className="brand-tagline">Security & Smart Solutions</div>
-            </div>
-          </Link>
-
-          <nav className="nav-menu">
-            <Link href="/" className="nav-item-link">
-              <i className="fas fa-home"></i> Trang chủ
-            </Link>
-            <Link href="/projects" className="nav-item-link">
-              <i className="fas fa-tools"></i> Dự án
-            </Link>
-            <Link href="/contact" className="nav-item-link">
-              <i className="fas fa-headset"></i> Liên hệ
-            </Link>
-            <Link href="/notifications" className="nav-item-link" style={{ position: 'relative' }}>
-              <i className="fas fa-bell"></i>
-              <NotifBadge />
-            </Link>
-            <Link href="/cart" className="nav-item-link" style={{ position: 'relative' }}>
-              <i className="fas fa-shopping-cart"></i> Giỏ hàng
-              {totalItems > 0 && <span className="nav-badge-pill">{totalItems}</span>}
-            </Link>
-
-            {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '6px' }}>
-                <Link href={String(user.role) === "1" ? "/admin" : "/profile"} className="header-user-btn">
-                  <div className="header-user-avatar">
-                    {user.username.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="header-user-text">
-                    <span className="header-user-name">{user.username}</span>
-                    <span className="header-user-role">{String(user.role) === "1" ? "Quản trị viên" : "Khách hàng"}</span>
-                  </div>
-                </Link>
-                <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', padding: '6px' }} title="Đăng xuất">
-                  <i className="fas fa-sign-out-alt"></i>
-                </button>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '6px' }}>
-                <Link href="/login" className="nav-item-link">Đăng nhập</Link>
-                <Link href="/register" className="nav-item-link highlight">Đăng ký</Link>
-              </div>
-            )}
-          </nav>
-        </div>
-      </header>
+      <Header user={user} onLogout={handleLogout} />
 
       {/* MAIN CONTAINER */}
       <main style={{ maxWidth: '1240px', width: '95%', margin: '25px auto 60px', flex: 1 }}>
