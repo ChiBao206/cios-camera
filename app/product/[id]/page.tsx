@@ -808,23 +808,10 @@ export default function ProductDetail() {
       <Header user={user} onLogout={handleLogout} />
 
       {/* MAIN CONTAINER */}
-      <main style={{ maxWidth: '1240px', width: '95%', margin: '25px auto 60px', flex: 1 }}>
+      <main className="product-detail-main">
         {/* Breadcrumb */}
-        <div style={{ 
-          background: 'rgba(255, 255, 255, 0.85)', 
-          backdropFilter: 'blur(12px)', 
-          padding: '12px 20px', 
-          borderRadius: '12px', 
-          border: '1px solid #bae6fd', 
-          fontSize: '13.5px', 
-          fontWeight: '600', 
-          color: '#64748b', 
-          marginBottom: '25px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <Link href="/" style={{ color: '#0369a1' }}>Trang chủ</Link>
+        <div className="product-breadcrumb">
+          <Link href="/">Trang chủ</Link>
           <span style={{ color: '#cbd5e1' }}>›</span>
           <span style={{ color: '#0369a1' }}>{categoryName}</span>
           <span style={{ color: '#cbd5e1' }}>›</span>
@@ -832,50 +819,20 @@ export default function ProductDetail() {
         </div>
 
         {/* KHUNG SẢN PHẨM CHÍNH (PRODUCT SHOWCASE) */}
-        <div style={{ 
-          background: '#ffffff', 
-          borderRadius: '24px', 
-          padding: '36px', 
-          boxShadow: '0 10px 35px -5px rgba(2, 132, 199, 0.1)', 
-          border: '1.5px solid #bae6fd', 
-          display: 'grid', 
-          gridTemplateColumns: 'minmax(320px, 460px) 1fr', 
-          gap: '40px', 
-          marginBottom: '35px', 
-          position: 'relative' 
-        }}>
+        <div className="product-showcase-card">
           {/* Sale badge */}
           {isSaleDay && saleDiscount > 0 && (
-            <div style={{ position: 'absolute', top: '20px', left: '20px', background: 'linear-gradient(135deg, #ef4444, #dc2626)', color: 'white', padding: '6px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: '800', zIndex: 5, boxShadow: '0 4px 12px rgba(239, 68, 68, 0.35)' }}>
+            <div className="product-sale-badge">
               🔥 GIẢM NGAY {saleDiscount}% HÔM NAY
             </div>
           )}
 
           {/* CỘT ẢNH SẢN PHẨM CHÍNH (GALLERY SLIDER & THUMBNAILS) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ 
-              background: 'linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%)', 
-              borderRadius: '20px', 
-              border: '1.5px solid #e0f2fe', 
-              aspectRatio: '1', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              padding: '30px', 
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
+          <div className="product-gallery-col">
+            <div className="product-main-img-box">
               <img 
                 src={currentMainImg} 
                 alt={product.name} 
-                style={{ 
-                  maxWidth: '100%', 
-                  maxHeight: '100%', 
-                  objectFit: 'contain', 
-                  margin: '0 auto', 
-                  display: 'block',
-                  transition: 'all 0.35s ease'
-                }} 
               />
 
               {/* Nút lướt ảnh trái / phải */}
@@ -883,26 +840,7 @@ export default function ProductDetail() {
                 <>
                   <button 
                     onClick={handlePrevImg}
-                    style={{
-                      position: 'absolute',
-                      left: '14px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      background: 'rgba(255, 255, 255, 0.92)',
-                      border: '1.5px solid #bae6fd',
-                      boxShadow: '0 4px 14px rgba(2, 132, 199, 0.15)',
-                      color: '#0284c7',
-                      fontSize: '16px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      zIndex: 3,
-                      transition: 'all 0.25s ease'
-                    }}
+                    className="product-img-nav-btn prev"
                     title="Ảnh trước"
                   >
                     <i className="fas fa-chevron-left"></i>
@@ -910,26 +848,7 @@ export default function ProductDetail() {
 
                   <button 
                     onClick={handleNextImg}
-                    style={{
-                      position: 'absolute',
-                      right: '14px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      background: 'rgba(255, 255, 255, 0.92)',
-                      border: '1.5px solid #bae6fd',
-                      boxShadow: '0 4px 14px rgba(2, 132, 199, 0.15)',
-                      color: '#0284c7',
-                      fontSize: '16px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      zIndex: 3,
-                      transition: 'all 0.25s ease'
-                    }}
+                    className="product-img-nav-btn next"
                     title="Ảnh kế tiếp"
                   >
                     <i className="fas fa-chevron-right"></i>
@@ -940,79 +859,33 @@ export default function ProductDetail() {
               {/* Icon phóng to ảnh ở góc dưới bên trái */}
               <button 
                 onClick={() => setIsZoomModalOpen(true)}
-                style={{
-                  position: 'absolute',
-                  bottom: '15px',
-                  left: '15px',
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  background: 'rgba(255, 255, 255, 0.92)',
-                  border: '1.5px solid #bae6fd',
-                  color: '#0284c7',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '14px',
-                  boxShadow: '0 3px 10px rgba(0,0,0,0.08)',
-                  zIndex: 3,
-                  transition: 'all 0.2s ease'
-                }}
+                className="product-zoom-trigger-btn"
                 title="Phóng to ảnh"
               >
                 <i className="fas fa-expand-alt"></i>
               </button>
 
               {/* Tag số thứ tự ảnh */}
-              <div style={{ position: 'absolute', bottom: '15px', right: '15px', background: 'rgba(255, 255, 255, 0.9)', padding: '5px 12px', borderRadius: '20px', fontSize: '11.5px', fontWeight: '800', color: '#0369a1', border: '1px solid #bae6fd', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div className="product-img-counter-tag">
                 <i className="fas fa-images"></i> {activeImageIndex + 1} / {productImages.length}
               </div>
             </div>
 
             {/* DẢI THUMBNAILS THU NHỎ BÊN DƯỚI */}
             {productImages.length > 1 && (
-              <div style={{ 
-                display: 'flex', 
-                gap: '12px', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                flexWrap: 'wrap',
-                padding: '4px 0' 
-              }}>
+              <div className="product-thumbnails-row">
                 {productImages.map((img, idx) => {
                   const isActive = activeImageIndex === idx;
                   return (
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      style={{
-                        width: '72px',
-                        height: '72px',
-                        borderRadius: '14px',
-                        background: '#ffffff',
-                        border: isActive ? '2.5px solid #0284c7' : '1.5px solid #e0f2fe',
-                        boxShadow: isActive ? '0 4px 14px rgba(2, 132, 199, 0.25)' : 'none',
-                        transform: isActive ? 'translateY(-2px)' : 'none',
-                        padding: '6px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'all 0.25s ease',
-                        outline: 'none'
-                      }}
+                      className={`product-thumb-btn${isActive ? " is-active" : ""}`}
                       title={`Xem góc ảnh ${idx + 1}`}
                     >
                       <img 
                         src={img} 
                         alt={`${product.name} góc ${idx + 1}`} 
-                        style={{ 
-                          maxWidth: '100%', 
-                          maxHeight: '100%', 
-                          objectFit: 'contain', 
-                          display: 'block' 
-                        }} 
                       />
                     </button>
                   );
@@ -1021,65 +894,52 @@ export default function ProductDetail() {
             )}
 
             {/* Dải thông số nhanh */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-              <div style={{ background: '#f0f9ff', padding: '10px 8px', borderRadius: '10px', textAlign: 'center', border: '1px solid #bae6fd' }}>
-                <i className="fas fa-award" style={{ color: '#0284c7', fontSize: '16px', marginBottom: '4px', display: 'block' }}></i>
-                <span style={{ fontSize: '11px', fontWeight: '700', color: '#0c4a6e', display: 'block' }}>Chính Hãng</span>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>Bảo hành 24T</span>
+            <div className="product-quick-specs-grid">
+              <div className="product-quick-spec-item">
+                <i className="fas fa-award"></i>
+                <span className="product-quick-spec-title">Chính Hãng</span>
+                <span className="product-quick-spec-desc">Bảo hành 24T</span>
               </div>
-              <div style={{ background: '#f0f9ff', padding: '10px 8px', borderRadius: '10px', textAlign: 'center', border: '1px solid #bae6fd' }}>
-                <i className="fas fa-bolt" style={{ color: '#0284c7', fontSize: '16px', marginBottom: '4px', display: 'block' }}></i>
-                <span style={{ fontSize: '11px', fontWeight: '700', color: '#0c4a6e', display: 'block' }}>Giao Hỏa Tốc</span>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>Nhận trong 2H</span>
+              <div className="product-quick-spec-item">
+                <i className="fas fa-bolt"></i>
+                <span className="product-quick-spec-title">Giao Hỏa Tốc</span>
+                <span className="product-quick-spec-desc">Nhận trong 2H</span>
               </div>
-              <div style={{ background: '#f0f9ff', padding: '10px 8px', borderRadius: '10px', textAlign: 'center', border: '1px solid #bae6fd' }}>
-                <i className="fas fa-shield-alt" style={{ color: '#0284c7', fontSize: '16px', marginBottom: '4px', display: 'block' }}></i>
-                <span style={{ fontSize: '11px', fontWeight: '700', color: '#0c4a6e', display: 'block' }}>Đổi Mới 1-1</span>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>Trong 30 ngày</span>
+              <div className="product-quick-spec-item">
+                <i className="fas fa-shield-alt"></i>
+                <span className="product-quick-spec-title">Đổi Mới 1-1</span>
+                <span className="product-quick-spec-desc">Trong 30 ngày</span>
               </div>
             </div>
           </div>
 
           {/* CỘT THÔNG TIN VÀ NÚT MUA HÀNG */}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ background: '#e0f2fe', color: '#0369a1', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: '800' }}>
+          <div className="product-info-col">
+            <div className="product-info-topbar">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span className="product-sku-tag">
                   SKU: {String(product._id || product.id).slice(-6).toUpperCase()}
                 </span>
-                <span style={{ background: '#dcfce7', color: '#16a34a', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: '700' }}>
+                <span className="product-stock-tag">
                   <i className="fas fa-check-circle"></i> Còn hàng
                 </span>
               </div>
 
               <button 
                 onClick={() => addToFavorite(product)}
-                style={{ 
-                  background: '#f8fafc', 
-                  border: '1.5px solid #bae6fd', 
-                  color: '#f43f5e', 
-                  width: '38px', 
-                  height: '38px', 
-                  borderRadius: '50%', 
-                  cursor: 'pointer', 
-                  fontSize: '16px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  transition: 'all 0.25s ease'
-                }}
+                className="product-fav-btn"
                 title="Lưu vào yêu thích"
               >
                 <i className="fas fa-heart"></i>
               </button>
             </div>
 
-            <h1 style={{ fontSize: '26px', fontWeight: '900', color: '#0c4a6e', lineHeight: '1.3', marginBottom: '14px', letterSpacing: '-0.01em' }}>
+            <h1 className="product-title-heading">
               {product.name}
             </h1>
 
             {/* Đánh giá & đã bán */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '13.5px', color: '#64748b', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #e0f2fe', flexWrap: 'wrap' }}>
+            <div className="product-rating-row">
               {totalReviews > 0 && avgRating ? (
                 <>
                   <div style={{ color: '#f59e0b', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -1117,37 +977,22 @@ export default function ProductDetail() {
             </div>
 
             {/* Khung Giá bán */}
-            <div style={{ 
-              background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', 
-              padding: '20px 24px', 
-              borderRadius: '16px', 
-              border: '1.5px solid #bae6fd', 
-              marginBottom: '22px', 
-              display: 'flex', 
-              alignItems: 'baseline', 
-              gap: '16px' 
-            }}>
-              <span style={{ fontSize: '32px', fontWeight: '900', color: '#0284c7', letterSpacing: '-0.02em' }}>
+            <div className="product-price-box">
+              <span className="product-current-price">
                 {currentPrice.toLocaleString('vi-VN')} đ
               </span>
               {isSaleDay && saleDiscount > 0 && (
-                <span style={{ fontSize: '16px', color: '#94a3b8', textDecoration: 'line-through', fontWeight: '600' }}>
+                <span className="product-old-price">
                   {Number(product.price).toLocaleString('vi-VN')} đ
                 </span>
               )}
-              <span style={{ fontSize: '12px', color: '#0369a1', fontWeight: '700', marginLeft: 'auto' }}>
+              <span className="product-vat-tag">
                 [Đã bao gồm VAT]
               </span>
             </div>
 
             {/* HỘP QUÀ TẶNG & KHUYẾN MÃI ĐẶC QUYỀN */}
-            <div style={{ 
-              background: '#f8fafc', 
-              border: '1.5px dashed #38bdf8', 
-              borderRadius: '14px', 
-              padding: '16px 20px', 
-              marginBottom: '24px' 
-            }}>
+            <div className="product-gift-box">
               <div style={{ fontSize: '13.5px', fontWeight: '800', color: '#0369a1', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className="fas fa-gift" style={{ color: '#0284c7', fontSize: '16px' }}></i> ƯU ĐÃI ĐẶC BIỆT KHI MUA HÀNG HÔM NAY
               </div>
@@ -1162,12 +1007,12 @@ export default function ProductDetail() {
             </div>
 
             {/* Chọn số lượng */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '18px', marginBottom: '28px' }}>
+            <div className="product-qty-row">
               <span style={{ fontSize: '14px', fontWeight: '700', color: '#0c4a6e' }}>Số lượng:</span>
-              <div style={{ display: 'flex', border: '1.5px solid #bae6fd', borderRadius: '10px', overflow: 'hidden', background: '#ffffff' }}>
+              <div className="product-qty-control">
                 <button 
                   onClick={handleDecrease}
-                  style={{ width: '38px', height: '38px', background: '#f0f9ff', border: 'none', fontSize: '18px', fontWeight: 'bold', color: '#0284c7', cursor: 'pointer' }}
+                  className="product-qty-btn"
                 >
                   -
                 </button>
@@ -1175,11 +1020,11 @@ export default function ProductDetail() {
                   type="text" 
                   value={quantity} 
                   readOnly 
-                  style={{ width: '50px', height: '38px', border: 'none', borderLeft: '1px solid #bae6fd', borderRight: '1px solid #bae6fd', textAlign: 'center', fontWeight: '800', fontSize: '15px', color: '#0c4a6e', outline: 'none' }}
+                  className="product-qty-input"
                 />
                 <button 
                   onClick={handleIncrease}
-                  style={{ width: '38px', height: '38px', background: '#f0f9ff', border: 'none', fontSize: '18px', fontWeight: 'bold', color: '#0284c7', cursor: 'pointer' }}
+                  className="product-qty-btn"
                 >
                   +
                 </button>
@@ -1190,7 +1035,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Nút hành động */}
-            <div style={{ display: 'flex', gap: '14px', marginTop: 'auto' }}>
+            <div className="product-actions-row">
               {Number(product.quantity) > 0 ? (
                 <>
                   <button 
@@ -1203,22 +1048,7 @@ export default function ProductDetail() {
                         alert(`🎉 Đã thêm ${quantity} sản phẩm vào giỏ hàng thành công!`);
                       }
                     }}
-                    style={{ 
-                      flex: 1, 
-                      padding: '14px 20px', 
-                      borderRadius: '12px', 
-                      border: '2px solid #0284c7', 
-                      background: '#f0f9ff', 
-                      color: '#0284c7', 
-                      fontWeight: '800', 
-                      fontSize: '14.5px', 
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      transition: 'all 0.25s ease'
-                    }}
+                    className="btn-add-to-cart"
                   >
                     <i className="fas fa-cart-plus"></i> THÊM VÀO GIỎ
                   </button>
@@ -1233,13 +1063,7 @@ export default function ProductDetail() {
                         router.push('/cart');
                       }
                     }}
-                    className="btn-card-action"
-                    style={{ 
-                      flex: 1.3, 
-                      padding: '14px 24px', 
-                      fontSize: '15px', 
-                      borderRadius: '12px' 
-                    }}
+                    className="btn-card-action btn-buy-now"
                   >
                     <i className="fas fa-bolt"></i> MUA NGAY (GIAO 2H)
                   </button>
@@ -1254,73 +1078,33 @@ export default function ProductDetail() {
         </div>
 
         {/* TABS NỘI DUNG CHI TIẾT (MÔ TẢ - THÔNG SỐ - ĐÁNH GIÁ) */}
-        <div style={{ 
-          background: '#ffffff', 
-          borderRadius: '20px', 
-          border: '1.5px solid #bae6fd', 
-          boxShadow: '0 8px 30px rgba(2, 132, 199, 0.08)', 
-          overflow: 'hidden', 
-          marginBottom: '50px' 
-        }}>
+        <div className="product-tabs-card">
           {/* Tab Header */}
-          <div style={{ display: 'flex', background: '#f8fafc', borderBottom: '1.5px solid #e0f2fe' }}>
+          <div className="product-tabs-header">
             <button 
               onClick={() => setActiveTab('desc')}
-              style={{ 
-                flex: 1, 
-                padding: '18px 24px', 
-                border: 'none', 
-                background: activeTab === 'desc' ? '#ffffff' : 'transparent', 
-                color: activeTab === 'desc' ? '#0284c7' : '#64748b', 
-                fontWeight: activeTab === 'desc' ? '800' : '600', 
-                fontSize: '15px', 
-                cursor: 'pointer',
-                borderBottom: activeTab === 'desc' ? '3px solid #0284c7' : '3px solid transparent',
-                transition: 'all 0.25s ease'
-              }}
+              className={`product-tab-btn${activeTab === 'desc' ? " is-active" : ""}`}
             >
-              <i className="fas fa-file-alt" style={{ marginRight: '8px' }}></i> Mô Tả Chi Tiết
+              <i className="fas fa-file-alt"></i> <span>Mô Tả Chi Tiết</span>
             </button>
 
             <button 
               onClick={() => setActiveTab('specs')}
-              style={{ 
-                flex: 1, 
-                padding: '18px 24px', 
-                border: 'none', 
-                background: activeTab === 'specs' ? '#ffffff' : 'transparent', 
-                color: activeTab === 'specs' ? '#0284c7' : '#64748b', 
-                fontWeight: activeTab === 'specs' ? '800' : '600', 
-                fontSize: '15px', 
-                cursor: 'pointer',
-                borderBottom: activeTab === 'specs' ? '3px solid #0284c7' : '3px solid transparent',
-                transition: 'all 0.25s ease'
-              }}
+              className={`product-tab-btn${activeTab === 'specs' ? " is-active" : ""}`}
             >
-              <i className="fas fa-cogs" style={{ marginRight: '8px' }}></i> Thông Số Kỹ Thuật
+              <i className="fas fa-cogs"></i> <span>Thông Số Kỹ Thuật</span>
             </button>
 
             <button 
               onClick={() => setActiveTab('reviews')}
-              style={{ 
-                flex: 1, 
-                padding: '18px 24px', 
-                border: 'none', 
-                background: activeTab === 'reviews' ? '#ffffff' : 'transparent', 
-                color: activeTab === 'reviews' ? '#0284c7' : '#64748b', 
-                fontWeight: activeTab === 'reviews' ? '800' : '600', 
-                fontSize: '15px', 
-                cursor: 'pointer',
-                borderBottom: activeTab === 'reviews' ? '3px solid #0284c7' : '3px solid transparent',
-                transition: 'all 0.25s ease'
-              }}
+              className={`product-tab-btn${activeTab === 'reviews' ? " is-active" : ""}`}
             >
-              <i className="fas fa-star" style={{ marginRight: '8px' }}></i> Đánh Giá Từ Khách Hàng ({totalReviews})
+              <i className="fas fa-star"></i> <span>Đánh Giá ({totalReviews})</span>
             </button>
           </div>
 
           {/* Tab Body */}
-          <div style={{ padding: '40px', color: '#334155', fontSize: '15px', lineHeight: '1.8' }}>
+          <div className="product-tab-body">
             
             {/* TAB 1: MÔ TẢ CHI TIẾT */}
             {activeTab === 'desc' && (
@@ -1380,9 +1164,9 @@ export default function ProductDetail() {
                 <h3 style={{ fontSize: '18px', color: '#0c4a6e', fontWeight: '800', margin: '35px 0 16px' }}>
                   Điểm Nổi Bật Vượt Trội
                 </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                <div className="product-highlights-grid">
                   {highlights.map((h, i) => (
-                    <div key={i} style={{ background: '#f0f9ff', padding: '20px', borderRadius: '14px', border: '1px solid #bae6fd' }}>
+                    <div key={i} className="product-highlight-item">
                       <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#0284c7', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', marginBottom: '12px' }}>
                         <i className={h.icon}></i>
                       </div>
@@ -1396,16 +1180,15 @@ export default function ProductDetail() {
 
             {/* TAB 2: THÔNG SỐ KỸ THUẬT */}
             {activeTab === 'specs' && (
-              <div style={{ border: '1.5px solid #bae6fd', borderRadius: '14px', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', textAlign: 'left' }}>
+              <div className="product-specs-table-wrapper">
+                <table className="product-specs-table">
                   <tbody>
                     {specs.map((item, idx) => (
                       <tr key={idx} style={{ borderBottom: idx < specs.length - 1 ? '1px solid #e0f2fe' : 'none', background: idx % 2 === 0 ? '#f0f9ff' : '#ffffff' }}>
-                        <td style={{ padding: '16px 20px', width: '35%', fontWeight: '700', color: '#0c4a6e', background: idx % 2 === 1 ? '#f8fafc' : undefined }}>
+                        <td style={{ width: '35%', fontWeight: '700', color: '#0c4a6e', background: idx % 2 === 1 ? '#f8fafc' : undefined }}>
                           {item.label}
                         </td>
                         <td style={{ 
-                          padding: '16px 20px', 
                           color: (item as any).green ? '#16a34a' : (item.highlight ? '#0284c7' : '#1e293b'), 
                           fontWeight: (item as any).green || item.highlight ? '800' : '500' 
                         }}>
@@ -1732,22 +1515,23 @@ export default function ProductDetail() {
                   onClick={handlePrevImg}
                   style={{
                     position: 'absolute',
-                    left: '-24px',
+                    left: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
                     background: '#0284c7',
                     border: '2px solid white',
                     color: 'white',
-                    width: '48px',
-                    height: '48px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '50%',
                     cursor: 'pointer',
-                    fontSize: '18px',
+                    fontSize: '16px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    zIndex: 10
                   }}
                   title="Ảnh trước"
                 >
@@ -1757,22 +1541,23 @@ export default function ProductDetail() {
                   onClick={handleNextImg}
                   style={{
                     position: 'absolute',
-                    right: '-24px',
+                    right: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
                     background: '#0284c7',
                     border: '2px solid white',
                     color: 'white',
-                    width: '48px',
-                    height: '48px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '50%',
                     cursor: 'pointer',
-                    fontSize: '18px',
+                    fontSize: '16px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    zIndex: 10
                   }}
                   title="Ảnh kế tiếp"
                 >
