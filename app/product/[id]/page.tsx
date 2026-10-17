@@ -1085,21 +1085,27 @@ export default function ProductDetail() {
               onClick={() => setActiveTab('desc')}
               className={`product-tab-btn${activeTab === 'desc' ? " is-active" : ""}`}
             >
-              <i className="fas fa-file-alt"></i> <span>Mô Tả Chi Tiết</span>
+              <i className="fas fa-file-alt"></i> 
+              <span className="tab-text-full">Mô Tả Chi Tiết</span>
+              <span className="tab-text-short">Mô tả</span>
             </button>
 
             <button 
               onClick={() => setActiveTab('specs')}
               className={`product-tab-btn${activeTab === 'specs' ? " is-active" : ""}`}
             >
-              <i className="fas fa-cogs"></i> <span>Thông Số Kỹ Thuật</span>
+              <i className="fas fa-cogs"></i> 
+              <span className="tab-text-full">Thông Số Kỹ Thuật</span>
+              <span className="tab-text-short">Thông số</span>
             </button>
 
             <button 
               onClick={() => setActiveTab('reviews')}
               className={`product-tab-btn${activeTab === 'reviews' ? " is-active" : ""}`}
             >
-              <i className="fas fa-star"></i> <span>Đánh Giá ({totalReviews})</span>
+              <i className="fas fa-star"></i> 
+              <span className="tab-text-full">Đánh Giá ({totalReviews})</span>
+              <span className="tab-text-short">Đánh giá ({totalReviews})</span>
             </button>
           </div>
 
@@ -1204,10 +1210,10 @@ export default function ProductDetail() {
             {/* TAB 3: ĐÁNH GIÁ KHÁCH HÀNG */}
             {activeTab === 'reviews' && (
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '40px', marginBottom: '35px', paddingBottom: '30px', borderBottom: '1.5px solid #e0f2fe', flexWrap: 'wrap' }}>
+                <div className="product-reviews-summary" style={{ display: 'flex', alignItems: 'center', gap: '40px', marginBottom: '35px', paddingBottom: '30px', borderBottom: '1.5px solid #e0f2fe', flexWrap: 'wrap' }}>
                   
                   {totalReviews > 0 && avgRating ? (
-                    <div style={{ textAlign: 'center', minWidth: '140px', padding: '20px', background: '#f0f9ff', borderRadius: '16px', border: '1px solid #bae6fd' }}>
+                    <div className="review-score-box" style={{ textAlign: 'center', minWidth: '140px', padding: '20px', background: '#f0f9ff', borderRadius: '16px', border: '1px solid #bae6fd' }}>
                       <div style={{ fontSize: '48px', fontWeight: '900', color: '#0284c7', lineHeight: '1' }}>{avgRating}</div>
                       <div style={{ color: '#f59e0b', fontSize: '18px', margin: '8px 0' }}>
                         {'★'.repeat(Math.round(Number(avgRating)))}{'☆'.repeat(5 - Math.round(Number(avgRating)))}
@@ -1215,7 +1221,7 @@ export default function ProductDetail() {
                       <div style={{ fontSize: '13px', color: '#64748b' }}>Dựa trên {totalReviews} đánh giá</div>
                     </div>
                   ) : (
-                    <div style={{ textAlign: 'center', minWidth: '140px', padding: '20px', background: '#f8fafc', borderRadius: '16px', border: '1.5px solid #e2e8f0' }}>
+                    <div className="review-score-box" style={{ textAlign: 'center', minWidth: '140px', padding: '20px', background: '#f8fafc', borderRadius: '16px', border: '1.5px solid #e2e8f0' }}>
                       <div style={{ fontSize: '40px', fontWeight: '900', color: '#94a3b8', lineHeight: '1' }}>0.0</div>
                       <div style={{ color: '#cbd5e1', fontSize: '18px', margin: '8px 0' }}>
                         ☆☆☆☆☆
@@ -1224,7 +1230,7 @@ export default function ProductDetail() {
                     </div>
                   )}
 
-                  <div style={{ flex: 1, minWidth: '260px' }}>
+                  <div className="review-bars-col" style={{ flex: 1, minWidth: '240px' }}>
                     {[5, 4, 3, 2, 1].map(star => {
                       const count = reviews.filter(r => Number(r.rating || 5) === star).length;
                       const percent = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
@@ -1240,7 +1246,7 @@ export default function ProductDetail() {
                     })}
                   </div>
 
-                  <div style={{ textAlign: 'center' }}>
+                  <div className="review-cta-col" style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: '13.5px', color: '#64748b', marginBottom: '12px' }}>Bạn đã trải nghiệm thiết bị này?</p>
                     <button 
                       onClick={() => {
