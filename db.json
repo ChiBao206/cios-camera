@@ -671,7 +671,13 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "33",
       "category": "Wifi",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/8.jpg",
+        "/uploads/gallery/hik_dvr_2.jpg",
+        "/uploads/gallery/hik_dvr_3.jpg",
+        "/uploads/gallery/hik_dvr_4.jpg"
+      ]
     },
     {
       "id": "117",
@@ -825,7 +831,14 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "50",
       "category": "Router",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/33.jpg",
+        "/uploads/gallery/ax53_2.jpg",
+        "/uploads/gallery/ax53_3.jpg",
+        "/uploads/gallery/ax53_4.jpg",
+        "/uploads/gallery/ax53_5.jpg"
+      ]
     },
     {
       "id": "126",
@@ -839,7 +852,14 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "50",
       "category": "Router",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/34.jpg",
+        "/uploads/gallery/totolink_2.jpg",
+        "/uploads/gallery/totolink_3.jpg",
+        "/uploads/gallery/totolink_4.jpg",
+        "/uploads/gallery/totolink_5.jpg"
+      ]
     },
     {
       "id": "127",
@@ -853,7 +873,13 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "19",
       "category": "Đầu ghi",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/35.jpg",
+        "/uploads/gallery/hik_dvr_2.jpg",
+        "/uploads/gallery/hik_dvr_3.jpg",
+        "/uploads/gallery/hik_dvr_4.jpg"
+      ]
     },
     {
       "id": "128",
@@ -867,7 +893,13 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "15",
       "category": "Đầu ghi",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/36.jpg",
+        "/uploads/gallery/vantech_dvr_2.jpg",
+        "/uploads/gallery/vantech_dvr_3.jpg",
+        "/uploads/gallery/vantech_dvr_4.jpg"
+      ]
     },
     {
       "id": "129",
@@ -881,7 +913,13 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "100",
       "category": "Switch",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/37.jpg",
+        "/uploads/gallery/tplink_ls1005g_2.jpg",
+        "/uploads/gallery/tplink_ls1005g_3.jpg",
+        "/uploads/gallery/tplink_ls1005g_4.jpg"
+      ]
     },
     {
       "id": "130",
@@ -895,7 +933,14 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "0",
       "category": "Switch",
-      "sold": "0"
+      "sold": "0",
+      "images": [
+        "/uploads/38.jpg",
+        "/uploads/gallery/hik_poe_2.jpg",
+        "/uploads/gallery/hik_poe_3.jpg",
+        "/uploads/gallery/hik_poe_4.jpg",
+        "/uploads/gallery/hik_poe_5.jpg"
+      ]
     },
     {
       "id": "131",
@@ -909,7 +954,14 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "88",
       "category": "Switch",
-      "sold": "1"
+      "sold": "1",
+      "images": [
+        "/uploads/39.jpg",
+        "/uploads/gallery/tenda_s105_1.png",
+        "/uploads/gallery/tenda_s105_3.jpg",
+        "/uploads/gallery/tenda_s105_4.jpg",
+        "/uploads/gallery/tenda_s105_5.jpg"
+      ]
     },
     {
       "id": "132",
@@ -923,7 +975,14 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "35",
       "category": "Switch",
-      "sold": "11"
+      "sold": "11",
+      "images": [
+        "/uploads/40.jpg",
+        "/uploads/gallery/cisco_cbs110_1.jpg",
+        "/uploads/gallery/cisco_cbs110_2.jpg",
+        "/uploads/gallery/cisco_cbs110_3.jpg",
+        "/uploads/gallery/cisco_cbs110_4.jpg"
+      ]
     }
   ],
   "reviews": [

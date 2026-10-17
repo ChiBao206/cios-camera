@@ -446,6 +446,7 @@ function getProductGiftList(product: any, type: string) {
 
 // Helper lấy danh sách đầy đủ các ảnh góc nhìn cho toàn bộ sản phẩm chuẩn TikTok Shop & Shopee
 function getProductImages(product: any, type: string): string[] {
+  // 1. Ưu tiên hàng đầu: Mảng images hợp lệ từ MongoDB hoặc db.json
   if (product?.images && Array.isArray(product.images) && product.images.length > 1) {
     return product.images;
   }
@@ -454,7 +455,107 @@ function getProductImages(product: any, type: string): string[] {
   const name = String(product?.name || '').toLowerCase();
   const id = String(product?._id || product?.id || '');
 
-  // 1. Camera Vantech V-2020AI (Id 97)
+  // 2. ROUTER & THIẾT BỊ PHÁT WI-FI (ĐẢM BẢO 100% ẢNH THẬT ROUTER, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  if (type === 'router' || name.includes('router') || name.includes('totolink') || name.includes('archer') || name.includes('ax53')) {
+    if (id === '126' || name.includes('totolink') || name.includes('a720r')) {
+      return [
+        mainImg,
+        '/uploads/gallery/totolink_2.jpg',
+        '/uploads/gallery/totolink_3.jpg',
+        '/uploads/gallery/totolink_4.jpg',
+        '/uploads/gallery/totolink_5.jpg'
+      ];
+    }
+    if (id === '125' || name.includes('ax53') || name.includes('archer')) {
+      return [
+        mainImg,
+        '/uploads/gallery/ax53_2.jpg',
+        '/uploads/gallery/ax53_3.jpg',
+        '/uploads/gallery/ax53_4.jpg',
+        '/uploads/gallery/ax53_5.jpg'
+      ];
+    }
+    return [
+      mainImg,
+      '/uploads/gallery/ax53_2.jpg',
+      '/uploads/gallery/totolink_3.jpg',
+      '/uploads/gallery/totolink_5.jpg'
+    ];
+  }
+
+  // 3. SWITCH CHIA MẠNG & SWITCH POE (ĐẢM BẢO 100% ẢNH THẬT SWITCH, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  if (type === 'switch' || name.includes('switch') || name.includes('chia mạng') || name.includes('s105') || name.includes('ls1005') || name.includes('cbs110') || name.includes('3e0105')) {
+    if (id === '131' || name.includes('s105') || name.includes('tenda')) {
+      return [
+        mainImg,
+        '/uploads/gallery/tenda_s105_1.png',
+        '/uploads/gallery/tenda_s105_3.jpg',
+        '/uploads/gallery/tenda_s105_4.jpg',
+        '/uploads/gallery/tenda_s105_5.jpg'
+      ];
+    }
+    if (id === '129' || name.includes('ls1005g') || (name.includes('tp-link') && name.includes('5 cổng'))) {
+      return [
+        mainImg,
+        '/uploads/gallery/tplink_ls1005g_2.jpg',
+        '/uploads/gallery/tplink_ls1005g_3.jpg',
+        '/uploads/gallery/tplink_ls1005g_4.jpg'
+      ];
+    }
+    if (id === '130' || name.includes('3e0105') || (name.includes('poe') && name.includes('hikvision'))) {
+      return [
+        mainImg,
+        '/uploads/gallery/hik_poe_2.jpg',
+        '/uploads/gallery/hik_poe_3.jpg',
+        '/uploads/gallery/hik_poe_4.jpg',
+        '/uploads/gallery/hik_poe_5.jpg'
+      ];
+    }
+    if (id === '132' || name.includes('cbs110') || name.includes('cisco')) {
+      return [
+        mainImg,
+        '/uploads/gallery/cisco_cbs110_1.jpg',
+        '/uploads/gallery/cisco_cbs110_2.jpg',
+        '/uploads/gallery/cisco_cbs110_3.jpg',
+        '/uploads/gallery/cisco_cbs110_4.jpg'
+      ];
+    }
+    return [
+      mainImg,
+      '/uploads/gallery/tplink_ls1005g_2.jpg',
+      '/uploads/gallery/hik_poe_3.jpg',
+      '/uploads/gallery/tenda_s105_4.jpg'
+    ];
+  }
+
+  // 4. ĐẦU GHI HÌNH DVR / NVR (ĐẢM BẢO 100% ẢNH THẬT ĐẦU GHI, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  if (type === 'dvr' || name.includes('đầu ghi') || name.includes('dvr') || name.includes('nvr') || name.includes('xvr')) {
+    if (id === '128' || name.includes('vantech') || name.includes('vp-464a')) {
+      return [
+        mainImg,
+        '/uploads/gallery/vantech_dvr_2.jpg',
+        '/uploads/gallery/vantech_dvr_3.jpg',
+        '/uploads/gallery/vantech_dvr_4.jpg'
+      ];
+    }
+    return [
+      mainImg,
+      '/uploads/gallery/hik_dvr_2.jpg',
+      '/uploads/gallery/hik_dvr_3.jpg',
+      '/uploads/gallery/hik_dvr_4.jpg'
+    ];
+  }
+
+  // 5. PHỤ KIỆN / THẺ NHỚ / Ổ CỨNG (KHÔNG HIỆN ẢNH CAMERA)
+  if (type === 'accessory' || name.includes('thẻ nhớ') || name.includes('ổ cứng') || name.includes('hdd') || name.includes('nguồn')) {
+    return [
+      mainImg,
+      '/uploads/gallery/hik_dvr_3.jpg',
+      '/uploads/gallery/hik_poe_3.jpg'
+    ];
+  }
+
+  // 6. Camera Vantech V-2020AI (Id 97)
   if (id === '97' || name.includes('vantech') || name.includes('v-2020') || name.includes('2020ai')) {
     return [
       mainImg,
@@ -465,7 +566,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 2. Imou Ranger 2 (A22EP)
+  // 7. Imou Ranger 2 (A22EP)
   if (id === '92' || name.includes('ranger 2') || name.includes('a22ep')) {
     return [
       mainImg,
@@ -476,7 +577,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 3. Camera Ezviz C6N
+  // 8. Camera Ezviz C6N
   if (id === '93' || name.includes('c6n')) {
     return [
       mainImg,
@@ -487,7 +588,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 4. Camera Imou Bullet 2C
+  // 9. Camera Imou Bullet 2C
   if (id === '94' || name.includes('bullet 2c')) {
     return [
       mainImg,
@@ -498,7 +599,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 5. Camera Ezviz C3TN OutPro 3MP
+  // 10. Camera Ezviz C3TN OutPro 3MP
   if (id === '95' || name.includes('outpro') || name.includes('c3tn')) {
     return [
       mainImg,
@@ -509,7 +610,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 6. Camera Wifi Kbone H21P
+  // 11. Camera Wifi Kbone H21P
   if (id === '96' || name.includes('kbone') || name.includes('h21p')) {
     return [
       mainImg,
@@ -520,7 +621,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 7. Camera Yoosee 3 Râu
+  // 12. Camera Yoosee 3 Râu
   if (id === '99' || name.includes('yoosee')) {
     return [
       mainImg,
@@ -531,7 +632,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 8. Camera Dahua IPC-HFW1230S
+  // 13. Camera Dahua IPC-HFW1230S
   if (id === '100' || name.includes('1230s') || name.includes('dahua')) {
     return [
       mainImg,
@@ -542,7 +643,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 9. Trọn bộ 4 Camera Hikvision
+  // 14. Trọn bộ 4 Camera Hikvision
   if (id === '101' || name.includes('trọn bộ')) {
     return [
       mainImg,
@@ -552,7 +653,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 10. Xiaomi Mi Home 360 & TP-Link Tapo C200
+  // 15. Xiaomi Mi Home 360 & TP-Link Tapo C200
   if (name.includes('xiaomi') || name.includes('tapo') || name.includes('c200')) {
     return [
       mainImg,
@@ -562,7 +663,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 11. Camera Ngoài Trời (Bullet, PTZ C8C, Cruiser...)
+  // 16. Camera Ngoài Trời (Bullet, PTZ C8C, Cruiser...)
   if (type === 'camera_outdoor') {
     return [
       mainImg,
@@ -573,7 +674,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 12. Camera Trong Nhà (xoay 360, đàm thoại)
+  // 17. Camera Trong Nhà (xoay 360, đàm thoại)
   if (type === 'camera_indoor') {
     return [
       mainImg,
@@ -603,13 +704,17 @@ export default function ProductDetail() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false); 
   
-  // STATE LẤY DỮ LIỆU
+  // STATE LẤY DỮ LIỆU NHANH
   const [user, setUser] = useState<any>(null);
-  const initialProduct = db.products.find((p: any) => String(p.id) === String(params?.id)) || null;
+  const paramId = String(params?.id || '');
+  const initialProduct = (db.products || []).find((p: any) => 
+    String(p.id) === paramId || String((p as any)._id) === paramId
+  ) || null;
+
   const [product, setProduct] = useState<any>(initialProduct);
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]); 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(!initialProduct);
 
   // State cho Form Đánh giá mới
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -627,55 +732,65 @@ export default function ProductDetail() {
     const loggedInUser = localStorage.getItem('currentUser');
     if (loggedInUser) setUser(JSON.parse(loggedInUser));
 
-    const fetchData = async () => {
+    if (!params?.id) return;
+    const currentId = String(params.id);
+
+    // 1. Thử lấy nhanh từ bộ nhớ session (khi bấm từ trang chủ sang)
+    if (!product) {
       try {
-        const timestamp = new Date().getTime();
-        
-        const [prodRes, reviewRes, setRes] = await Promise.all([
-          fetch(`/api/products?t=${timestamp}`).catch(() => null),
-          fetch(`/api/reviews?t=${timestamp}`).catch(() => null),
-          fetch(`/api/settings?t=${timestamp}`).catch(() => null)
-        ]);
-
-        let allProducts: any[] = db.products || [];
-        if (prodRes && prodRes.ok) {
-          const pData = await prodRes.json();
-          if (Array.isArray(pData) && pData.length > 0) {
-            allProducts = pData;
+        const cached = sessionStorage.getItem(`prod_${currentId}`);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && (String(parsed.id) === currentId || String(parsed._id) === currentId)) {
+            setProduct(parsed);
+            setIsLoading(false);
           }
         }
+      } catch (e) {}
+    }
 
-        const currentProduct = allProducts.find((p: any) => String(p._id || p.id) === String(params?.id)) 
-          || db.products.find((p: any) => String(p.id) === String(params?.id));
-        
-        if (currentProduct) {
-          setProduct(currentProduct);
-          const related = allProducts
-            .filter((p: any) => String(p.category_id) === String(currentProduct.category_id) && String(p._id || p.id) !== String(params?.id))
-            .slice(0, 4);
-          setRelatedProducts(related);
-        }
+    // 2. Fetch thông tin sản phẩm cụ thể (Tối ưu tốc độ cực nhanh)
+    fetch(`/api/products?id=${encodeURIComponent(currentId)}`)
+      .then(res => res.ok ? res.json() : null)
+      .then(pData => {
+        if (pData) {
+          setProduct(pData);
+          setIsLoading(false);
+          try { sessionStorage.setItem(`prod_${currentId}`, JSON.stringify(pData)); } catch(e) {}
 
-        let fetchedReviews: any[] = [];
-        if (reviewRes && reviewRes.ok) {
-          try {
-            const rData = await reviewRes.json();
-            if (Array.isArray(rData)) fetchedReviews = rData;
-          } catch (e) {
-            console.error("Lỗi parse reviews:", e);
+          // Nạp các sản phẩm liên quan cùng danh mục
+          if (pData.category_id) {
+            fetch(`/api/products?category_id=${pData.category_id}`)
+              .then(r => r.ok ? r.json() : [])
+              .then(relData => {
+                if (Array.isArray(relData)) {
+                  setRelatedProducts(relData.filter((rp: any) => String(rp._id || rp.id) !== currentId).slice(0, 4));
+                }
+              })
+              .catch(() => {});
           }
+        } else if (!product) {
+          setIsLoading(false);
         }
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
 
-        // Kết hợp dữ liệu đánh giá từ Database MongoDB và db.json dự phòng
-        const combinedReviews: any[] = [...fetchedReviews];
+    // 3. Fetch reviews song song chỉ cho sản phẩm này
+    fetch(`/api/reviews?product_id=${encodeURIComponent(currentId)}`)
+      .then(res => res.ok ? res.json() : [])
+      .then(rData => {
+        let fetchedReviews: any[] = Array.isArray(rData) ? rData : [];
         if (db.reviews && Array.isArray(db.reviews)) {
-          for (const dbr of db.reviews) {
-            const alreadyExists = combinedReviews.some((cr: any) => 
+          const dbrs = db.reviews.filter((dbr: any) => String(dbr.product_id) === currentId);
+          for (const dbr of dbrs) {
+            const exists = fetchedReviews.some((cr: any) => 
               String(cr._id || cr.id) === String(dbr.id) ||
-              (cr.comment === dbr.comment && String(cr.username || '') === String(dbr.user_id || '') && Number(cr.rating) === Number(dbr.rating))
+              (cr.comment === dbr.comment && Number(cr.rating) === Number(dbr.rating))
             );
-            if (!alreadyExists) {
-              combinedReviews.push({
+            if (!exists) {
+              fetchedReviews.push({
                 ...dbr,
                 customer_name: dbr.user_id === '11' ? 'bao' : (dbr.user_id === '1' ? 'ADMIN' : 'Khách hàng'),
                 createdAt: dbr.created_at
@@ -683,47 +798,25 @@ export default function ProductDetail() {
             }
           }
         }
+        setReviews(fetchedReviews);
+      })
+      .catch(() => {});
 
-        // Lọc chuẩn xác cho sản phẩm hiện tại: khớp với param id, Mongo _id hoặc db.json id
-        const prodMongoId = currentProduct?._id ? String(currentProduct._id) : '';
-        const prodDbId = currentProduct?.id ? String(currentProduct.id) : '';
-        const paramId = String(params?.id || '');
-
-        const currentReviews = combinedReviews.filter((r: any) => {
-          const rProdId = String(r.product_id || r.productId || '');
-          if (!rProdId) return false;
-          return rProdId === paramId || 
-                 (prodMongoId && rProdId === prodMongoId) || 
-                 (prodDbId && rProdId === prodDbId);
-        });
-
-        setReviews(currentReviews);
-
-        if (setRes && setRes.ok) {
-          const sData = await setRes.json();
-          if (sData) {
-            const discount = Number(sData.saleDiscount) || 0;
-            setSaleDiscount(discount);
-            
-            const currentDay = new Date().getDate();
-            const daysArray = (sData.saleDays || "").split(',').map((d: string) => parseInt(d.trim()));
-            
-            if (daysArray.includes(currentDay) && discount > 0) {
-              setIsSaleDay(true);
-            }
+    // 4. Fetch settings khuyến mãi
+    fetch('/api/settings')
+      .then(res => res.ok ? res.json() : null)
+      .then(sData => {
+        if (sData) {
+          const discount = Number(sData.saleDiscount) || 0;
+          setSaleDiscount(discount);
+          const currentDay = new Date().getDate();
+          const daysArray = (sData.saleDays || "").split(',').map((d: string) => parseInt(d.trim()));
+          if (daysArray.includes(currentDay) && discount > 0) {
+            setIsSaleDay(true);
           }
         }
-
-      } catch (error) {
-        console.error("Lỗi tải dữ liệu sản phẩm:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (params?.id) {
-      fetchData();
-    }
+      })
+      .catch(() => {});
   }, [params?.id]);
 
   const handleLogout = () => {
@@ -791,8 +884,23 @@ export default function ProductDetail() {
 
   if (isLoading) {
     return (
-      <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "18px", fontWeight: "700", color: "#0284c7" }}>
-        <i className="fas fa-spinner fa-spin" style={{ marginRight: "12px", fontSize: "24px" }}></i> Đang tải thông tin sản phẩm...
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+        <Header user={user} onLogout={handleLogout} />
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '60px 20px' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              width: '44px',
+              height: '44px',
+              border: '3.5px solid #e0f2fe',
+              borderTopColor: '#0284c7',
+              borderRadius: '50%',
+              animation: 'spin 0.8s linear infinite',
+              margin: '0 auto 16px'
+            }} />
+            <p style={{ color: '#0369a1', fontWeight: '700', fontSize: '16px' }}>Đang tải thông tin sản phẩm...</p>
+          </div>
+        </div>
+        <Footer />
       </div>
     );
   }

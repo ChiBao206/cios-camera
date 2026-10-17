@@ -8,13 +8,26 @@ export const revalidate = 0;
 
 export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const productId = url.searchParams.get("product_id") || url.searchParams.get("productId");
     await connectDB();
-    const reviews = await Review.find({}).sort({ createdAt: -1 }); 
-    const response = NextResponse.json(reviews);
-    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    response.headers.set('Pragma', 'no-cache');
-    response.headers.set('Expires', '0');
-    return response;
+
+    let query: any = {};
+    if (productId) {
+      query = {
+        $or: [
+          { product_id: productId },
+          { productId: productId }
+        ]
+      };
+    }
+
+    const reviews = await Review.find(query).sort({ createdAt: -1 }).lean(); 
+    return NextResponse.json(reviews, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=60'
+      }
+    });
   } catch (error) {
     return NextResponse.json({ error: "Lỗi lấy dữ liệu đánh giá" }, { status: 500 });
   }
