@@ -444,7 +444,7 @@ function getProductGiftList(product: any, type: string) {
   ];
 }
 
-// Helper lấy danh sách đầy đủ các ảnh góc nhìn cho toàn bộ sản phẩm
+// Helper lấy danh sách đầy đủ các ảnh góc nhìn cho toàn bộ sản phẩm chuẩn TikTok Shop & Shopee
 function getProductImages(product: any, type: string): string[] {
   if (product?.images && Array.isArray(product.images) && product.images.length > 1) {
     return product.images;
@@ -452,67 +452,145 @@ function getProductImages(product: any, type: string): string[] {
 
   const mainImg = product?.image || '/uploads/32.jpg';
   const name = String(product?.name || '').toLowerCase();
-  const list: string[] = [mainImg];
+  const id = String(product?._id || product?.id || '');
 
-  // 1. Imou Ranger 2 (A22EP)
-  if (name.includes('ranger 2') || name.includes('a22ep')) {
-    list.push('/uploads/gallery/imou_ranger2_angle.png');
-    list.push('/uploads/gallery/indoor_rear.jpg');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+  // 1. Camera Vantech V-2020AI (Id 97)
+  if (id === '97' || name.includes('vantech') || name.includes('v-2020') || name.includes('2020ai')) {
+    return [
+      mainImg,
+      '/uploads/gallery/vantech_4.jpg',
+      '/uploads/gallery/vantech_black_clean.jpg',
+      '/uploads/gallery/p_92_angle_3.jpg',
+      '/uploads/gallery/p_92_angle_4.png'
+    ];
   }
 
-  // 2. Camera Ezviz C6N
-  if (name.includes('c6n')) {
-    list.push('/uploads/gallery/imou_ranger2_angle.png');
-    list.push('/uploads/gallery/indoor_rear.jpg');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+  // 2. Imou Ranger 2 (A22EP)
+  if (id === '92' || name.includes('ranger 2') || name.includes('a22ep')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_92_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_3.jpg',
+      '/uploads/gallery/p_92_angle_4.png',
+      '/uploads/gallery/imou_ranger2_angle.png'
+    ];
   }
 
-  // 3. Switch Mạng (TP-Link, PoE Hikvision, Tenda, Cisco)
-  if (type === 'switch') {
-    list.push('/uploads/gallery/switch_rear.jpg');
-    list.push('/uploads/gallery/switch_angle.jpg');
-    list.push('/uploads/gallery/switch_box.jpg');
-    return list;
+  // 3. Camera Ezviz C6N
+  if (id === '93' || name.includes('c6n')) {
+    return [
+      mainImg,
+      '/uploads/gallery/ezviz_c6n_angle.jpg',
+      '/uploads/gallery/ezviz_c6n_back.jpg',
+      '/uploads/gallery/ezviz_c6n_kit.jpg',
+      '/uploads/gallery/ezviz_c6n_scene.jpg'
+    ];
   }
 
-  // 4. Router Wi-Fi (Archer AX53, Totolink)
-  if (type === 'router') {
-    list.push('/uploads/gallery/router_back.jpg');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+  // 4. Camera Imou Bullet 2C
+  if (id === '94' || name.includes('bullet 2c')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg',
+      '/uploads/gallery/p_100_angle_1.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg'
+    ];
   }
 
-  // 5. Đầu Ghi Hình (Hikvision, Vantech)
-  if (type === 'dvr') {
-    list.push('/uploads/gallery/dvr_back.jpg');
-    list.push('/uploads/gallery/switch_angle.jpg');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+  // 5. Camera Ezviz C3TN OutPro 3MP
+  if (id === '95' || name.includes('outpro') || name.includes('c3tn')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg',
+      '/uploads/gallery/p_100_angle_1.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg'
+    ];
   }
 
-  // 6. Camera Ngoài Trời (Bullet 2C, OutPro, C8C, Cruiser...)
+  // 6. Camera Wifi Kbone H21P
+  if (id === '96' || name.includes('kbone') || name.includes('h21p')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_96_angle_1.jpg',
+      '/uploads/gallery/p_96_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_4.png'
+    ];
+  }
+
+  // 7. Camera Yoosee 3 Râu
+  if (id === '99' || name.includes('yoosee')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_99_angle_1.png',
+      '/uploads/gallery/p_99_angle_2.jpg',
+      '/uploads/gallery/p_99_angle_3.jpg',
+      '/uploads/gallery/p_92_angle_4.png'
+    ];
+  }
+
+  // 8. Camera Dahua IPC-HFW1230S
+  if (id === '100' || name.includes('1230s') || name.includes('dahua')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_100_angle_1.jpg',
+      '/uploads/gallery/p_100_angle_2.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg'
+    ];
+  }
+
+  // 9. Trọn bộ 4 Camera Hikvision
+  if (id === '101' || name.includes('trọn bộ')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg'
+    ];
+  }
+
+  // 10. Xiaomi Mi Home 360 & TP-Link Tapo C200
+  if (name.includes('xiaomi') || name.includes('tapo') || name.includes('c200')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_102_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_4.png'
+    ];
+  }
+
+  // 11. Camera Ngoài Trời (Bullet, PTZ C8C, Cruiser...)
   if (type === 'camera_outdoor') {
-    list.push('/uploads/gallery/outdoor_bracket.jpg');
-    list.push('/uploads/gallery/outdoor_ports.jpg');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg',
+      '/uploads/gallery/p_100_angle_1.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg'
+    ];
   }
 
-  // 7. Camera Trong Nhà (Kbone, Tapo, Xiaomi, FPT, Viettel...)
+  // 12. Camera Trong Nhà (xoay 360, đàm thoại)
   if (type === 'camera_indoor') {
-    list.push('/uploads/gallery/indoor_rear.jpg');
-    list.push('/uploads/gallery/imou_ranger2_angle.png');
-    list.push('/uploads/gallery/indoor_kit.jpg');
-    return list;
+    return [
+      mainImg,
+      '/uploads/gallery/p_92_angle_2.jpg',
+      '/uploads/gallery/p_92_angle_3.jpg',
+      '/uploads/gallery/p_92_angle_4.png',
+      '/uploads/gallery/ezviz_c6n_scene.jpg'
+    ];
   }
 
-  // Mặc định cho mọi sản phẩm khác
-  list.push('/uploads/gallery/indoor_rear.jpg');
-  list.push('/uploads/gallery/switch_angle.jpg');
-  return list;
+  // Mặc định cho mọi camera an ninh khác: góc nghiêng, góc xoay, thực tế lắp đặt
+  return [
+    mainImg,
+    '/uploads/gallery/p_92_angle_2.jpg',
+    '/uploads/gallery/p_95_angle_2.jpg',
+    '/uploads/gallery/p_92_angle_4.png'
+  ];
 }
 
 export default function ProductDetail() {

@@ -1,94 +1,1015 @@
 {
   "cart": [],
   "categories": [
-    { "id": "13", "name": "Camera wifi" },
-    { "id": "14", "name": "Camera ngoài trời" },
-    { "id": "15", "name": "Camera ip ( thân)" },
-    { "id": "16", "name": "Camera ip ( tròn)" },
-    { "id": "17", "name": "Router" },
-    { "id": "18", "name": "Switch" },
-    { "id": "19", "name": "Đầu ghi" }
+    {
+      "id": "13",
+      "name": "Camera wifi"
+    },
+    {
+      "id": "14",
+      "name": "Camera ngoài trời"
+    },
+    {
+      "id": "15",
+      "name": "Camera ip ( thân)"
+    },
+    {
+      "id": "16",
+      "name": "Camera ip ( tròn)"
+    },
+    {
+      "id": "17",
+      "name": "Router"
+    },
+    {
+      "id": "18",
+      "name": "Switch"
+    },
+    {
+      "id": "19",
+      "name": "Đầu ghi"
+    }
   ],
   "favorites": [
-    { "id": "4", "user_id": "1", "product_id": "124", "created_at": "2026-01-14 08:36:35" },
-    { "id": "5", "user_id": "1", "product_id": "121", "created_at": "2026-01-14 08:36:38" },
-    { "id": "6", "user_id": "1", "product_id": "120", "created_at": "2026-01-14 08:36:40" },
-    { "id": "7", "user_id": "1", "product_id": "127", "created_at": "2026-01-14 13:45:10" },
-    { "id": "8", "user_id": "1", "product_id": "126", "created_at": "2026-01-14 13:45:14" },
-    { "id": "9", "user_id": "1", "product_id": "125", "created_at": "2026-01-14 13:45:18" },
-    { "id": "10", "user_id": "1", "product_id": "130", "created_at": "2026-01-14 13:45:20" },
-    { "id": "11", "user_id": "1", "product_id": "131", "created_at": "2026-01-14 13:45:21" },
-    { "id": "27", "user_id": "11", "product_id": "122", "created_at": "2026-01-14 15:04:17" },
-    { "id": "29", "user_id": "11", "product_id": "124", "created_at": "2026-01-14 15:04:19" },
-    { "id": "30", "user_id": "11", "product_id": "131", "created_at": "2026-01-14 15:04:24" },
-    { "id": "31", "user_id": "11", "product_id": "130", "created_at": "2026-01-14 15:04:24" }
+    {
+      "id": "4",
+      "user_id": "1",
+      "product_id": "124",
+      "created_at": "2026-01-14 08:36:35"
+    },
+    {
+      "id": "5",
+      "user_id": "1",
+      "product_id": "121",
+      "created_at": "2026-01-14 08:36:38"
+    },
+    {
+      "id": "6",
+      "user_id": "1",
+      "product_id": "120",
+      "created_at": "2026-01-14 08:36:40"
+    },
+    {
+      "id": "7",
+      "user_id": "1",
+      "product_id": "127",
+      "created_at": "2026-01-14 13:45:10"
+    },
+    {
+      "id": "8",
+      "user_id": "1",
+      "product_id": "126",
+      "created_at": "2026-01-14 13:45:14"
+    },
+    {
+      "id": "9",
+      "user_id": "1",
+      "product_id": "125",
+      "created_at": "2026-01-14 13:45:18"
+    },
+    {
+      "id": "10",
+      "user_id": "1",
+      "product_id": "130",
+      "created_at": "2026-01-14 13:45:20"
+    },
+    {
+      "id": "11",
+      "user_id": "1",
+      "product_id": "131",
+      "created_at": "2026-01-14 13:45:21"
+    },
+    {
+      "id": "27",
+      "user_id": "11",
+      "product_id": "122",
+      "created_at": "2026-01-14 15:04:17"
+    },
+    {
+      "id": "29",
+      "user_id": "11",
+      "product_id": "124",
+      "created_at": "2026-01-14 15:04:19"
+    },
+    {
+      "id": "30",
+      "user_id": "11",
+      "product_id": "131",
+      "created_at": "2026-01-14 15:04:24"
+    },
+    {
+      "id": "31",
+      "user_id": "11",
+      "product_id": "130",
+      "created_at": "2026-01-14 15:04:24"
+    }
   ],
   "orders": [
-    { "id": "95", "user_id": "12", "customer_name": "bao", "customer_phone": "0914021454", "customer_address": "htyj", "total_money": "1100000.00", "status": "2", "created_at": "2026-03-17 08:29:50" },
-    { "id": "96", "user_id": "1", "customer_name": "ADMIN", "customer_phone": "0971024173", "customer_address": "23432423, Phường 19, Quận Bình Thạnh, Thành phố Hồ Chí Minh", "total_money": "31000.00", "status": "0", "created_at": "2026-03-17 15:09:48" },
-    { "id": "97", "user_id": "1", "customer_name": "ADMIN", "customer_phone": "0971024173", "customer_address": "32423234, Xã Long Hòa, Huyện Cần Giờ, Thành phố Hồ Chí Minh", "total_money": "26600000.00", "status": "2", "created_at": "2026-03-17 15:38:58" }
+    {
+      "id": "95",
+      "user_id": "12",
+      "customer_name": "bao",
+      "customer_phone": "0914021454",
+      "customer_address": "htyj",
+      "total_money": "1100000.00",
+      "status": "2",
+      "created_at": "2026-03-17 08:29:50"
+    },
+    {
+      "id": "96",
+      "user_id": "1",
+      "customer_name": "ADMIN",
+      "customer_phone": "0971024173",
+      "customer_address": "23432423, Phường 19, Quận Bình Thạnh, Thành phố Hồ Chí Minh",
+      "total_money": "31000.00",
+      "status": "0",
+      "created_at": "2026-03-17 15:09:48"
+    },
+    {
+      "id": "97",
+      "user_id": "1",
+      "customer_name": "ADMIN",
+      "customer_phone": "0971024173",
+      "customer_address": "32423234, Xã Long Hòa, Huyện Cần Giờ, Thành phố Hồ Chí Minh",
+      "total_money": "26600000.00",
+      "status": "2",
+      "created_at": "2026-03-17 15:38:58"
+    }
   ],
   "order_details": [
-    { "id": "85", "order_id": "95", "product_id": "132", "product_name": null, "product_image": null, "quantity": "1", "price": "1100000.00", "user_rating": "0", "user_comment": null },
-    { "id": "86", "order_id": "96", "product_id": "131", "product_name": null, "product_image": null, "quantity": "1", "price": "1000.00", "user_rating": "0", "user_comment": null },
-    { "id": "87", "order_id": "97", "product_id": "130", "product_name": null, "product_image": null, "quantity": "28", "price": "950000.00", "user_rating": "0", "user_comment": null }
+    {
+      "id": "85",
+      "order_id": "95",
+      "product_id": "132",
+      "product_name": null,
+      "product_image": null,
+      "quantity": "1",
+      "price": "1100000.00",
+      "user_rating": "0",
+      "user_comment": null
+    },
+    {
+      "id": "86",
+      "order_id": "96",
+      "product_id": "131",
+      "product_name": null,
+      "product_image": null,
+      "quantity": "1",
+      "price": "1000.00",
+      "user_rating": "0",
+      "user_comment": null
+    },
+    {
+      "id": "87",
+      "order_id": "97",
+      "product_id": "130",
+      "product_name": null,
+      "product_image": null,
+      "quantity": "28",
+      "price": "950000.00",
+      "user_rating": "0",
+      "user_comment": null
+    }
   ],
   "products": [
-    { "id": "92", "category_id": "13", "name": "Camera Wifi Imou Ranger 2 (A22EP)", "price": "550000.00", "old_price": "687500", "image": "/uploads/32.jpg", "resolution": null, "description": "Xoay 360, đàm thoại 2 chiều.", "created_at": "2025-12-31 20:36:51", "quantity": "37", "category": "Wifi", "sold": "0" },
-    { "id": "93", "category_id": "13", "name": "Camera Wifi Ezviz C6N 1080P", "price": "490000.00", "old_price": "612500", "image": "/uploads/31.jpg", "resolution": null, "description": "Góc rộng, hồng ngoại 10m.", "created_at": "2025-12-31 20:36:51", "quantity": "14", "category": "Wifi", "sold": "0" },
-    { "id": "94", "category_id": "14", "name": "Camera Imou Bullet 2C", "price": "790000.00", "old_price": "987500", "image": "/uploads/30.jpg", "resolution": null, "description": "Chống nước IP67, mic thu âm.", "created_at": "2025-12-31 20:36:51", "quantity": "26", "category": "Wifi", "sold": "0" },
-    { "id": "95", "category_id": "14", "name": "Camera Ezviz C3TN OutPro 3MP", "price": "1150000.00", "old_price": "1437500", "image": "/uploads/29.jpg", "resolution": null, "description": "Có màu ban đêm, báo động.", "created_at": "2025-12-31 20:36:51", "quantity": "41", "category": "Wifi", "sold": "0" },
-    { "id": "96", "category_id": "13", "name": "Camera Wifi Kbone H21P", "price": "520000.00", "old_price": "650000", "image": "/uploads/28.jpg", "resolution": null, "description": "Nhỏ gọn, Full HD, thẻ nhớ 256GB.", "created_at": "2025-12-31 20:36:51", "quantity": "36", "category": "Wifi", "sold": "0" },
-    { "id": "97", "category_id": "13", "name": "Camera Vantech V-2020AI", "price": "1250000.00", "old_price": "1562500", "image": "/uploads/27.jpg", "resolution": null, "description": "Công nghệ AI, vỏ kim loại.", "created_at": "2025-12-31 20:36:51", "quantity": "46", "category": "Wifi", "sold": "0" },
-    { "id": "98", "category_id": "15", "name": "Camera Hikvision DS-2CD2021G1-I", "price": "1450000.00", "old_price": "1812500", "image": "/uploads/26.jpg", "resolution": null, "description": "Chuẩn nén H.265+, hồng ngoại 30m.", "created_at": "2025-12-31 20:36:51", "quantity": "35", "category": "Wifi", "sold": "0" },
-    { "id": "99", "category_id": "13", "name": "Camera Wifi Yoosee 3 Râu C6N", "price": "350000.00", "old_price": "437500", "image": "/uploads/25.jpg", "resolution": null, "description": "Giá rẻ, xoay 360.", "created_at": "2025-12-31 20:36:51", "quantity": "27", "category": "Wifi", "sold": "0" },
-    { "id": "100", "category_id": "15", "name": "Camera Dahua IPC-HFW1230S", "price": "980000.00", "old_price": "1225000", "image": "/uploads/24.jpg", "resolution": null, "description": "Chống ngược sáng DWDR.", "created_at": "2025-12-31 20:36:51", "quantity": "20", "category": "Wifi", "sold": "0" },
-    { "id": "101", "category_id": "14", "name": "Trọn bộ 4 Camera Hikvision", "price": "3500000.00", "old_price": "4375000", "image": "/uploads/23.jpg", "resolution": null, "description": "Đầu ghi + 4 mắt cam.", "created_at": "2025-12-31 20:36:51", "quantity": "11", "category": "Wifi", "sold": "0" },
-    { "id": "102", "category_id": "13", "name": "Camera Xiaomi Mi Home 360", "price": "650000.00", "old_price": "812500", "image": "/uploads/22.jpg", "resolution": null, "description": "Độ phân giải 2K, AI.", "created_at": "2025-12-31 20:36:51", "quantity": "26", "category": "Wifi", "sold": "0" },
-    { "id": "103", "category_id": "13", "name": "Camera TP-Link Tapo C200", "price": "590000.00", "old_price": "737500", "image": "/uploads/21.jpg", "resolution": null, "description": "Full HD 1080p, quay quét.", "created_at": "2025-12-31 20:36:51", "quantity": "46", "category": "Wifi", "sold": "0" },
-    { "id": "104", "category_id": "13", "name": "Camera FPT Indoor", "price": "1100000.00", "old_price": "1375000", "image": "/uploads/20.jpg", "resolution": null, "description": "Lưu trữ Cloud, bảo mật cao.", "created_at": "2025-12-31 20:36:51", "quantity": "22", "category": "Wifi", "sold": "0" },
-    { "id": "105", "category_id": "13", "name": "Camera Viettel HC2", "price": "1200000.00", "old_price": "1500000", "image": "/uploads/19.jpg", "resolution": null, "description": "Đàm thoại 2 chiều.", "created_at": "2025-12-31 20:36:51", "quantity": "45", "category": "Wifi", "sold": "0" },
-    { "id": "106", "category_id": "15", "name": "Camera KBVision KX-A2111N3", "price": "850000.00", "old_price": "1062500", "image": "/uploads/18.jpg", "resolution": null, "description": "Thương hiệu Mỹ, bền bỉ.", "created_at": "2025-12-31 20:36:51", "quantity": "27", "category": "Wifi", "sold": "0" },
-    { "id": "107", "category_id": "16", "name": "Camera Huviron F-ND221", "price": "1600000.00", "old_price": "2000000", "image": "/uploads/17.jpg", "resolution": null, "description": "Camera Dome ốp trần.", "created_at": "2025-12-31 20:36:51", "quantity": "30", "category": "Wifi", "sold": "0" },
-    { "id": "108", "category_id": "16", "name": "Camera Panasonic K-EF134L01E", "price": "2100000.00", "old_price": "2625000", "image": "/uploads/16.jpg", "resolution": null, "description": "Chống chịu thời tiết.", "created_at": "2025-12-31 20:36:51", "quantity": "18", "category": "Wifi", "sold": "0" },
-    { "id": "109", "category_id": "14", "name": "Camera PTZ Ezviz C8C", "price": "1850000.00", "old_price": "2312500", "image": "/uploads/15.jpg", "resolution": null, "description": "Xoay 360 ngoài trời.", "created_at": "2025-12-31 20:36:51", "quantity": "33", "category": "Wifi", "sold": "0" },
-    { "id": "110", "category_id": "14", "name": "Camera Imou Cruiser S42FP", "price": "1590000.00", "old_price": "1987500", "image": "/uploads/14.jpg", "resolution": null, "description": "4MP, xoay 360, chống nước.", "created_at": "2025-12-31 20:36:51", "quantity": "23", "category": "Wifi", "sold": "0" },
-    { "id": "111", "category_id": "13", "name": "Camera Dahua Wifi Hero A1", "price": "690000.00", "old_price": "862500", "image": "/uploads/13.jpg", "resolution": null, "description": "AI thông minh, kết nối nhanh.", "created_at": "2025-12-31 20:36:51", "quantity": "43", "category": "Wifi", "sold": "0" },
-    { "id": "112", "category_id": "13", "name": "Camera Hành Trình Vietmap C61", "price": "2500000.00", "old_price": "3125000", "image": "/uploads/12.jpg", "resolution": null, "description": "Ghi hình 4K, cảnh báo.", "created_at": "2025-12-31 20:36:51", "quantity": "18", "category": "Wifi", "sold": "0" },
-    { "id": "113", "category_id": "14", "name": "Camera Năng Lượng Mặt Trời 4G", "price": "3200000.00", "old_price": "4000000", "image": "/uploads/11.jpg", "resolution": null, "description": "Không cần điện wifi.", "created_at": "2025-12-31 20:36:51", "quantity": "30", "category": "Wifi", "sold": "0" },
-    { "id": "114", "category_id": "13", "name": "Camera Ngụy Trang Bóng Đèn", "price": "450000.00", "old_price": "562500", "image": "/uploads/10.jpg", "resolution": null, "description": "Gắn đuôi đèn E27.", "created_at": "2025-12-31 20:36:51", "quantity": "47", "category": "Wifi", "sold": "0" },
-    { "id": "115", "category_id": "13", "name": "Camera Mini A9", "price": "350000.00", "old_price": "437500", "image": "/uploads/9.jpg", "resolution": null, "description": "Siêu nhỏ, pin trâu.", "created_at": "2025-12-31 20:36:51", "quantity": "22", "category": "Wifi", "sold": "0" },
-    { "id": "116", "category_id": "19", "name": "Đầu ghi hình Hikvision 8 Kênh", "price": "2200000.00", "old_price": "2750000", "image": "/uploads/8.jpg", "resolution": null, "description": "Hỗ trợ 8 camera.", "created_at": "2025-12-31 20:36:51", "quantity": "33", "category": "Wifi", "sold": "0" },
-    { "id": "117", "category_id": "13", "name": "Camera Google Nest Cam", "price": "3200000.00", "old_price": "4000000", "image": "/uploads/7.jpg", "resolution": null, "description": "Nhận diện khuôn mặt.", "created_at": "2025-12-31 20:36:51", "quantity": "12", "category": "Wifi", "sold": "0" },
-    { "id": "118", "category_id": "14", "name": "Camera Ring Stick Up", "price": "2100000.00", "old_price": "2625000", "image": "/uploads/6.jpg", "resolution": null, "description": "Đàm thoại to rõ.", "created_at": "2025-12-31 20:36:51", "quantity": "30", "category": "Wifi", "sold": "0" },
-    { "id": "119", "category_id": "14", "name": "Camera Arlo Pro 4", "price": "4500000.00", "old_price": "5625000", "image": "/uploads/5.jpg", "resolution": null, "description": "2K HDR, đèn pha.", "created_at": "2025-12-31 20:36:51", "quantity": "27", "category": "Wifi", "sold": "0" },
-    { "id": "120", "category_id": "13", "name": "Camera Wyze Cam v3", "price": "850000.00", "old_price": "1062500", "image": "/uploads/4.jpg", "resolution": null, "description": "Quay đêm có màu.", "created_at": "2025-12-31 20:36:51", "quantity": "33", "category": "Wifi", "sold": "0" },
-    { "id": "121", "category_id": "13", "name": "Camera Blink Mini", "price": "950000.00", "old_price": "1187500", "image": "/uploads/3.jpg", "resolution": null, "description": "Kích thước siêu nhỏ.", "created_at": "2025-12-31 20:36:51", "quantity": "33", "category": "Wifi", "sold": "0" },
-    { "id": "122", "category_id": "13", "name": "Camera Eufy Solo Indoor", "price": "1050000.00", "old_price": "1312500", "image": "/uploads/2.jpg", "resolution": null, "description": "Nhận diện tiếng khóc.", "created_at": "2025-12-31 20:36:51", "quantity": "14", "category": "Wifi", "sold": "2" },
-    { "id": "124", "category_id": "13", "name": "Camera Logitech Circle", "price": "3700000.00", "old_price": "4625000", "image": "/uploads/1.jpg", "resolution": null, "description": "Camera an ninh cao cấp, chống nước.", "created_at": "2026-01-06 20:45:22", "quantity": "32", "category": "Wifi", "sold": "0" },
-    { "id": "125", "category_id": "17", "name": "Router Wifi 6 TP-Link Archer AX53", "price": "1490000.00", "old_price": "1862500", "image": "/uploads/33.jpg", "resolution": null, "description": "Router Wifi 6 tốc độ cao, băng tần kép AX3000.", "created_at": "2026-01-12 13:54:19", "quantity": "50", "category": "Router", "sold": "0" },
-    { "id": "126", "category_id": "17", "name": "Router Wifi Totolink A720R", "price": "450000.00", "old_price": "562500", "image": "/uploads/34.jpg", "resolution": null, "description": "Router Wifi băng tần kép AC1200, 4 ăng ten sóng khỏe.", "created_at": "2026-01-12 13:54:19", "quantity": "50", "category": "Router", "sold": "0" },
-    { "id": "127", "category_id": "19", "name": "Đầu ghi hình Hikvision DS-7204HGHI-K1", "price": "1250000.00", "old_price": "1562500", "image": "/uploads/35.jpg", "resolution": null, "description": "Đầu ghi 4 kênh Turbo HD 4.0, chuẩn nén H.265 Pro+.", "created_at": "2026-01-12 13:54:19", "quantity": "19", "category": "Đầu ghi", "sold": "0" },
-    { "id": "128", "category_id": "19", "name": "Đầu ghi hình Vantech VP-464A", "price": "1800000.00", "old_price": "2250000", "image": "/uploads/36.jpg", "resolution": null, "description": "Đầu ghi hình AHD 4 kênh, hỗ trợ camera 4MP, xem qua mạng mượt mà.", "created_at": "2026-01-12 13:54:19", "quantity": "15", "category": "Đầu ghi", "sold": "0" },
-    { "id": "129", "category_id": "18", "name": "Switch 5 cổng TP-Link LS1005G", "price": "250000.00", "old_price": "312500", "image": "/uploads/37.jpg", "resolution": null, "description": "Switch để bàn 5 cổng 10/100/1000Mbps, vỏ thép.", "created_at": "2026-01-12 13:54:19", "quantity": "100", "category": "Switch", "sold": "0" },
-    { "id": "130", "category_id": "18", "name": "Switch POE Hikvision DS-3E0105P-E", "price": "950000.00", "old_price": "1187500", "image": "/uploads/38.jpg", "resolution": null, "description": "Switch PoE 4 cổng, cấp nguồn cho camera IP qua dây mạng.", "created_at": "2026-01-12 13:54:19", "quantity": "0", "category": "Switch", "sold": "0" },
-    { "id": "131", "category_id": "18", "name": "Switch Tenda S105 5 Port", "price": "991000.00", "old_price": "187500", "image": "/uploads/39.jpg", "resolution": null, "description": "Switch chia mạng 5 cổng giá rẻ, nhỏ gọn.", "created_at": "2026-01-12 13:54:19", "quantity": "88", "category": "Switch", "sold": "1" },
-    { "id": "132", "category_id": "18", "name": "Switch Cisco Business CBS110-8T-D", "price": "1100000.00", "old_price": "1375000", "image": "/uploads/40.jpg", "resolution": null, "description": "Switch 8 cổng Gigabit, thương hiệu Cisco siêu bền.", "created_at": "2026-01-12 13:54:19", "quantity": "35", "category": "Switch", "sold": "11" }
+    {
+      "id": "92",
+      "category_id": "13",
+      "name": "Camera Wifi Imou Ranger 2 (A22EP)",
+      "price": "550000.00",
+      "old_price": "687500",
+      "image": "/uploads/32.jpg",
+      "resolution": null,
+      "description": "Xoay 360, đàm thoại 2 chiều.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "37",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/32.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png",
+        "/uploads/gallery/imou_ranger2_angle.png"
+      ]
+    },
+    {
+      "id": "93",
+      "category_id": "13",
+      "name": "Camera Wifi Ezviz C6N 1080P",
+      "price": "490000.00",
+      "old_price": "612500",
+      "image": "/uploads/31.jpg",
+      "resolution": null,
+      "description": "Góc rộng, hồng ngoại 10m.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "14",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/31.jpg",
+        "/uploads/gallery/ezviz_c6n_angle.jpg",
+        "/uploads/gallery/ezviz_c6n_back.jpg",
+        "/uploads/gallery/ezviz_c6n_kit.jpg",
+        "/uploads/gallery/ezviz_c6n_scene.jpg"
+      ]
+    },
+    {
+      "id": "94",
+      "category_id": "14",
+      "name": "Camera Imou Bullet 2C",
+      "price": "790000.00",
+      "old_price": "987500",
+      "image": "/uploads/30.jpg",
+      "resolution": null,
+      "description": "Chống nước IP67, mic thu âm.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "26",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/30.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "95",
+      "category_id": "14",
+      "name": "Camera Ezviz C3TN OutPro 3MP",
+      "price": "1150000.00",
+      "old_price": "1437500",
+      "image": "/uploads/29.jpg",
+      "resolution": null,
+      "description": "Có màu ban đêm, báo động.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "41",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/29.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "96",
+      "category_id": "13",
+      "name": "Camera Wifi Kbone H21P",
+      "price": "520000.00",
+      "old_price": "650000",
+      "image": "/uploads/28.jpg",
+      "resolution": null,
+      "description": "Nhỏ gọn, Full HD, thẻ nhớ 256GB.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "36",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/28.jpg",
+        "/uploads/gallery/p_96_angle_1.jpg",
+        "/uploads/gallery/p_96_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "97",
+      "category_id": "13",
+      "name": "Camera Vantech V-2020AI",
+      "price": "1250000.00",
+      "old_price": "1562500",
+      "image": "/uploads/27.jpg",
+      "resolution": null,
+      "description": "Công nghệ AI, vỏ kim loại.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "46",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/27.jpg",
+        "/uploads/gallery/vantech_4.jpg",
+        "/uploads/gallery/vantech_black_clean.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "98",
+      "category_id": "15",
+      "name": "Camera Hikvision DS-2CD2021G1-I",
+      "price": "1450000.00",
+      "old_price": "1812500",
+      "image": "/uploads/26.jpg",
+      "resolution": null,
+      "description": "Chuẩn nén H.265+, hồng ngoại 30m.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "35",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/26.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "99",
+      "category_id": "13",
+      "name": "Camera Wifi Yoosee 3 Râu C6N",
+      "price": "350000.00",
+      "old_price": "437500",
+      "image": "/uploads/25.jpg",
+      "resolution": null,
+      "description": "Giá rẻ, xoay 360.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "27",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/25.jpg",
+        "/uploads/gallery/p_99_angle_1.png",
+        "/uploads/gallery/p_99_angle_2.jpg",
+        "/uploads/gallery/p_99_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "100",
+      "category_id": "15",
+      "name": "Camera Dahua IPC-HFW1230S",
+      "price": "980000.00",
+      "old_price": "1225000",
+      "image": "/uploads/24.jpg",
+      "resolution": null,
+      "description": "Chống ngược sáng DWDR.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "20",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/24.jpg",
+        "/uploads/gallery/p_100_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_2.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "101",
+      "category_id": "14",
+      "name": "Trọn bộ 4 Camera Hikvision",
+      "price": "3500000.00",
+      "old_price": "4375000",
+      "image": "/uploads/23.jpg",
+      "resolution": null,
+      "description": "Đầu ghi + 4 mắt cam.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "11",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/23.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "102",
+      "category_id": "13",
+      "name": "Camera Xiaomi Mi Home 360",
+      "price": "650000.00",
+      "old_price": "812500",
+      "image": "/uploads/22.jpg",
+      "resolution": null,
+      "description": "Độ phân giải 2K, AI.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "26",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/22.jpg",
+        "/uploads/gallery/p_102_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "103",
+      "category_id": "13",
+      "name": "Camera TP-Link Tapo C200",
+      "price": "590000.00",
+      "old_price": "737500",
+      "image": "/uploads/21.jpg",
+      "resolution": null,
+      "description": "Full HD 1080p, quay quét.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "46",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/21.jpg",
+        "/uploads/gallery/p_102_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "104",
+      "category_id": "13",
+      "name": "Camera FPT Indoor",
+      "price": "1100000.00",
+      "old_price": "1375000",
+      "image": "/uploads/20.jpg",
+      "resolution": null,
+      "description": "Lưu trữ Cloud, bảo mật cao.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "22",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/20.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "105",
+      "category_id": "13",
+      "name": "Camera Viettel HC2",
+      "price": "1200000.00",
+      "old_price": "1500000",
+      "image": "/uploads/19.jpg",
+      "resolution": null,
+      "description": "Đàm thoại 2 chiều.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "45",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/19.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "106",
+      "category_id": "15",
+      "name": "Camera KBVision KX-A2111N3",
+      "price": "850000.00",
+      "old_price": "1062500",
+      "image": "/uploads/18.jpg",
+      "resolution": null,
+      "description": "Thương hiệu Mỹ, bền bỉ.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "27",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/18.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "107",
+      "category_id": "16",
+      "name": "Camera Huviron F-ND221",
+      "price": "1600000.00",
+      "old_price": "2000000",
+      "image": "/uploads/17.jpg",
+      "resolution": null,
+      "description": "Camera Dome ốp trần.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "30",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/17.jpg",
+        "/uploads/gallery/p_96_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "108",
+      "category_id": "16",
+      "name": "Camera Panasonic K-EF134L01E",
+      "price": "2100000.00",
+      "old_price": "2625000",
+      "image": "/uploads/16.jpg",
+      "resolution": null,
+      "description": "Chống chịu thời tiết.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "18",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/16.jpg",
+        "/uploads/gallery/p_96_angle_1.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "109",
+      "category_id": "14",
+      "name": "Camera PTZ Ezviz C8C",
+      "price": "1850000.00",
+      "old_price": "2312500",
+      "image": "/uploads/15.jpg",
+      "resolution": null,
+      "description": "Xoay 360 ngoài trời.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "33",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/15.jpg",
+        "/uploads/gallery/p_102_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "110",
+      "category_id": "14",
+      "name": "Camera Imou Cruiser S42FP",
+      "price": "1590000.00",
+      "old_price": "1987500",
+      "image": "/uploads/14.jpg",
+      "resolution": null,
+      "description": "4MP, xoay 360, chống nước.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "23",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/14.jpg",
+        "/uploads/gallery/p_102_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "111",
+      "category_id": "13",
+      "name": "Camera Dahua Wifi Hero A1",
+      "price": "690000.00",
+      "old_price": "862500",
+      "image": "/uploads/13.jpg",
+      "resolution": null,
+      "description": "AI thông minh, kết nối nhanh.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "43",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/13.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "112",
+      "category_id": "13",
+      "name": "Camera Hành Trình Vietmap C61",
+      "price": "2500000.00",
+      "old_price": "3125000",
+      "image": "/uploads/12.jpg",
+      "resolution": null,
+      "description": "Ghi hình 4K, cảnh báo.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "18",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/12.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "113",
+      "category_id": "14",
+      "name": "Camera Năng Lượng Mặt Trời 4G",
+      "price": "3200000.00",
+      "old_price": "4000000",
+      "image": "/uploads/11.jpg",
+      "resolution": null,
+      "description": "Không cần điện wifi.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "30",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/11.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "114",
+      "category_id": "13",
+      "name": "Camera Ngụy Trang Bóng Đèn",
+      "price": "450000.00",
+      "old_price": "562500",
+      "image": "/uploads/10.jpg",
+      "resolution": null,
+      "description": "Gắn đuôi đèn E27.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "47",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/10.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "115",
+      "category_id": "13",
+      "name": "Camera Mini A9",
+      "price": "350000.00",
+      "old_price": "437500",
+      "image": "/uploads/9.jpg",
+      "resolution": null,
+      "description": "Siêu nhỏ, pin trâu.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "22",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/9.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "116",
+      "category_id": "19",
+      "name": "Đầu ghi hình Hikvision 8 Kênh",
+      "price": "2200000.00",
+      "old_price": "2750000",
+      "image": "/uploads/8.jpg",
+      "resolution": null,
+      "description": "Hỗ trợ 8 camera.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "33",
+      "category": "Wifi",
+      "sold": "0"
+    },
+    {
+      "id": "117",
+      "category_id": "13",
+      "name": "Camera Google Nest Cam",
+      "price": "3200000.00",
+      "old_price": "4000000",
+      "image": "/uploads/7.jpg",
+      "resolution": null,
+      "description": "Nhận diện khuôn mặt.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "12",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/7.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "118",
+      "category_id": "14",
+      "name": "Camera Ring Stick Up",
+      "price": "2100000.00",
+      "old_price": "2625000",
+      "image": "/uploads/6.jpg",
+      "resolution": null,
+      "description": "Đàm thoại to rõ.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "30",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/6.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "119",
+      "category_id": "14",
+      "name": "Camera Arlo Pro 4",
+      "price": "4500000.00",
+      "old_price": "5625000",
+      "image": "/uploads/5.jpg",
+      "resolution": null,
+      "description": "2K HDR, đèn pha.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "27",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/5.jpg",
+        "/uploads/gallery/p_95_angle_2.jpg",
+        "/uploads/gallery/p_95_angle_3.jpg",
+        "/uploads/gallery/p_100_angle_3.jpg"
+      ]
+    },
+    {
+      "id": "120",
+      "category_id": "13",
+      "name": "Camera Wyze Cam v3",
+      "price": "850000.00",
+      "old_price": "1062500",
+      "image": "/uploads/4.jpg",
+      "resolution": null,
+      "description": "Quay đêm có màu.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "33",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/4.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "121",
+      "category_id": "13",
+      "name": "Camera Blink Mini",
+      "price": "950000.00",
+      "old_price": "1187500",
+      "image": "/uploads/3.jpg",
+      "resolution": null,
+      "description": "Kích thước siêu nhỏ.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "33",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/3.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "122",
+      "category_id": "13",
+      "name": "Camera Eufy Solo Indoor",
+      "price": "1050000.00",
+      "old_price": "1312500",
+      "image": "/uploads/2.jpg",
+      "resolution": null,
+      "description": "Nhận diện tiếng khóc.",
+      "created_at": "2025-12-31 20:36:51",
+      "quantity": "14",
+      "category": "Wifi",
+      "sold": "2",
+      "images": [
+        "/uploads/2.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "124",
+      "category_id": "13",
+      "name": "Camera Logitech Circle",
+      "price": "3700000.00",
+      "old_price": "4625000",
+      "image": "/uploads/1.jpg",
+      "resolution": null,
+      "description": "Camera an ninh cao cấp, chống nước.",
+      "created_at": "2026-01-06 20:45:22",
+      "quantity": "32",
+      "category": "Wifi",
+      "sold": "0",
+      "images": [
+        "/uploads/1.jpg",
+        "/uploads/gallery/p_92_angle_2.jpg",
+        "/uploads/gallery/p_92_angle_3.jpg",
+        "/uploads/gallery/p_92_angle_4.png"
+      ]
+    },
+    {
+      "id": "125",
+      "category_id": "17",
+      "name": "Router Wifi 6 TP-Link Archer AX53",
+      "price": "1490000.00",
+      "old_price": "1862500",
+      "image": "/uploads/33.jpg",
+      "resolution": null,
+      "description": "Router Wifi 6 tốc độ cao, băng tần kép AX3000.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "50",
+      "category": "Router",
+      "sold": "0"
+    },
+    {
+      "id": "126",
+      "category_id": "17",
+      "name": "Router Wifi Totolink A720R",
+      "price": "450000.00",
+      "old_price": "562500",
+      "image": "/uploads/34.jpg",
+      "resolution": null,
+      "description": "Router Wifi băng tần kép AC1200, 4 ăng ten sóng khỏe.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "50",
+      "category": "Router",
+      "sold": "0"
+    },
+    {
+      "id": "127",
+      "category_id": "19",
+      "name": "Đầu ghi hình Hikvision DS-7204HGHI-K1",
+      "price": "1250000.00",
+      "old_price": "1562500",
+      "image": "/uploads/35.jpg",
+      "resolution": null,
+      "description": "Đầu ghi 4 kênh Turbo HD 4.0, chuẩn nén H.265 Pro+.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "19",
+      "category": "Đầu ghi",
+      "sold": "0"
+    },
+    {
+      "id": "128",
+      "category_id": "19",
+      "name": "Đầu ghi hình Vantech VP-464A",
+      "price": "1800000.00",
+      "old_price": "2250000",
+      "image": "/uploads/36.jpg",
+      "resolution": null,
+      "description": "Đầu ghi hình AHD 4 kênh, hỗ trợ camera 4MP, xem qua mạng mượt mà.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "15",
+      "category": "Đầu ghi",
+      "sold": "0"
+    },
+    {
+      "id": "129",
+      "category_id": "18",
+      "name": "Switch 5 cổng TP-Link LS1005G",
+      "price": "250000.00",
+      "old_price": "312500",
+      "image": "/uploads/37.jpg",
+      "resolution": null,
+      "description": "Switch để bàn 5 cổng 10/100/1000Mbps, vỏ thép.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "100",
+      "category": "Switch",
+      "sold": "0"
+    },
+    {
+      "id": "130",
+      "category_id": "18",
+      "name": "Switch POE Hikvision DS-3E0105P-E",
+      "price": "950000.00",
+      "old_price": "1187500",
+      "image": "/uploads/38.jpg",
+      "resolution": null,
+      "description": "Switch PoE 4 cổng, cấp nguồn cho camera IP qua dây mạng.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "0",
+      "category": "Switch",
+      "sold": "0"
+    },
+    {
+      "id": "131",
+      "category_id": "18",
+      "name": "Switch Tenda S105 5 Port",
+      "price": "991000.00",
+      "old_price": "187500",
+      "image": "/uploads/39.jpg",
+      "resolution": null,
+      "description": "Switch chia mạng 5 cổng giá rẻ, nhỏ gọn.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "88",
+      "category": "Switch",
+      "sold": "1"
+    },
+    {
+      "id": "132",
+      "category_id": "18",
+      "name": "Switch Cisco Business CBS110-8T-D",
+      "price": "1100000.00",
+      "old_price": "1375000",
+      "image": "/uploads/40.jpg",
+      "resolution": null,
+      "description": "Switch 8 cổng Gigabit, thương hiệu Cisco siêu bền.",
+      "created_at": "2026-01-12 13:54:19",
+      "quantity": "35",
+      "category": "Switch",
+      "sold": "11"
+    }
   ],
   "reviews": [
-    { "id": "6", "user_id": "11", "product_id": "131", "rating": "5", "comment": "okk", "created_at": "2026-01-16 17:47:53" },
-    { "id": "7", "user_id": "11", "product_id": "131", "rating": "5", "comment": "okk", "created_at": "2026-01-16 17:47:53" },
-    { "id": "8", "user_id": "12", "product_id": "131", "rating": "4", "comment": "", "created_at": "2026-03-16 20:01:25" },
-    { "id": "9", "user_id": "12", "product_id": "131", "rating": "5", "comment": "few", "created_at": "2026-03-16 20:01:28" }
+    {
+      "id": "6",
+      "user_id": "11",
+      "product_id": "131",
+      "rating": "5",
+      "comment": "okk",
+      "created_at": "2026-01-16 17:47:53"
+    },
+    {
+      "id": "7",
+      "user_id": "11",
+      "product_id": "131",
+      "rating": "5",
+      "comment": "okk",
+      "created_at": "2026-01-16 17:47:53"
+    },
+    {
+      "id": "8",
+      "user_id": "12",
+      "product_id": "131",
+      "rating": "4",
+      "comment": "",
+      "created_at": "2026-03-16 20:01:25"
+    },
+    {
+      "id": "9",
+      "user_id": "12",
+      "product_id": "131",
+      "rating": "5",
+      "comment": "few",
+      "created_at": "2026-03-16 20:01:28"
+    }
   ],
   "support_messages": [
-    { "id": "7", "request_id": "2", "sender_type": "admin", "message": "lo", "created_at": "2026-01-14 08:17:38" }
+    {
+      "id": "7",
+      "request_id": "2",
+      "sender_type": "admin",
+      "message": "lo",
+      "created_at": "2026-01-14 08:17:38"
+    }
   ],
   "support_requests": [
-    { "id": "2", "user_id": null, "customer_name": "bao", "phone": "0971240218", "request_type": "Tư vấn mua hàng", "message": "alo", "status": "0", "created_at": "2026-01-13 21:04:14", "has_new": "1" }
+    {
+      "id": "2",
+      "user_id": null,
+      "customer_name": "bao",
+      "phone": "0971240218",
+      "request_type": "Tư vấn mua hàng",
+      "message": "alo",
+      "status": "0",
+      "created_at": "2026-01-13 21:04:14",
+      "has_new": "1"
+    }
   ],
   "users": [
-    { "id": "1", "full_name": "ADMIN", "username": "admin", "email": "admin", "password": "admin123", "phone": "0971024173", "address": null, "created_at": "2025-12-17 20:37:27", "role": "1", "reset_token": null, "token_expiry": null, "avatar": null },
-    { "id": "11", "full_name": "bao", "username": "bao123", "email": "chibaonguyen086@gmail.com", "password": "2006", "phone": "0971240218", "address": null, "created_at": "2026-01-06 20:21:08", "role": "0", "reset_token": "195215", "token_expiry": "2026-01-16 09:34:54", "avatar": null }
+    {
+      "id": "1",
+      "full_name": "ADMIN",
+      "username": "admin",
+      "email": "admin",
+      "password": "admin123",
+      "phone": "0971024173",
+      "address": null,
+      "created_at": "2025-12-17 20:37:27",
+      "role": "1",
+      "reset_token": null,
+      "token_expiry": null,
+      "avatar": null
+    },
+    {
+      "id": "11",
+      "full_name": "bao",
+      "username": "bao123",
+      "email": "chibaonguyen086@gmail.com",
+      "password": "2006",
+      "phone": "0971240218",
+      "address": null,
+      "created_at": "2026-01-06 20:21:08",
+      "role": "0",
+      "reset_token": "195215",
+      "token_expiry": "2026-01-16 09:34:54",
+      "avatar": null
+    }
   ]
 }
