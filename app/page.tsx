@@ -173,9 +173,11 @@ export default function Home() {
     }
   };
 
-  // CHIA SẢN PHẨM
-  const hotProducts = products.slice(0, 4);
-  const baseProducts = products.length > 4 ? products.slice(4) : products;
+  // CHIA SẢN PHẨM: Lấy top bán chạy theo đúng số lượng đã bán thực tế từ MongoDB
+  const hotProducts = [...products]
+    .sort((a, b) => (Number(b.sold) || 0) - (Number(a.sold) || 0))
+    .slice(0, 4);
+  const baseProducts = products;
 
   useEffect(() => {
     setCurrentPage(1);
@@ -359,7 +361,7 @@ export default function Home() {
         <div className="trust-grid">
           <div className="trust-item">
             <div className="trust-icon">
-              <i className="fas fa-shield-check"></i>
+              <i className="fas fa-shield-alt"></i>
             </div>
             <div className="trust-content">
               <strong>Chính Hãng 100%</strong>

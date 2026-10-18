@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "docx": "^9.12.0",
     "mongoose": "^9.10.0",
     "next": "16.3.3",
     "nodemailer": "^10.0.14",
@@ -26,7 +27,6 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  
   "browserslist": [
     ">0.3%",
     "not ie 11",

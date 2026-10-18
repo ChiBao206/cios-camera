@@ -1355,7 +1355,7 @@ export default function ProductDetail() {
                 </>
               )}
               <span>•</span>
-              <span>Đã bán <strong>{product.sold || 48}</strong></span>
+              <span>Đã bán <strong>{Number(product.sold) || 0}</strong></span>
             </div>
 
             {/* Khung Giá bán */}
@@ -1794,7 +1794,7 @@ export default function ProductDetail() {
                     </div>
                     
                     <div className="card-stock-label">
-                      <i className="fas fa-check-circle"></i> Sẵn hàng: {p.quantity || 10} cái
+                      <i className="fas fa-check-circle"></i> Sẵn hàng: {p.quantity !== undefined && p.quantity !== null ? p.quantity : 0} cái
                     </div>
 
                     <Link href={`/product/${p._id || p.id}`} className="btn-card-action" style={{ textDecoration: 'none' }}>

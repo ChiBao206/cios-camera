@@ -184,7 +184,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "37",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 2,
       "images": [
         "/uploads/32.jpg",
         "/uploads/gallery/p_92_angle_2.jpg",
@@ -205,7 +205,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "14",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/31.jpg",
         "/uploads/gallery/ezviz_c6n_angle.jpg",
@@ -226,7 +226,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "26",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 2,
       "images": [
         "/uploads/30.jpg",
         "/uploads/gallery/p_94_angle_1.png",
@@ -247,7 +247,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "41",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 1,
       "images": [
         "/uploads/29.jpg",
         "/uploads/gallery/p_95_angle_1.png",
@@ -268,7 +268,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "36",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 3,
       "images": [
         "/uploads/28.jpg",
         "/uploads/gallery/p_96_angle_1.jpg",
@@ -288,7 +288,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "46",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 2,
       "images": [
         "/uploads/27.jpg",
         "/uploads/gallery/vantech_4.jpg",
@@ -308,7 +308,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "35",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/26.jpg",
         "/uploads/gallery/p_98_angle_1.png",
@@ -328,7 +328,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "27",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/25.jpg",
         "/uploads/gallery/p_99_angle_1.png",
@@ -349,7 +349,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "20",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/24.jpg",
         "/uploads/gallery/p_100_angle_1.jpg",
@@ -370,7 +370,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "11",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/23.jpg",
         "/uploads/gallery/p_101_angle_1.png",
@@ -390,7 +390,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "26",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/22.jpg",
         "/uploads/gallery/p_102_angle_1.jpg",
@@ -411,7 +411,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "46",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/21.jpg",
         "/uploads/gallery/tapo_c200_side.jpg",
@@ -432,7 +432,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "22",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/20.jpg",
         "/uploads/gallery/p_104_angle_1.jpg",
@@ -453,7 +453,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "45",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/19.jpg",
         "/uploads/gallery/p_105_angle_1.png",
@@ -473,7 +473,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "27",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/18.jpg",
         "/uploads/gallery/kbvision_c31l.jpg",
@@ -493,7 +493,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "30",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/17.jpg",
         "/uploads/gallery/dome_front.jpg",
@@ -513,7 +513,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "18",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/16.jpg",
         "/uploads/gallery/dome_angle.jpg",
@@ -533,7 +533,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "33",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/15.jpg",
         "/uploads/gallery/c8c_front.png",
@@ -553,7 +553,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "23",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/14.jpg",
         "/uploads/gallery/cruiser_angle.jpg",
@@ -574,7 +574,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "43",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/13.jpg",
         "/uploads/gallery/hero_a1_front.jpg",
@@ -595,7 +595,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "18",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/12.jpg",
         "/uploads/gallery/vietmap_screen.png",
@@ -616,7 +616,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "30",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/11.jpg",
         "/uploads/gallery/solar_4g_panel.png",
@@ -637,7 +637,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "47",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/10.jpg",
         "/uploads/gallery/bulb_e27.jpg",
@@ -658,7 +658,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "22",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/9.jpg",
         "/uploads/gallery/a9_angle.jpg",
@@ -678,7 +678,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "33",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/8.jpg",
         "/uploads/gallery/hik_dvr_2.jpg",
@@ -698,7 +698,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "12",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/7.jpg",
         "/uploads/gallery/nest_cam_mount.jpg",
@@ -718,7 +718,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "30",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/6.jpg",
         "/uploads/gallery/outdoor_bracket.jpg",
@@ -738,7 +738,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "27",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/5.jpg",
         "/uploads/gallery/arlo_pro4_45.png",
@@ -758,7 +758,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "33",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/4.jpg",
         "/uploads/gallery/wyze_v3_cutout.png",
@@ -778,7 +778,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "33",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/3.jpg",
         "/uploads/gallery/blink_mini_white.png",
@@ -798,7 +798,7 @@
       "created_at": "2025-12-31 20:36:51",
       "quantity": "14",
       "category": "Wifi",
-      "sold": "2",
+      "sold": 0,
       "images": [
         "/uploads/2.jpg",
         "/uploads/gallery/cube_front.jpg",
@@ -818,7 +818,7 @@
       "created_at": "2026-01-06 20:45:22",
       "quantity": "32",
       "category": "Wifi",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/1.jpg",
         "/uploads/gallery/logi_circle_1.png",
@@ -839,7 +839,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "50",
       "category": "Router",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/33.jpg",
         "/uploads/gallery/ax53_2.jpg",
@@ -860,7 +860,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "50",
       "category": "Router",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/34.jpg",
         "/uploads/gallery/totolink_2.jpg",
@@ -881,7 +881,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "19",
       "category": "Đầu ghi",
-      "sold": "0",
+      "sold": 10,
       "images": [
         "/uploads/35.jpg",
         "/uploads/gallery/hik_dvr_2.jpg",
@@ -901,7 +901,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "15",
       "category": "Đầu ghi",
-      "sold": "0",
+      "sold": 1,
       "images": [
         "/uploads/36.jpg",
         "/uploads/gallery/vantech_dvr_2.jpg",
@@ -921,7 +921,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "100",
       "category": "Switch",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/37.jpg",
         "/uploads/gallery/tplink_ls1005g_2.jpg",
@@ -941,7 +941,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "0",
       "category": "Switch",
-      "sold": "0",
+      "sold": 0,
       "images": [
         "/uploads/38.jpg",
         "/uploads/gallery/hik_poe_2.jpg",
@@ -962,7 +962,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "88",
       "category": "Switch",
-      "sold": "1",
+      "sold": 1,
       "images": [
         "/uploads/39.jpg",
         "/uploads/gallery/tenda_s105_1.png",
@@ -983,7 +983,7 @@
       "created_at": "2026-01-12 13:54:19",
       "quantity": "35",
       "category": "Switch",
-      "sold": "11",
+      "sold": 0,
       "images": [
         "/uploads/40.jpg",
         "/uploads/gallery/cisco_cbs110_1.jpg",
