@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "./context/CartContext";
 import NotifBadge from "@/app/components/NotifBadge";
@@ -34,10 +34,28 @@ export default function Home() {
   // FAVORITES
   const [favIds, setFavIds] = useState<string[]>([]);
 
-  // BỘ LỌC & PHÂN TRANG
-  const [currentPage, setCurrentPage] = useState(1);
+  // BỘ LỌC & PHÂN TRANG (Tự động khôi phục trang và danh mục khi khách từ trang chi tiết quay lại)
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedPage = sessionStorage.getItem("home_current_page");
+        if (savedPage && !isNaN(Number(savedPage)) && Number(savedPage) > 0) {
+          return Number(savedPage);
+        }
+      } catch (e) {}
+    }
+    return 1;
+  });
   const productsPerPage = 8; 
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedCat = sessionStorage.getItem("home_category");
+        if (savedCat) return savedCat;
+      } catch (e) {}
+    }
+    return "all";
+  });
   const [minPrice, setMinPrice] = useState(0); 
   const [maxPrice, setMaxPrice] = useState(5000000); 
   const [searchTerm, setSearchTerm] = useState("");
@@ -179,9 +197,35 @@ export default function Home() {
     .slice(0, 4);
   const baseProducts = products;
 
+  const isFirstFilterRun = useRef(true);
+
   useEffect(() => {
+    if (isFirstFilterRun.current) {
+      isFirstFilterRun.current = false;
+      return;
+    }
     setCurrentPage(1);
+    try {
+      sessionStorage.setItem("home_current_page", "1");
+      sessionStorage.setItem("home_category", String(selectedCategory));
+    } catch (e) {}
   }, [selectedCategory, minPrice, maxPrice, searchTerm]);
+
+  // Tự động cuộn lại đúng vị trí xem trước đó khi khách từ trang chi tiết quay lại
+  useEffect(() => {
+    try {
+      const savedScrollY = sessionStorage.getItem("home_scroll_y");
+      if (savedScrollY && products.length > 0) {
+        const y = Number(savedScrollY);
+        if (!isNaN(y) && y > 0) {
+          const timer = setTimeout(() => {
+            window.scrollTo({ top: y, behavior: "instant" });
+          }, 80);
+          return () => clearTimeout(timer);
+        }
+      }
+    } catch (e) {}
+  }, [products]);
 
   const filteredProducts = baseProducts.filter(product => {
     const matchCat = selectedCategory === "all" || String(product.category_id) === String(selectedCategory);
@@ -195,14 +239,6 @@ export default function Home() {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage) || 1;
 
-  const handlePrev = () => {
-    setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1);
-  };
-  
-  const handleNext = () => {
-    setCurrentPage(currentPage === totalPages ? 1 : currentPage + 1);
-  };
-
   const scrollToProducts = () => {
     const elem = document.getElementById('products-section');
     if (elem) {
@@ -210,6 +246,32 @@ export default function Home() {
       const y = elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    try {
+      sessionStorage.setItem("home_current_page", String(newPage));
+    } catch (e) {}
+    scrollToProducts();
+  };
+
+  const handlePrev = () => {
+    const prev = currentPage === 1 ? totalPages : currentPage - 1;
+    handlePageChange(prev);
+  };
+  
+  const handleNext = () => {
+    const next = currentPage === totalPages ? 1 : currentPage + 1;
+    handlePageChange(next);
+  };
+
+  const handleProductClick = () => {
+    try {
+      sessionStorage.setItem("home_current_page", String(currentPage));
+      sessionStorage.setItem("home_scroll_y", String(window.scrollY));
+      sessionStorage.setItem("home_category", String(selectedCategory));
+    } catch (e) {}
   };
 
   const handleSearchSubmit = (e?: React.FormEvent) => {
@@ -607,13 +669,13 @@ export default function Home() {
                   </div>
 
                   <div className="card-img-wrapper">
-                    <Link href={`/product/${product.id || product._id}`}>
+                    <Link href={`/product/${product.id || product._id}`} onClick={handleProductClick}>
                       <img src={product.image} alt={product.name} />
                     </Link>
                   </div>
 
                   <div className="card-info-content">
-                    <Link href={`/product/${product.id || product._id}`}>
+                    <Link href={`/product/${product.id || product._id}`} onClick={handleProductClick}>
                       <h3 className="card-product-title">{product.name}</h3>
                     </Link>
 
@@ -699,13 +761,13 @@ export default function Home() {
                     </div>
 
                     <div className="card-img-wrapper">
-                      <Link href={`/product/${product.id || product._id}`}>
+                      <Link href={`/product/${product.id || product._id}`} onClick={handleProductClick}>
                         <img src={product.image} alt={product.name} />
                       </Link>
                     </div>
 
                     <div className="card-info-content">
-                      <Link href={`/product/${product.id || product._id}`}>
+                      <Link href={`/product/${product.id || product._id}`} onClick={handleProductClick}>
                         <h3 className="card-product-title">{product.name}</h3>
                       </Link>
 
@@ -770,7 +832,7 @@ export default function Home() {
                   <button
                     key={number}
                     className={`page-btn-pro ${currentPage === number ? "active" : ""}`}
-                    onClick={() => setCurrentPage(number)}
+                    onClick={() => handlePageChange(number)}
                   >
                     {number}
                   </button>

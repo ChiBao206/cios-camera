@@ -17,6 +17,14 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
 
   const close = () => setMobileMenuOpen(false);
 
+  const handleHomeClick = () => {
+    try {
+      sessionStorage.removeItem("home_current_page");
+      sessionStorage.removeItem("home_scroll_y");
+    } catch (e) {}
+    close();
+  };
+
   return (
     <>
       <header className="site-header">
@@ -31,7 +39,7 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
 
         <div className="header-container">
           {/* Logo */}
-          <Link href="/" className="brand-logo" onClick={close}>
+          <Link href="/" className="brand-logo" onClick={handleHomeClick}>
             <div className="brand-icon">
               <i className="fas fa-video"></i>
             </div>
@@ -60,7 +68,7 @@ export default function Header({ user, activePage, onLogout }: HeaderProps) {
             <Link
               href="/"
               className={`nav-item-link${activePage === "home" ? " active" : ""}`}
-              onClick={close}
+              onClick={handleHomeClick}
             >
               <i className="fas fa-home"></i> <span>Trang chủ</span>
             </Link>

@@ -931,21 +931,37 @@ export default function ProductDetail() {
     if (!params?.id) return;
     const currentId = String(params.id);
 
-    // 1. Thử lấy nhanh từ bộ nhớ session (khi bấm từ trang chủ sang)
-    if (!product) {
-      try {
-        const cached = sessionStorage.getItem(`prod_${currentId}`);
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (parsed && (String(parsed.id) === currentId || String(parsed._id) === currentId)) {
-            setProduct(parsed);
-            setIsLoading(false);
-          }
-        }
-      } catch (e) {}
+    // 1. Luôn cuộn lên đầu trang khi mở/chuyển sản phẩm
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // 2. Reset góc ảnh về ảnh chính đầu tiên
+    setActiveImageIndex(0);
+
+    // 3. FIX LỖI SẢN PHẨM CŨ: Lập tức đồng bộ lại sản phẩm đúng với URL hiện tại
+    const freshInitial = (db.products || []).find((p: any) => 
+      String(p.id) === currentId || String((p as any)._id) === currentId
+    ) || null;
+
+    setProduct(freshInitial);
+    if (!freshInitial) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
     }
 
-    // 2. Fetch thông tin sản phẩm cụ thể (Tối ưu tốc độ cực nhanh)
+    // 4. Thử lấy nhanh từ bộ nhớ session (nếu có cache của chính ID này)
+    try {
+      const cached = sessionStorage.getItem(`prod_${currentId}`);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed && (String(parsed.id) === currentId || String(parsed._id) === currentId)) {
+          setProduct(parsed);
+          setIsLoading(false);
+        }
+      }
+    } catch (e) {}
+
+    // 5. Fetch thông tin sản phẩm cụ thể từ API (MongoDB Cloud)
     fetch(`/api/products?id=${encodeURIComponent(currentId)}`)
       .then(res => res.ok ? res.json() : null)
       .then(pData => {
@@ -1191,13 +1207,24 @@ export default function ProductDetail() {
 
       {/* MAIN CONTAINER */}
       <main className="product-detail-main">
-        {/* Breadcrumb */}
-        <div className="product-breadcrumb">
-          <Link href="/">Trang chủ</Link>
-          <span style={{ color: '#cbd5e1' }}>›</span>
-          <span style={{ color: '#0369a1' }}>{categoryName}</span>
-          <span style={{ color: '#cbd5e1' }}>›</span>
-          <span style={{ color: '#0284c7', fontWeight: '700' }}>{product.name}</span>
+        {/* THANH ĐIỀU HƯỚNG & NÚT QUAY LẠI CHUẨN MỌI THIẾT BỊ */}
+        <div className="product-breadcrumb-bar">
+          <button 
+            type="button"
+            onClick={() => router.push('/')}
+            className="product-back-btn"
+            title="Quay lại danh sách sản phẩm"
+          >
+            <i className="fas fa-arrow-left"></i> Quay lại danh sách
+          </button>
+
+          <div className="product-breadcrumb">
+            <Link href="/" title="Về trang chủ">Trang chủ</Link>
+            <span style={{ color: '#cbd5e1' }}>›</span>
+            <span style={{ color: '#0369a1' }}>{categoryName}</span>
+            <span style={{ color: '#cbd5e1' }}>›</span>
+            <span style={{ color: '#0284c7', fontWeight: '700' }}>{product.name}</span>
+          </div>
         </div>
 
         {/* KHUNG SẢN PHẨM CHÍNH (PRODUCT SHOWCASE) */}
