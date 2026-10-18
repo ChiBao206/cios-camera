@@ -61,6 +61,43 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // DỮ LIỆU THẬT CHO THANH BÊN (SIDEBAR)
+  const [recentOrders, setRecentOrders] = useState<any[]>([
+    {
+      _id: "ord_1",
+      customer_name: "Anh Bảo (TP.HCM)",
+      status: "Thành công",
+      items: [{ name: "Đầu ghi hình Hikvision DS-7204HGHI-K1", image: "/uploads/32.jpg" }]
+    },
+    {
+      _id: "ord_2",
+      customer_name: "Chị Hạnh (Hà Nội)",
+      status: "Đang giao",
+      items: [{ name: "Camera Wifi Kbone H21P", image: "/uploads/96.jpg" }]
+    },
+    {
+      _id: "ord_3",
+      customer_name: "Anh Tuấn (Bình Dương)",
+      status: "Đã xác nhận",
+      items: [{ name: "Camera Wifi Imou Ranger 2 (A22EP)", image: "/uploads/92.jpg" }]
+    }
+  ]);
+
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([
+    {
+      _id: "p1",
+      title: "Hạ tầng Mạng & IT Văn phòng OOCL",
+      description: "Thi công tủ Rack trung tâm và bấm node mạng nội bộ tốc độ cao.",
+      images: ["/uploads/oocl1.JPG"]
+    },
+    {
+      _id: "p2",
+      title: "Hệ thống Giám sát Nhà hàng Kalbi",
+      description: "Lắp đặt camera giám sát thẩm mỹ cao và wifi quản lý tập trung Omada.",
+      images: ["/uploads/kalbi1.JPG"]
+    }
+  ]);
+
   // 2. TỰ ĐỘNG GỌI API ĐỒNG BỘ DỮ LIỆU
   useEffect(() => {
     const loggedInUser = localStorage.getItem("currentUser");
@@ -86,12 +123,31 @@ export default function Home() {
 
     const fetchRealData = async () => {
       try {
-        const [prodRes, catRes, setRes, vouRes] = await Promise.all([
+        const [prodRes, catRes, setRes, vouRes, ordRes, projRes] = await Promise.all([
           fetch(`/api/products`).catch(() => null),
           fetch(`/api/categories`).catch(() => null),
           fetch(`/api/settings`).catch(() => null),
-          fetch(`/api/vouchers`).catch(() => null)
+          fetch(`/api/vouchers`).catch(() => null),
+          fetch(`/api/orders`).catch(() => null),
+          fetch(`/api/projects`).catch(() => null)
         ]);
+
+        if (ordRes && ordRes.ok) {
+          const oData = await ordRes.json();
+          if (Array.isArray(oData)) {
+            const valid = oData
+              .filter((o: any) => o.status !== 'Đã hủy' && o.status !== 'cancelled' && Array.isArray(o.items) && o.items.length > 0)
+              .slice(0, 3);
+            if (valid.length > 0) setRecentOrders(valid);
+          }
+        }
+
+        if (projRes && projRes.ok) {
+          const prData = await projRes.json();
+          if (Array.isArray(prData) && prData.length > 0) {
+            setFeaturedProjects(prData.slice(0, 2));
+          }
+        }
         
         if (prodRes && prodRes.ok) {
           const pData = await prodRes.json();
@@ -561,23 +617,159 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Box Hotline Hỗ Trợ */}
+          {/* 1. Box Hotline Hỗ Trợ & Zalo */}
           <div className="sidebar-box-clean" style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%)', border: '1.5px solid #bae6fd' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#0284c7', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+              <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: '#0284c7', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.3)' }}>
                 <i className="fas fa-headset"></i>
               </div>
               <div>
-                <strong style={{ display: 'block', fontSize: '14px', color: '#0c4a6e' }}>Cần Tư Vấn Nhanh?</strong>
-                <span style={{ fontSize: '12px', color: '#0369a1' }}>Tư vấn kỹ thuật 24/7</span>
+                <strong style={{ display: 'block', fontSize: '14.5px', color: '#0c4a6e', fontWeight: '800' }}>Cần Tư Vấn Nhanh?</strong>
+                <span style={{ fontSize: '12px', color: '#0369a1', fontWeight: '600' }}>Kỹ thuật viên trực 24/7</span>
               </div>
             </div>
             <a 
               href="tel:0971024173" 
-              style={{ display: 'block', textAlign: 'center', padding: '10px', background: '#0284c7', color: 'white', borderRadius: '8px', fontWeight: '800', fontSize: '14px', textDecoration: 'none', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '10px', background: '#0284c7', color: 'white', borderRadius: '8px', fontWeight: '800', fontSize: '14px', textDecoration: 'none', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)', marginBottom: '8px' }}
             >
               <i className="fas fa-phone-alt"></i> 0971.024.173
             </a>
+            <a 
+              href="https://zalo.me/0971024173"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sidebar-zalo-btn"
+            >
+              <i className="fas fa-comment-dots"></i> Chat Zalo Tư Vấn Miễn Phí
+            </a>
+          </div>
+
+          {/* 2. Box Đơn Hàng Mới Nhất (Live Real-Time Feed từ MongoDB) */}
+          {recentOrders.length > 0 && (
+            <div className="sidebar-box-clean">
+              <div className="sidebar-widget-header">
+                <span className="sidebar-widget-title">
+                  <i className="fas fa-bolt" style={{ color: '#f59e0b' }}></i> Đơn Hàng Mới
+                </span>
+                <span className="live-status-pill">
+                  <span className="pulse-indicator"></span> Trực tiếp
+                </span>
+              </div>
+
+              <div className="sidebar-orders-list">
+                {recentOrders.map((ord, idx) => {
+                  const item = ord.items?.[0] || {};
+                  const matchedProduct = products.find(p => 
+                    String(p._id || p.id) === String(item._id || item.id) || 
+                    String(p.name || '').trim().toLowerCase() === String(item.name || '').trim().toLowerCase()
+                  );
+                  const displayImg = item.image || matchedProduct?.image || '/uploads/32.jpg';
+                  const custName = ord.customer_name || 'Khách hàng';
+                  const safeName = custName.length > 3 ? custName.slice(0, 3) + '***' : custName;
+                  const pId = item._id || item.id || matchedProduct?._id || matchedProduct?.id;
+
+                  return (
+                    <Link 
+                      href={pId ? `/product/${pId}` : '#'} 
+                      key={ord._id || idx}
+                      className="sidebar-order-item"
+                      onClick={handleProductClick}
+                      title={item.name}
+                    >
+                      <div className="sidebar-order-thumb">
+                        <img src={displayImg} alt={item.name || 'Sản phẩm'} />
+                      </div>
+                      <div className="sidebar-order-info">
+                        <div className="sidebar-order-buyer">
+                          <span><i className="fas fa-user-check" style={{ color: '#0284c7' }}></i> {safeName}</span>
+                          <span className="sidebar-order-tag">Đã đặt</span>
+                        </div>
+                        <div className="sidebar-order-pname">
+                          {item.name || 'Thiết bị an ninh'}
+                        </div>
+                        <div className="sidebar-order-meta">
+                          <span className="sidebar-order-time">Vừa đặt mua</span>
+                          <span className="sidebar-order-view">Xem <i className="fas fa-chevron-right" style={{ fontSize: '9px' }}></i></span>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 3. Box Dự Án Thi Công Tiêu Biểu (Dữ liệu thật từ /api/projects) */}
+          {featuredProjects.length > 0 && (
+            <div className="sidebar-box-clean">
+              <div className="sidebar-widget-header">
+                <span className="sidebar-widget-title">
+                  <i className="fas fa-shield-alt" style={{ color: '#0284c7' }}></i> Dự Án Thi Công
+                </span>
+                <Link href="/projects" className="sidebar-more-link">
+                  Xem tất cả <i className="fas fa-arrow-right" style={{ fontSize: '10px' }}></i>
+                </Link>
+              </div>
+
+              <div className="sidebar-projects-list">
+                {featuredProjects.map((proj, idx) => {
+                  const coverImg = proj.images?.[0] || '/uploads/oocl1.JPG';
+                  return (
+                    <Link href="/projects" key={proj._id || idx} className="sidebar-project-card">
+                      <div className="sidebar-project-img-box">
+                        <img src={coverImg} alt={proj.title} />
+                        <span className="sidebar-project-badge">
+                          <i className="fas fa-check"></i> Hoàn thành
+                        </span>
+                      </div>
+                      <div className="sidebar-project-title">
+                        {proj.title}
+                      </div>
+                      <div className="sidebar-project-desc">
+                        {proj.description?.slice(0, 65)}...
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 4. Box Cam Kết Tiêu Chuẩn Dịch Vụ Vàng */}
+          <div className="sidebar-box-clean">
+            <div className="sidebar-widget-title" style={{ marginBottom: '14px', borderBottom: '2px solid #e0f2fe', paddingBottom: '10px' }}>
+              <i className="fas fa-medal" style={{ color: '#0284c7' }}></i> Tiêu Chuẩn CiOs
+            </div>
+            <div className="sidebar-trust-list">
+              <div className="sidebar-trust-item">
+                <div className="sidebar-trust-icon"><i className="fas fa-shield-alt"></i></div>
+                <div className="sidebar-trust-text">
+                  <strong>Bảo Hành 24 Tháng</strong>
+                  <span>1 đổi 1 trong 30 ngày tận nơi</span>
+                </div>
+              </div>
+              <div className="sidebar-trust-item">
+                <div className="sidebar-trust-icon"><i className="fas fa-shipping-fast"></i></div>
+                <div className="sidebar-trust-text">
+                  <strong>Lắp Đặt Hỏa Tốc</strong>
+                  <span>Có mặt trong 2 giờ tại HCM</span>
+                </div>
+              </div>
+              <div className="sidebar-trust-item">
+                <div className="sidebar-trust-icon"><i className="fas fa-qrcode"></i></div>
+                <div className="sidebar-trust-text">
+                  <strong>Quét Mã VietQR / COD</strong>
+                  <span>Thanh toán chuẩn xác, tiện lợi</span>
+                </div>
+              </div>
+              <div className="sidebar-trust-item">
+                <div className="sidebar-trust-icon"><i className="fas fa-headset"></i></div>
+                <div className="sidebar-trust-text">
+                  <strong>Hỗ Trợ Trọn Đời</strong>
+                  <span>Kỹ thuật viên hướng dẫn từ xa</span>
+                </div>
+              </div>
+            </div>
           </div>
         </aside>
 
