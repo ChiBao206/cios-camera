@@ -83,21 +83,6 @@ export default function Home() {
     }
   ]);
 
-  const [featuredProjects, setFeaturedProjects] = useState<any[]>([
-    {
-      _id: "p1",
-      title: "Hạ tầng Mạng & IT Văn phòng OOCL",
-      description: "Thi công tủ Rack trung tâm và bấm node mạng nội bộ tốc độ cao.",
-      images: ["/uploads/oocl1.JPG"]
-    },
-    {
-      _id: "p2",
-      title: "Hệ thống Giám sát Nhà hàng Kalbi",
-      description: "Lắp đặt camera giám sát thẩm mỹ cao và wifi quản lý tập trung Omada.",
-      images: ["/uploads/kalbi1.JPG"]
-    }
-  ]);
-
   // 2. TỰ ĐỘNG GỌI API ĐỒNG BỘ DỮ LIỆU
   useEffect(() => {
     const loggedInUser = localStorage.getItem("currentUser");
@@ -123,13 +108,12 @@ export default function Home() {
 
     const fetchRealData = async () => {
       try {
-        const [prodRes, catRes, setRes, vouRes, ordRes, projRes] = await Promise.all([
+        const [prodRes, catRes, setRes, vouRes, ordRes] = await Promise.all([
           fetch(`/api/products`).catch(() => null),
           fetch(`/api/categories`).catch(() => null),
           fetch(`/api/settings`).catch(() => null),
           fetch(`/api/vouchers`).catch(() => null),
-          fetch(`/api/orders`).catch(() => null),
-          fetch(`/api/projects`).catch(() => null)
+          fetch(`/api/orders`).catch(() => null)
         ]);
 
         if (ordRes && ordRes.ok) {
@@ -139,13 +123,6 @@ export default function Home() {
               .filter((o: any) => o.status !== 'Đã hủy' && o.status !== 'cancelled' && Array.isArray(o.items) && o.items.length > 0)
               .slice(0, 3);
             if (valid.length > 0) setRecentOrders(valid);
-          }
-        }
-
-        if (projRes && projRes.ok) {
-          const prData = await projRes.json();
-          if (Array.isArray(prData) && prData.length > 0) {
-            setFeaturedProjects(prData.slice(0, 2));
           }
         }
         
@@ -699,43 +676,7 @@ export default function Home() {
             </div>
           )}
 
-          {/* 3. Box Dự Án Thi Công Tiêu Biểu (Dữ liệu thật từ /api/projects) */}
-          {featuredProjects.length > 0 && (
-            <div className="sidebar-box-clean">
-              <div className="sidebar-widget-header">
-                <span className="sidebar-widget-title">
-                  <i className="fas fa-shield-alt" style={{ color: '#0284c7' }}></i> Dự Án Thi Công
-                </span>
-                <Link href="/projects" className="sidebar-more-link">
-                  Xem tất cả <i className="fas fa-arrow-right" style={{ fontSize: '10px' }}></i>
-                </Link>
-              </div>
-
-              <div className="sidebar-projects-list">
-                {featuredProjects.map((proj, idx) => {
-                  const coverImg = proj.images?.[0] || '/uploads/oocl1.JPG';
-                  return (
-                    <Link href="/projects" key={proj._id || idx} className="sidebar-project-card">
-                      <div className="sidebar-project-img-box">
-                        <img src={coverImg} alt={proj.title} />
-                        <span className="sidebar-project-badge">
-                          <i className="fas fa-check"></i> Hoàn thành
-                        </span>
-                      </div>
-                      <div className="sidebar-project-title">
-                        {proj.title}
-                      </div>
-                      <div className="sidebar-project-desc">
-                        {proj.description?.slice(0, 65)}...
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* 4. Box Cam Kết Tiêu Chuẩn Dịch Vụ Vàng */}
+          {/* 3. Box Cam Kết Tiêu Chuẩn Dịch Vụ Vàng */}
           <div className="sidebar-box-clean">
             <div className="sidebar-widget-title" style={{ marginBottom: '14px', borderBottom: '2px solid #e0f2fe', paddingBottom: '10px' }}>
               <i className="fas fa-medal" style={{ color: '#0284c7' }}></i> Tiêu Chuẩn CiOs
