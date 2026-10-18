@@ -28,12 +28,13 @@ export async function GET(request: Request) {
       }
 
       if (product) {
-        // Đồng bộ bổ sung ảnh multi-angle từ db.json nếu bản ghi Mongo cũ chưa có mảng images
-        if (!product.images || product.images.length === 0) {
-          const matchedDb = db.products.find((p: any) => String(p.id) === String(product.id) || String(p.name).toLowerCase() === String(product.name).toLowerCase());
-          if (matchedDb && matchedDb.images && matchedDb.images.length > 0) {
-            product.images = matchedDb.images;
-          }
+        // Luôn đồng bộ chuẩn xác bộ ảnh đa góc từ db.json
+        const matchedDb = db.products.find((p: any) => 
+          String(p.id) === String(product.id) || 
+          String(p.name).trim().toLowerCase() === String(product.name).trim().toLowerCase()
+        );
+        if (matchedDb && matchedDb.images && matchedDb.images.length > 0) {
+          product.images = matchedDb.images;
         }
         return NextResponse.json(product, {
           headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' }
@@ -50,7 +51,17 @@ export async function GET(request: Request) {
       if (!catProds || catProds.length === 0) {
         catProds = db.products.filter((p: any) => String(p.category_id) === String(category_id)).slice(0, 8);
       }
-      return NextResponse.json(catProds);
+      const enrichedCatProds = catProds.map((p: any) => {
+        const matched = db.products.find((dp: any) => 
+          String(dp.id) === String(p.id) || 
+          String(dp.name).trim().toLowerCase() === String(p.name).trim().toLowerCase()
+        );
+        if (matched && matched.images && matched.images.length > 0) {
+          return { ...p, images: matched.images };
+        }
+        return p;
+      });
+      return NextResponse.json(enrichedCatProds);
     }
 
     // 3. DANH SÁCH TOÀN BỘ SẢN PHẨM
@@ -69,11 +80,12 @@ export async function GET(request: Request) {
     }
     
     const finalProducts = (products && products.length > 0 ? products : db.products).map((p: any) => {
-      if (!p.images || p.images.length === 0) {
-        const matched = db.products.find((dp: any) => String(dp.id) === String(p.id) || String(dp.name).toLowerCase() === String(p.name).toLowerCase());
-        if (matched && matched.images && matched.images.length > 0) {
-          return { ...p, images: matched.images };
-        }
+      const matched = db.products.find((dp: any) => 
+        String(dp.id) === String(p.id) || 
+        String(dp.name).trim().toLowerCase() === String(p.name).trim().toLowerCase()
+      );
+      if (matched && matched.images && matched.images.length > 0) {
+        return { ...p, images: matched.images };
       }
       return p;
     });

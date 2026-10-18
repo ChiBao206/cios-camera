@@ -446,16 +446,32 @@ function getProductGiftList(product: any, type: string) {
 
 // Helper lấy danh sách đầy đủ các ảnh góc nhìn cho toàn bộ sản phẩm chuẩn TikTok Shop & Shopee
 function getProductImages(product: any, type: string): string[] {
-  // 1. Ưu tiên hàng đầu: Mảng images hợp lệ từ MongoDB hoặc db.json
+  const name = String(product?.name || '').toLowerCase();
+  const id = String(product?._id || product?.id || '');
+  const catId = String(product?.category_id || '');
+
+  // 1. ƯU TIÊN 1: Tìm cấu hình ảnh chuẩn xác 100% từ db.json
+  const matchedDb = (db.products || []).find((p: any) => 
+    String(p.id) === id || 
+    String((p as any)._id) === id || 
+    (product?.name && String(p.name).trim().toLowerCase() === String(product.name).trim().toLowerCase())
+  );
+  if (matchedDb && matchedDb.images && Array.isArray(matchedDb.images) && matchedDb.images.length > 1) {
+    return matchedDb.images;
+  }
+
+  // 2. ƯU TIÊN 2: Mảng images từ sản phẩm (loại trừ trường hợp dữ liệu cũ bị dính ảnh Imou sai)
   if (product?.images && Array.isArray(product.images) && product.images.length > 1) {
-    return product.images;
+    const isImouModel = name.includes('imou') || name.includes('ranger') || id === '92';
+    const hasImouLeak = product.images.some((img: string) => img.includes('p_92_angle_') || img.includes('imou_ranger2'));
+    if (isImouModel || !hasImouLeak) {
+      return product.images;
+    }
   }
 
   const mainImg = product?.image || '/uploads/32.jpg';
-  const name = String(product?.name || '').toLowerCase();
-  const id = String(product?._id || product?.id || '');
 
-  // 2. ROUTER & THIẾT BỊ PHÁT WI-FI (ĐẢM BẢO 100% ẢNH THẬT ROUTER, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  // 3. ROUTER & THIẾT BỊ PHÁT WI-FI (100% ẢNH THẬT ROUTER)
   if (type === 'router' || name.includes('router') || name.includes('totolink') || name.includes('archer') || name.includes('ax53')) {
     if (id === '126' || name.includes('totolink') || name.includes('a720r')) {
       return [
@@ -483,7 +499,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 3. SWITCH CHIA MẠNG & SWITCH POE (ĐẢM BẢO 100% ẢNH THẬT SWITCH, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  // 4. SWITCH CHIA MẠNG & SWITCH POE (100% ẢNH THẬT SWITCH)
   if (type === 'switch' || name.includes('switch') || name.includes('chia mạng') || name.includes('s105') || name.includes('ls1005') || name.includes('cbs110') || name.includes('3e0105')) {
     if (id === '131' || name.includes('s105') || name.includes('tenda')) {
       return [
@@ -528,7 +544,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 4. ĐẦU GHI HÌNH DVR / NVR (ĐẢM BẢO 100% ẢNH THẬT ĐẦU GHI, TUYỆT ĐỐI KHÔNG RA ẢNH CAMERA)
+  // 5. ĐẦU GHI HÌNH DVR / NVR (100% ẢNH THẬT ĐẦU GHI)
   if (type === 'dvr' || name.includes('đầu ghi') || name.includes('dvr') || name.includes('nvr') || name.includes('xvr')) {
     if (id === '128' || name.includes('vantech') || name.includes('vp-464a')) {
       return [
@@ -546,7 +562,7 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 5. PHỤ KIỆN / THẺ NHỚ / Ổ CỨNG (KHÔNG HIỆN ẢNH CAMERA)
+  // 6. PHỤ KIỆN / THẺ NHỚ / Ổ CỨNG
   if (type === 'accessory' || name.includes('thẻ nhớ') || name.includes('ổ cứng') || name.includes('hdd') || name.includes('nguồn')) {
     return [
       mainImg,
@@ -555,29 +571,286 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 6. Camera Vantech V-2020AI (Id 97)
+  // 7. CAMERA NĂNG LƯỢNG MẶT TRỜI 4G (ID 113) - TẤM PIN SOLAR, SIM 4G, QUAY QUÉT 360
+  if (id === '113' || name.includes('năng lượng mặt trời') || name.includes('solar')) {
+    return [
+      mainImg,
+      '/uploads/gallery/solar_4g_panel.png',
+      '/uploads/gallery/solar_4g_ptz.png',
+      '/uploads/gallery/solar_4g_sim.png',
+      '/uploads/gallery/solar_4g_kit.jpg'
+    ];
+  }
+
+  // 8. CAMERA LOGITECH CIRCLE (ID 124) - BỘ ẢNH CHÍNH HÃNG LOGITECH CIRCLE VIEW TRÒN
+  if (id === '124' || name.includes('logitech') || name.includes('circle')) {
+    return [
+      mainImg,
+      '/uploads/gallery/logi_circle_1.png',
+      '/uploads/gallery/logi_circle_2.png',
+      '/uploads/gallery/logi_circle_3.png',
+      '/uploads/gallery/logi_circle_4.png'
+    ];
+  }
+
+  // 9. CAMERA MINI A9 (ID 115) - ẢNH CAMERA NAM CHÂM SIÊU NHỎ A9
+  if (id === '115' || name.includes('mini a9') || (name.includes('mini') && name.includes('a9'))) {
+    return [
+      mainImg,
+      '/uploads/gallery/a9_angle.jpg',
+      '/uploads/gallery/a9_mount.jpg',
+      '/uploads/gallery/a9_hand.png'
+    ];
+  }
+
+  // 10. CAMERA NGỤY TRANG BÓNG ĐÈN (ID 114) - ĐUI XOAY E27 & GÓC TOÀN CẢNH 360
+  if (id === '114' || name.includes('bóng đèn')) {
+    return [
+      mainImg,
+      '/uploads/gallery/bulb_e27.jpg',
+      '/uploads/gallery/bulb_360.jpg',
+      '/uploads/gallery/bulb_led.jpg',
+      '/uploads/gallery/bulb_scene.jpg'
+    ];
+  }
+
+  // 11. CAMERA HÀNH TRÌNH VIETMAP C61 (ID 112) - MÀN HÌNH DASHCAM Ô TÔ & GẮN KÍNH
+  if (id === '112' || name.includes('vietmap') || name.includes('hành trình') || name.includes('c61')) {
+    return [
+      mainImg,
+      '/uploads/gallery/vietmap_screen.png',
+      '/uploads/gallery/vietmap_mount.png',
+      '/uploads/gallery/vietmap_app.png',
+      '/uploads/gallery/vietmap_kit.png'
+    ];
+  }
+
+  // 12. CAMERA IMOU CRUISER S42FP (ID 110) - PTZ NGOÀI TRỜI 2 RÂU FULL COLOR
+  if (id === '110' || name.includes('cruiser') || name.includes('s42fp')) {
+    return [
+      mainImg,
+      '/uploads/gallery/cruiser_angle.jpg',
+      '/uploads/gallery/cruiser_color.jpg',
+      '/uploads/gallery/cruiser_waterproof.jpg',
+      '/uploads/gallery/cruiser_bracket.jpg'
+    ];
+  }
+
+  // 13. CAMERA PTZ EZVIZ C8C (ID 109) - HÌNH CẦU NGOÀI TRỜI QUAY QUÉT 360
+  if (id === '109' || name.includes('c8c')) {
+    return [
+      mainImg,
+      '/uploads/gallery/c8c_front.png',
+      '/uploads/gallery/c8c_mount.jpg',
+      '/uploads/gallery/c8c_night.jpg'
+    ];
+  }
+
+  // 14. CAMERA DAHUA WIFI HERO A1 (ID 111) - DAHUA HERO A1 QUAY QUÉT
+  if (id === '111' || name.includes('hero a1') || (name.includes('dahua') && name.includes('hero'))) {
+    return [
+      mainImg,
+      '/uploads/gallery/hero_a1_front.jpg',
+      '/uploads/gallery/hero_a1_rotate.jpg',
+      '/uploads/gallery/hero_a1_call.jpg',
+      '/uploads/gallery/hero_a1_port.jpg'
+    ];
+  }
+
+  // 15. CAMERA TP-LINK TAPO C200 (ID 103) - BỘ ẢNH THẬT TAPO C200
+  if (id === '103' || name.includes('tapo') || name.includes('c200')) {
+    return [
+      mainImg,
+      '/uploads/gallery/tapo_c200_side.jpg',
+      '/uploads/gallery/tapo_c200_sd.jpg',
+      '/uploads/gallery/p_103_angle_1.jpg',
+      '/uploads/gallery/p_103_angle_2.jpg'
+    ];
+  }
+
+  // 16. CAMERA XIAOMI MI HOME 360 (ID 102) - BỘ ẢNH THẬT XIAOMI MIJIA
+  if (id === '102' || name.includes('xiaomi') || name.includes('mi home')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_102_angle_1.jpg',
+      '/uploads/gallery/p_102_angle_2.jpg',
+      '/uploads/gallery/p_102_angle_3.jpg',
+      '/uploads/gallery/p_102_angle_4.jpg'
+    ];
+  }
+
+  // 17. CAMERA FPT INDOOR (ID 104) - BỘ ẢNH THẬT FPT
+  if (id === '104' || name.includes('fpt')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_104_angle_1.jpg',
+      '/uploads/gallery/p_104_angle_2.jpg',
+      '/uploads/gallery/p_104_angle_3.jpg',
+      '/uploads/gallery/p_104_angle_4.jpg'
+    ];
+  }
+
+  // 18. CAMERA VIETTEL HC2 (ID 105) - BỘ ẢNH THẬT VIETTEL
+  if (id === '105' || name.includes('viettel') || name.includes('hc2')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_105_angle_1.png',
+      '/uploads/gallery/hero_a1_rotate.jpg',
+      '/uploads/gallery/tapo_c200_side.jpg'
+    ];
+  }
+
+  // 19. CAMERA DOME BÁN CẦU: HUVIRON (107) & PANASONIC (108) (100% ẢNH THẬT CAMERA TRÒN GẮN TRẦN)
+  if (id === '107' || id === '108' || name.includes('huviron') || name.includes('panasonic') || name.includes('bán cầu') || name.includes('dome') || catId === '16') {
+    return [
+      mainImg,
+      '/uploads/gallery/dome_front.jpg',
+      '/uploads/gallery/dome_angle.jpg',
+      '/uploads/gallery/dome_mount.jpg'
+    ];
+  }
+
+  // 20. CAMERA CUBE / KHỐI NHỎ: GOOGLE NEST, RING, ARLO, WYZE, BLINK, EUFY
+  if (id === '117' || name.includes('nest') || name.includes('google')) {
+    return [
+      mainImg,
+      '/uploads/gallery/nest_cam_mount.jpg',
+      '/uploads/gallery/cube_side.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+  if (id === '119' || name.includes('arlo')) {
+    return [
+      mainImg,
+      '/uploads/gallery/arlo_pro4_45.png',
+      '/uploads/gallery/outdoor_bracket.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+  if (id === '120' || name.includes('wyze')) {
+    return [
+      mainImg,
+      '/uploads/gallery/wyze_v3_cutout.png',
+      '/uploads/gallery/cube_side.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+  if (id === '121' || name.includes('blink')) {
+    return [
+      mainImg,
+      '/uploads/gallery/blink_mini_white.png',
+      '/uploads/gallery/cube_side.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+  if (id === '122' || name.includes('eufy')) {
+    return [
+      mainImg,
+      '/uploads/gallery/cube_front.jpg',
+      '/uploads/gallery/cube_side.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+  if (id === '118' || name.includes('ring')) {
+    return [
+      mainImg,
+      '/uploads/gallery/outdoor_bracket.jpg',
+      '/uploads/gallery/cube_side.jpg',
+      '/uploads/gallery/cube_back.jpg'
+    ];
+  }
+
+  // 21. CAMERA KBVISION THÂN (ID 106)
+  if (id === '106' || name.includes('kbvision') || name.includes('kx-a2111')) {
+    return [
+      mainImg,
+      '/uploads/gallery/kbvision_c31l.jpg',
+      '/uploads/gallery/outdoor_ports.jpg',
+      '/uploads/gallery/outdoor_bracket.jpg'
+    ];
+  }
+
+  // 22. CAMERA DAHUA THÂN (ID 100)
+  if (id === '100' || name.includes('1230s') || (name.includes('dahua') && name.includes('hfw'))) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_100_angle_1.jpg',
+      '/uploads/gallery/p_100_angle_2.jpg',
+      '/uploads/gallery/p_100_angle_3.jpg',
+      '/uploads/gallery/p_100_angle_4.jpg'
+    ];
+  }
+
+  // 23. CAMERA HIKVISION THÂN (ID 98) & TRỌN BỘ HIKVISION (ID 101)
+  if (id === '98' || name.includes('2021g1') || name.includes('ds-2cd')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_98_angle_1.png',
+      '/uploads/gallery/outdoor_ports.jpg',
+      '/uploads/gallery/outdoor_bracket.jpg'
+    ];
+  }
+  if (id === '101' || name.includes('trọn bộ')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_101_angle_1.png',
+      '/uploads/gallery/hik_dvr_2.jpg',
+      '/uploads/gallery/hik_dvr_4.jpg'
+    ];
+  }
+
+  // 24. CAMERA EZVIZ OUTPRO (ID 95) & IMOU BULLET 2C (ID 94)
+  if (id === '95' || name.includes('outpro') || name.includes('c3tn')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_1.png',
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/p_95_angle_3.jpg',
+      '/uploads/gallery/p_95_angle_4.jpg'
+    ];
+  }
+  if (id === '94' || name.includes('bullet 2c')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_94_angle_1.png',
+      '/uploads/gallery/p_94_angle_2.png',
+      '/uploads/gallery/outdoor_ports.jpg',
+      '/uploads/gallery/outdoor_bracket.jpg'
+    ];
+  }
+
+  // 25. CAMERA VANTECH V-2020AI (ID 97)
   if (id === '97' || name.includes('vantech') || name.includes('v-2020') || name.includes('2020ai')) {
     return [
       mainImg,
       '/uploads/gallery/vantech_4.jpg',
       '/uploads/gallery/vantech_black_clean.jpg',
-      '/uploads/gallery/p_92_angle_3.jpg',
-      '/uploads/gallery/p_92_angle_4.png'
+      '/uploads/gallery/vantech_white_angle.jpg'
     ];
   }
 
-  // 7. Imou Ranger 2 (A22EP)
-  if (id === '92' || name.includes('ranger 2') || name.includes('a22ep')) {
+  // 26. CAMERA KBONE H21P (ID 96)
+  if (id === '96' || name.includes('kbone') || name.includes('h21p')) {
     return [
       mainImg,
-      '/uploads/gallery/p_92_angle_2.jpg',
-      '/uploads/gallery/p_92_angle_3.jpg',
-      '/uploads/gallery/p_92_angle_4.png',
-      '/uploads/gallery/imou_ranger2_angle.png'
+      '/uploads/gallery/p_96_angle_1.jpg',
+      '/uploads/gallery/p_96_angle_2.jpg',
+      '/uploads/gallery/p_96_angle_3.jpg'
     ];
   }
 
-  // 8. Camera Ezviz C6N
+  // 27. CAMERA YOOSEE 3 RÂU (ID 99)
+  if (id === '99' || name.includes('yoosee')) {
+    return [
+      mainImg,
+      '/uploads/gallery/p_99_angle_1.png',
+      '/uploads/gallery/p_99_angle_2.jpg',
+      '/uploads/gallery/p_99_angle_3.jpg',
+      '/uploads/gallery/p_99_angle_4.jpg'
+    ];
+  }
+
+  // 28. CAMERA EZVIZ C6N (ID 93)
   if (id === '93' || name.includes('c6n')) {
     return [
       mainImg,
@@ -588,109 +861,32 @@ function getProductImages(product: any, type: string): string[] {
     ];
   }
 
-  // 9. Camera Imou Bullet 2C
-  if (id === '94' || name.includes('bullet 2c')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_95_angle_2.jpg',
-      '/uploads/gallery/p_95_angle_3.jpg',
-      '/uploads/gallery/p_100_angle_1.jpg',
-      '/uploads/gallery/p_100_angle_3.jpg'
-    ];
-  }
-
-  // 10. Camera Ezviz C3TN OutPro 3MP
-  if (id === '95' || name.includes('outpro') || name.includes('c3tn')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_95_angle_2.jpg',
-      '/uploads/gallery/p_95_angle_3.jpg',
-      '/uploads/gallery/p_100_angle_1.jpg',
-      '/uploads/gallery/p_100_angle_3.jpg'
-    ];
-  }
-
-  // 11. Camera Wifi Kbone H21P
-  if (id === '96' || name.includes('kbone') || name.includes('h21p')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_96_angle_1.jpg',
-      '/uploads/gallery/p_96_angle_2.jpg',
-      '/uploads/gallery/p_92_angle_2.jpg',
-      '/uploads/gallery/p_92_angle_4.png'
-    ];
-  }
-
-  // 12. Camera Yoosee 3 Râu
-  if (id === '99' || name.includes('yoosee')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_99_angle_1.png',
-      '/uploads/gallery/p_99_angle_2.jpg',
-      '/uploads/gallery/p_99_angle_3.jpg',
-      '/uploads/gallery/p_92_angle_4.png'
-    ];
-  }
-
-  // 13. Camera Dahua IPC-HFW1230S
-  if (id === '100' || name.includes('1230s') || name.includes('dahua')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_100_angle_1.jpg',
-      '/uploads/gallery/p_100_angle_2.jpg',
-      '/uploads/gallery/p_100_angle_3.jpg',
-      '/uploads/gallery/p_95_angle_3.jpg'
-    ];
-  }
-
-  // 14. Trọn bộ 4 Camera Hikvision
-  if (id === '101' || name.includes('trọn bộ')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_95_angle_2.jpg',
-      '/uploads/gallery/p_100_angle_3.jpg',
-      '/uploads/gallery/p_95_angle_3.jpg'
-    ];
-  }
-
-  // 15. Xiaomi Mi Home 360 & TP-Link Tapo C200
-  if (name.includes('xiaomi') || name.includes('tapo') || name.includes('c200')) {
-    return [
-      mainImg,
-      '/uploads/gallery/p_102_angle_2.jpg',
-      '/uploads/gallery/p_92_angle_2.jpg',
-      '/uploads/gallery/p_92_angle_4.png'
-    ];
-  }
-
-  // 16. Camera Ngoài Trời (Bullet, PTZ C8C, Cruiser...)
-  if (type === 'camera_outdoor') {
-    return [
-      mainImg,
-      '/uploads/gallery/p_95_angle_2.jpg',
-      '/uploads/gallery/p_95_angle_3.jpg',
-      '/uploads/gallery/p_100_angle_1.jpg',
-      '/uploads/gallery/p_100_angle_3.jpg'
-    ];
-  }
-
-  // 17. Camera Trong Nhà (xoay 360, đàm thoại)
-  if (type === 'camera_indoor') {
+  // 29. CAMERA IMOU RANGER 2 (ID 92)
+  if (id === '92' || name.includes('ranger 2') || name.includes('a22ep')) {
     return [
       mainImg,
       '/uploads/gallery/p_92_angle_2.jpg',
       '/uploads/gallery/p_92_angle_3.jpg',
       '/uploads/gallery/p_92_angle_4.png',
-      '/uploads/gallery/ezviz_c6n_scene.jpg'
+      '/uploads/gallery/imou_ranger2_angle.png'
     ];
   }
 
-  // Mặc định cho mọi camera an ninh khác: góc nghiêng, góc xoay, thực tế lắp đặt
+  // 30. MẶC ĐỊNH THEO LOẠI THIẾT BỊ NẾU LÀ MODEL LẠ
+  if (type === 'camera_outdoor') {
+    return [
+      mainImg,
+      '/uploads/gallery/p_95_angle_2.jpg',
+      '/uploads/gallery/outdoor_ports.jpg',
+      '/uploads/gallery/outdoor_bracket.jpg'
+    ];
+  }
+
   return [
     mainImg,
-    '/uploads/gallery/p_92_angle_2.jpg',
-    '/uploads/gallery/p_95_angle_2.jpg',
-    '/uploads/gallery/p_92_angle_4.png'
+    '/uploads/gallery/ezviz_c6n_angle.jpg',
+    '/uploads/gallery/ezviz_c6n_back.jpg',
+    '/uploads/gallery/ezviz_c6n_kit.jpg'
   ];
 }
 
