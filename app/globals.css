@@ -3090,7 +3090,7 @@ input:focus, select:focus, textarea:focus {
   .product-tab-body {
     padding: 20px 14px !important;
     font-size: 13.5px !important;
-    line-height: 1.6 !important;
+    line-height: 1.6 !important; 
   }
 
   /* Khối tổng quan đánh giá trên mobile */
