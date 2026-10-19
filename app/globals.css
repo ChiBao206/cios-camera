@@ -1691,8 +1691,8 @@ input:focus, select:focus, textarea:focus {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual-card { display: none; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
-  .main-wrapper { grid-template-columns: 1fr; }
-  .products-grid-modern { grid-template-columns: repeat(3, 1fr); }
+  .main-wrapper { grid-template-columns: 260px 1fr; gap: 20px; }
+  .products-grid-modern { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: repeat(2, 1fr); gap: 30px; }
   .brand-tagline { display: none; }
 }
@@ -1850,15 +1850,159 @@ input:focus, select:focus, textarea:focus {
   .trust-content strong { font-size: 12.5px; }
   .trust-content span { font-size: 11px; }
 
-  /* Main layout */
+  /* Main layout: Flex column cho phép sidebar và content sắp xếp theo luồng UX mobile chuẩn */
   .main-wrapper {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     margin-bottom: 40px;
+    width: 95%;
   }
 
-  /* Sidebar ẩn (có thể mở bằng toggle nếu muốn) */
-  .sidebar-col { display: none; }
+  /* Hiển thị đầy đủ sidebar và content trên mobile */
+  .sidebar-col,
+  .content-col {
+    display: contents;
+  }
+
+  /* 1. Danh Mục Thiết Bị (Thanh trượt vuốt ngang hiện đại) */
+  .sidebar-box-categories {
+    order: 1;
+    margin-bottom: 0;
+    padding: 14px 14px 10px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+  .sidebar-box-categories .sidebar-title {
+    font-size: 13.5px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .category-nav-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .category-nav-list::-webkit-scrollbar {
+    display: none;
+  }
+  .category-nav-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    transition: all 0.2s ease;
+  }
+  .category-nav-item:hover {
+    padding-left: 16px;
+  }
+  .category-nav-item i {
+    display: none;
+  }
+  .category-nav-item.active {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+    color: #ffffff;
+    border-color: var(--primary-600);
+    box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
+  }
+
+  /* 2. Khoảng Giá (Lọc giá dạng lưới 2 cột gọn gàng) */
+  .sidebar-box-price {
+    order: 2;
+    margin-bottom: 0;
+    padding: 14px 16px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+  .sidebar-box-price .sidebar-title {
+    font-size: 13.5px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .price-chip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .price-chip {
+    padding: 8px 10px;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .price-chip span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 3. Vouchers Giảm Giá */
+  .content-section-vouchers {
+    order: 3;
+    margin-bottom: 10px !important;
+  }
+
+  /* 4. Top Bán Chạy */
+  .content-section-hot {
+    order: 4;
+    margin-bottom: 24px !important;
+  }
+
+  /* 5. Danh Sách Tất Cả Sản Phẩm */
+  .content-section-products {
+    order: 5;
+    margin-bottom: 16px;
+  }
+
+  /* 6. Đơn Hàng Mới Nhất (Live Real-Time Feed từ MongoDB) */
+  .sidebar-box-orders {
+    order: 6;
+    margin-bottom: 0;
+    padding: 16px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+
+  /* 7. Tiêu Chuẩn CiOs (Cam kết dịch vụ vàng) */
+  .sidebar-box-trust {
+    order: 7;
+    margin-bottom: 0;
+    padding: 16px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+  }
+  .sidebar-trust-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* 8. Hotline & Chat Zalo Tư Vấn Nhanh */
+  .sidebar-box-hotline {
+    order: 8;
+    margin-bottom: 0;
+    padding: 16px;
+    border-radius: var(--radius-lg);
+  }
 
   /* Products grid */
   .products-grid-modern { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -1904,6 +2048,20 @@ input:focus, select:focus, textarea:focus {
 
   /* Trust bar */
   .trust-grid { grid-template-columns: 1fr; gap: 8px; }
+
+  /* Sidebar widgets on small mobile */
+  .sidebar-trust-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .price-chip-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .price-chip {
+    padding: 7px 6px;
+    font-size: 11px;
+  }
 
   /* Products */
   .products-grid-modern { grid-template-columns: 1fr 1fr; gap: 10px; }

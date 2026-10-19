@@ -501,7 +501,7 @@ export default function Home() {
         {/* SIDEBAR CỘT TRÁI */}
         <aside className="sidebar-col">
           {/* Box Danh Mục */}
-          <div className="sidebar-box-clean">
+          <div className="sidebar-box-clean sidebar-box-categories">
             <div className="sidebar-title">
               <i className="fas fa-th-large"></i> Danh Mục Thiết Bị
             </div>
@@ -527,7 +527,7 @@ export default function Home() {
           </div>
 
           {/* Box Lọc Khoảng Giá */}
-          <div className="sidebar-box-clean">
+          <div className="sidebar-box-clean sidebar-box-price">
             <div className="sidebar-title">
               <i className="fas fa-sliders-h"></i> Khoảng Giá
             </div>
@@ -595,7 +595,7 @@ export default function Home() {
           </div>
 
           {/* 1. Box Hotline Hỗ Trợ & Zalo */}
-          <div className="sidebar-box-clean" style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%)', border: '1.5px solid #bae6fd' }}>
+          <div className="sidebar-box-clean sidebar-box-hotline" style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%)', border: '1.5px solid #bae6fd' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
               <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: '#0284c7', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.3)' }}>
                 <i className="fas fa-headset"></i>
@@ -623,7 +623,7 @@ export default function Home() {
 
           {/* 2. Box Đơn Hàng Mới Nhất (Live Real-Time Feed từ MongoDB) */}
           {recentOrders.length > 0 && (
-            <div className="sidebar-box-clean">
+            <div className="sidebar-box-clean sidebar-box-orders">
               <div className="sidebar-widget-header">
                 <span className="sidebar-widget-title">
                   <i className="fas fa-bolt" style={{ color: '#f59e0b' }}></i> Đơn Hàng Mới
@@ -677,7 +677,7 @@ export default function Home() {
           )}
 
           {/* 3. Box Cam Kết Tiêu Chuẩn Dịch Vụ Vàng */}
-          <div className="sidebar-box-clean">
+          <div className="sidebar-box-clean sidebar-box-trust">
             <div className="sidebar-widget-title" style={{ marginBottom: '14px', borderBottom: '2px solid #e0f2fe', paddingBottom: '10px' }}>
               <i className="fas fa-medal" style={{ color: '#0284c7' }}></i> Tiêu Chuẩn CiOs
             </div>
@@ -718,7 +718,7 @@ export default function Home() {
         <main className="content-col">
           {/* KHU VỰC VOUCHERS */}
           {vouchers.length > 0 && (
-            <div style={{ marginBottom: '35px' }}>
+            <div className="content-section-vouchers" style={{ marginBottom: '35px' }}>
               <div className="section-header-modern">
                 <div className="section-title-modern">
                   <span className="title-accent"></span>
@@ -777,7 +777,7 @@ export default function Home() {
           )}
 
           {/* SẢN PHẨM BÁN CHẠY NHẤT (HOT) */}
-          <div style={{ marginBottom: '40px' }}>
+          <div className="content-section-hot" style={{ marginBottom: '40px' }}>
             <div className="section-header-modern">
               <div className="section-title-modern">
                 <span className="title-accent"></span>
@@ -860,7 +860,7 @@ export default function Home() {
           </div>
 
           {/* TẤT CẢ SẢN PHẨM */}
-          <div>
+          <div className="content-section-products">
             <div className="section-header-modern">
               <div className="section-title-modern">
                 <span className="title-accent"></span>
