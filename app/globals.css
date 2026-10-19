@@ -828,8 +828,7 @@ input:focus, select:focus, textarea:focus {
 @media (min-width: 769px) {
   .cat-arrow-wrapper-left,
   .cat-arrow-wrapper-right,
-  .cat-arrow-btn,
-  .cat-swipe-hint {
+  .cat-arrow-btn {
     display: none !important;
   }
 }
@@ -2087,17 +2086,6 @@ input:focus, select:focus, textarea:focus {
     font-size: 13.5px;
     margin-bottom: 10px;
     padding-bottom: 8px;
-  }
-  .cat-swipe-hint {
-    font-size: 11px;
-    font-weight: 700;
-    color: #0284c7;
-    background: #e0f2fe;
-    padding: 2px 8px;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
   }
   .category-scroll-container {
     position: relative !important;

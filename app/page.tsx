@@ -624,14 +624,9 @@ export default function Home() {
         <aside className="sidebar-col">
           {/* Box Danh Mục */}
           <div className="sidebar-box-clean sidebar-box-categories">
-            <div className="sidebar-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="fas fa-th-large" style={{ color: '#0284c7' }}></i>
-                <span>Danh Mục Thiết Bị</span>
-              </div>
-              <span className="cat-swipe-hint">
-                <i className="fas fa-arrows-alt-h"></i> Vuốt ngang
-              </span>
+            <div className="sidebar-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+              <i className="fas fa-th-large" style={{ color: '#0284c7' }}></i>
+              <span>Danh Mục Thiết Bị</span>
             </div>
             <div className="category-scroll-container">
               {canScrollLeft && (
