@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "./context/CartContext";
 import NotifBadge from "@/app/components/NotifBadge";
@@ -82,6 +82,80 @@ export default function Home() {
       items: [{ name: "Camera Wifi Imou Ranger 2 (A22EP)", image: "/uploads/92.jpg" }]
     }
   ]);
+
+  // XỬ LÝ VUỐT / KÉO / CUỘN DANH MỤC TRÊN MỌI THIẾT BỊ
+  const categoryNavRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const isDraggingCat = useRef(false);
+  const startXCat = useRef(0);
+  const scrollLeftCat = useRef(0);
+  const hasMovedCat = useRef(false);
+
+  const checkCatScroll = useCallback(() => {
+    if (categoryNavRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = categoryNavRef.current;
+      setCanScrollLeft(scrollLeft > 6);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 6);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkCatScroll();
+    const handleResize = () => checkCatScroll();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [checkCatScroll, categories]);
+
+  useEffect(() => {
+    const el = categoryNavRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (el.scrollWidth > el.clientWidth) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          el.scrollLeft += e.deltaY;
+          checkCatScroll();
+        }
+      }
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [checkCatScroll]);
+
+  const handleCatMouseDown = (e: React.MouseEvent) => {
+    if (!categoryNavRef.current) return;
+    isDraggingCat.current = true;
+    hasMovedCat.current = false;
+    startXCat.current = e.pageX - categoryNavRef.current.offsetLeft;
+    scrollLeftCat.current = categoryNavRef.current.scrollLeft;
+  };
+
+  const handleCatMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingCat.current || !categoryNavRef.current) return;
+    const x = e.pageX - categoryNavRef.current.offsetLeft;
+    const walk = (x - startXCat.current);
+    if (Math.abs(walk) > 4) {
+      hasMovedCat.current = true;
+    }
+    categoryNavRef.current.scrollLeft = scrollLeftCat.current - walk;
+    checkCatScroll();
+  };
+
+  const handleCatMouseUp = () => {
+    isDraggingCat.current = false;
+    setTimeout(() => {
+      hasMovedCat.current = false;
+    }, 60);
+  };
+
+  const scrollCat = (direction: 'left' | 'right') => {
+    if (categoryNavRef.current) {
+      const offset = direction === 'left' ? -220 : 220;
+      categoryNavRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+      setTimeout(checkCatScroll, 350);
+    }
+  };
 
   // 2. TỰ ĐỘNG GỌI API ĐỒNG BỘ DỮ LIỆU
   useEffect(() => {
@@ -505,92 +579,163 @@ export default function Home() {
             <div className="sidebar-title">
               <i className="fas fa-th-large"></i> Danh Mục Thiết Bị
             </div>
-            <div className="category-nav-list">
-              <div 
-                className={`category-nav-item ${selectedCategory === "all" ? "active" : ""}`}
-                onClick={() => setSelectedCategory("all")}
-              >
-                <span>Tất cả sản phẩm</span>
-                <i className="fas fa-chevron-right" style={{ fontSize: '11px' }}></i>
-              </div>
-              {categories.map((cat) => (
-                <div 
-                  key={cat.id || cat._id}
-                  className={`category-nav-item ${selectedCategory === String(cat.id || cat._id) ? "active" : ""}`}
-                  onClick={() => setSelectedCategory(String(cat.id || cat._id))}
+            <div className="category-scroll-container">
+              {canScrollLeft && (
+                <button
+                  type="button"
+                  className="cat-arrow-btn cat-arrow-left"
+                  onClick={() => scrollCat('left')}
+                  title="Cuộn sang trái"
+                  aria-label="Cuộn sang trái"
                 >
-                  <span>{cat.name}</span>
-                  <i className="fas fa-chevron-right" style={{ fontSize: '11px' }}></i>
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+              )}
+
+              <div 
+                className="category-nav-list"
+                ref={categoryNavRef}
+                onScroll={checkCatScroll}
+                onMouseDown={handleCatMouseDown}
+                onMouseMove={handleCatMouseMove}
+                onMouseUp={handleCatMouseUp}
+                onMouseLeave={handleCatMouseUp}
+              >
+                <div 
+                  className={`category-nav-item ${selectedCategory === "all" ? "active" : ""}`}
+                  onClick={() => {
+                    if (!hasMovedCat.current) setSelectedCategory("all");
+                  }}
+                >
+                  <i className="fas fa-border-all" style={{ fontSize: '11px' }}></i>
+                  <span>Tất cả sản phẩm</span>
                 </div>
-              ))}
+                {categories.map((cat) => (
+                  <div 
+                    key={cat.id || cat._id}
+                    className={`category-nav-item ${selectedCategory === String(cat.id || cat._id) ? "active" : ""}`}
+                    onClick={() => {
+                      if (!hasMovedCat.current) setSelectedCategory(String(cat.id || cat._id));
+                    }}
+                  >
+                    <span>{cat.name}</span>
+                    <i className="fas fa-chevron-right" style={{ fontSize: '11px' }}></i>
+                  </div>
+                ))}
+              </div>
+
+              {canScrollRight && (
+                <button
+                  type="button"
+                  className="cat-arrow-btn cat-arrow-right"
+                  onClick={() => scrollCat('right')}
+                  title="Cuộn sang phải"
+                  aria-label="Cuộn sang phải"
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Box Lọc Khoảng Giá */}
+          {/* Box Lọc Khoảng Giá Hiện Đại & Gọn Gàng */}
           <div className="sidebar-box-clean sidebar-box-price">
-            <div className="sidebar-title">
-              <i className="fas fa-sliders-h"></i> Khoảng Giá
+            <div className="sidebar-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <i className="fas fa-sliders-h" style={{ color: '#0284c7' }}></i>
+                <span>Khoảng Giá</span>
+              </div>
+              {(minPrice !== 0 || maxPrice !== 5000000) && (
+                <button 
+                  type="button"
+                  className="price-reset-pill"
+                  onClick={() => { setMinPrice(0); setMaxPrice(5000000); }}
+                  title="Xóa bộ lọc giá"
+                >
+                  <i className="fas fa-undo-alt"></i> Đặt lại
+                </button>
+              )}
             </div>
-            <div style={{ marginBottom: '16px' }}>
+
+            {/* Thẻ hiển thị mức giá đang chọn */}
+            <div className="price-display-card">
+              <span className="price-display-label">
+                <i className="fas fa-filter"></i> Mức giá lọc:
+              </span>
+              <span className="price-display-val">
+                {minPrice === 0 && maxPrice >= 5000000 ? (
+                  <span className="price-val-all">Tất cả mức giá</span>
+                ) : (
+                  <span className="price-val-active">
+                    {minPrice > 0 ? `${minPrice.toLocaleString('vi-VN')} đ` : '0 đ'} 
+                    <span style={{ margin: '0 4px', color: '#94a3b8' }}>→</span>
+                    {maxPrice >= 50000000 ? 'Trên 3 Triệu' : `${maxPrice.toLocaleString('vi-VN')} đ`}
+                  </span>
+                )}
+              </span>
+            </div>
+
+            {/* Thanh trượt khoảng giá công nghệ hiện đại */}
+            <div className="modern-slider-container">
               <input
                 type="range"
                 min="0"
                 max="5000000"
                 step="100000"
-                value={maxPrice}
+                value={maxPrice > 5000000 ? 5000000 : maxPrice}
                 onChange={(e) => {
                   setMinPrice(0);
                   setMaxPrice(Number(e.target.value));
                 }}
-                style={{ width: '100%', cursor: 'pointer', accentColor: '#0284c7' }}
+                className="modern-price-slider"
+                style={{
+                  background: `linear-gradient(to right, #0284c7 0%, #0284c7 ${Math.min(100, Math.max(0, (Math.min(maxPrice, 5000000) / 5000000) * 100))}%, #e2e8f0 ${Math.min(100, Math.max(0, (Math.min(maxPrice, 5000000) / 5000000) * 100))}%, #e2e8f0 100%)`
+                }}
               />
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', marginTop: '6px', color: '#0369a1', fontWeight: '700' }}>
+              <div className="slider-tick-labels">
                 <span>0 đ</span>
-                <span>Dưới {maxPrice.toLocaleString('vi-VN')} đ</span>
+                <span>2.5 Triệu</span>
+                <span>5+ Triệu</span>
               </div>
             </div>
 
+            {/* Các thẻ chọn nhanh khoảng giá dạng pills hiện đại */}
             <div className="price-chip-grid">
-              <div 
+              <button 
+                type="button"
                 className={`price-chip ${minPrice === 0 && maxPrice === 500000 ? "active" : ""}`}
                 onClick={() => { setMinPrice(0); setMaxPrice(500000); }}
               >
-                <span>Dưới 500.000đ</span>
-                <i className="fas fa-check" style={{ display: minPrice === 0 && maxPrice === 500000 ? 'block' : 'none' }}></i>
-              </div>
+                <span className="price-chip-dot"></span>
+                <span>Dưới 500K</span>
+              </button>
 
-              <div 
+              <button 
+                type="button"
                 className={`price-chip ${minPrice === 500000 && maxPrice === 1000000 ? "active" : ""}`}
                 onClick={() => { setMinPrice(500000); setMaxPrice(1000000); }}
               >
-                <span>500.000đ - 1.000.000đ</span>
-                <i className="fas fa-check" style={{ display: minPrice === 500000 && maxPrice === 1000000 ? 'block' : 'none' }}></i>
-              </div>
+                <span className="price-chip-dot"></span>
+                <span>500K - 1 Triệu</span>
+              </button>
 
-              <div 
+              <button 
+                type="button"
                 className={`price-chip ${minPrice === 1000000 && maxPrice === 3000000 ? "active" : ""}`}
                 onClick={() => { setMinPrice(1000000); setMaxPrice(3000000); }}
               >
-                <span>1.000.000đ - 3.000.000đ</span>
-                <i className="fas fa-check" style={{ display: minPrice === 1000000 && maxPrice === 3000000 ? 'block' : 'none' }}></i>
-              </div>
+                <span className="price-chip-dot"></span>
+                <span>1 - 3 Triệu</span>
+              </button>
 
-              <div 
+              <button 
+                type="button"
                 className={`price-chip ${minPrice === 3000000 && maxPrice === 50000000 ? "active" : ""}`}
                 onClick={() => { setMinPrice(3000000); setMaxPrice(50000000); }}
               >
-                <span>Trên 3.000.000đ</span>
-                <i className="fas fa-check" style={{ display: minPrice === 3000000 && maxPrice === 50000000 ? 'block' : 'none' }}></i>
-              </div>
-
-              {(minPrice !== 0 || maxPrice !== 5000000) && (
-                <button 
-                  onClick={() => { setMinPrice(0); setMaxPrice(5000000); }}
-                  style={{ background: 'transparent', border: 'none', color: '#0284c7', fontSize: '13px', fontWeight: '700', cursor: 'pointer', marginTop: '6px', textAlign: 'center' }}
-                >
-                  <i className="fas fa-times-circle"></i> Đặt lại bộ lọc giá
-                </button>
-              )}
+                <span className="price-chip-dot"></span>
+                <span>Trên 3 Triệu</span>
+              </button>
             </div>
           </div>
 

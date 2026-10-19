@@ -765,10 +765,61 @@ input:focus, select:focus, textarea:focus {
   color: var(--primary-600);
 }
 
+/* Category Scroll Container */
+.category-scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cat-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #bae6fd;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  transition: all 0.2s ease;
+}
+
+.cat-arrow-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+}
+
+.cat-arrow-left {
+  left: -8px;
+}
+
+.cat-arrow-right {
+  right: -8px;
+}
+
+@media (min-width: 769px) {
+  .cat-arrow-btn {
+    display: none !important;
+  }
+}
+
 .category-nav-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 }
 
 .category-nav-item {
@@ -781,6 +832,8 @@ input:focus, select:focus, textarea:focus {
   font-weight: 600;
   color: var(--slate-700);
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
   transition: all 0.2s ease;
 }
 
@@ -801,39 +854,169 @@ input:focus, select:focus, textarea:focus {
   color: #ffffff;
 }
 
-/* Price Filters */
-.price-chip-grid {
+/* ---- MODERN PRICE FILTER ---- */
+.price-reset-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0284c7;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.price-reset-pill:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #ef4444;
+}
+
+.price-display-card {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.price-display-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #0369a1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.price-display-val {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+.price-val-all {
+  color: #0369a1;
+}
+
+.price-val-active {
+  color: #0284c7;
+}
+
+.modern-slider-container {
+  margin-bottom: 16px;
+  padding: 0 2px;
+}
+
+.modern-price-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modern-price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modern-price-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.6);
+}
+
+.modern-price-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+  cursor: pointer;
+}
+
+.slider-tick-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Preset Chips (Desktop sidebar: 2 columns) */
+.price-chip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
 .price-chip {
-  padding: 9px 12px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--slate-200);
-  background: var(--slate-50);
-  font-size: 13.5px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--slate-700);
+  color: #334155;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.price-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #94a3b8;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .price-chip:hover {
-  border-color: var(--primary-400);
-  background: var(--primary-50);
-  color: var(--primary-700);
+  border-color: #7dd3fc;
+  background: #f0f9ff;
+  color: #0284c7;
+  transform: translateY(-1px);
+}
+
+.price-chip:hover .price-chip-dot {
+  background: #0284c7;
 }
 
 .price-chip.active {
-  border-color: var(--primary-600);
-  background: var(--primary-100);
-  color: var(--primary-800);
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  border-color: #0284c7;
   font-weight: 700;
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
+}
+
+.price-chip.active .price-chip-dot {
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
 }
 
 /* =========================================
@@ -1865,20 +2048,28 @@ input:focus, select:focus, textarea:focus {
     display: contents;
   }
 
-  /* 1. Danh Mục Thiết Bị (Thanh trượt vuốt ngang hiện đại) */
+  /* 1. Danh Mục Thiết Bị (Vuốt & Kéo ngang mượt mà trên mobile/tablet) */
   .sidebar-box-categories {
     order: 1;
     margin-bottom: 0;
-    padding: 14px 14px 10px;
+    padding: 12px 14px 10px;
     background: var(--card-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
+    position: relative;
+    overflow: hidden;
   }
   .sidebar-box-categories .sidebar-title {
     font-size: 13.5px;
     margin-bottom: 10px;
     padding-bottom: 8px;
+  }
+  .category-scroll-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
   .category-nav-list {
     display: flex;
@@ -1886,9 +2077,16 @@ input:focus, select:focus, textarea:focus {
     overflow-x: auto;
     flex-wrap: nowrap;
     gap: 8px;
-    padding-bottom: 6px;
+    padding: 4px 6px 8px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .category-nav-list:active {
+    cursor: grabbing;
   }
   .category-nav-list::-webkit-scrollbar {
     display: none;
@@ -1896,17 +2094,20 @@ input:focus, select:focus, textarea:focus {
   .category-nav-item {
     white-space: nowrap;
     flex-shrink: 0;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 7px 15px;
+    font-size: 12.5px;
     font-weight: 600;
     border-radius: 20px;
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
     color: #334155;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
   .category-nav-item:hover {
-    padding-left: 16px;
+    padding-left: 15px;
   }
   .category-nav-item i {
     display: none;
@@ -1918,7 +2119,7 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
   }
 
-  /* 2. Khoảng Giá (Lọc giá dạng lưới 2 cột gọn gàng) */
+  /* 2. Khoảng Giá (Lọc giá gọn gàng, hiện đại) */
   .sidebar-box-price {
     order: 2;
     margin-bottom: 0;
@@ -1930,7 +2131,7 @@ input:focus, select:focus, textarea:focus {
   }
   .sidebar-box-price .sidebar-title {
     font-size: 13.5px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding-bottom: 8px;
   }
   .price-chip-grid {
@@ -1941,14 +2142,6 @@ input:focus, select:focus, textarea:focus {
   .price-chip {
     padding: 8px 10px;
     font-size: 12px;
-    justify-content: center;
-    text-align: center;
-    border-radius: 8px;
-  }
-  .price-chip span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   /* 3. Vouchers Giảm Giá */
