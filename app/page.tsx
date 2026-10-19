@@ -102,9 +102,17 @@ export default function Home() {
 
   useEffect(() => {
     checkCatScroll();
+    const t1 = setTimeout(checkCatScroll, 100);
+    const t2 = setTimeout(checkCatScroll, 400);
+    const t3 = setTimeout(checkCatScroll, 1000);
     const handleResize = () => checkCatScroll();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      window.removeEventListener('resize', handleResize);
+    };
   }, [checkCatScroll, categories]);
 
   useEffect(() => {
@@ -133,8 +141,9 @@ export default function Home() {
 
   const handleCatMouseMove = (e: React.MouseEvent) => {
     if (!isDraggingCat.current || !categoryNavRef.current) return;
+    e.preventDefault();
     const x = e.pageX - categoryNavRef.current.offsetLeft;
-    const walk = (x - startXCat.current);
+    const walk = (x - startXCat.current) * 1.5;
     if (Math.abs(walk) > 4) {
       hasMovedCat.current = true;
     }
@@ -149,9 +158,32 @@ export default function Home() {
     }, 60);
   };
 
+  // Hỗ trợ vuốt chạm cảm ứng trên điện thoại
+  const touchStartX = useRef(0);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].pageX;
+    hasMovedCat.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const delta = Math.abs(e.touches[0].pageX - touchStartX.current);
+    if (delta > 6) {
+      hasMovedCat.current = true;
+    }
+    checkCatScroll();
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      hasMovedCat.current = false;
+      checkCatScroll();
+    }, 80);
+  };
+
   const scrollCat = (direction: 'left' | 'right') => {
     if (categoryNavRef.current) {
-      const offset = direction === 'left' ? -220 : 220;
+      const scrollStep = Math.max(160, Math.floor(categoryNavRef.current.clientWidth * 0.75));
+      const offset = direction === 'left' ? -scrollStep : scrollStep;
       categoryNavRef.current.scrollBy({ left: offset, behavior: 'smooth' });
       setTimeout(checkCatScroll, 350);
     }
@@ -581,15 +613,17 @@ export default function Home() {
             </div>
             <div className="category-scroll-container">
               {canScrollLeft && (
-                <button
-                  type="button"
-                  className="cat-arrow-btn cat-arrow-left"
-                  onClick={() => scrollCat('left')}
-                  title="Cuộn sang trái"
-                  aria-label="Cuộn sang trái"
-                >
-                  <i className="fas fa-chevron-left"></i>
-                </button>
+                <div className="cat-arrow-wrapper-left">
+                  <button
+                    type="button"
+                    className="cat-arrow-btn cat-arrow-left"
+                    onClick={() => scrollCat('left')}
+                    title="Cuộn sang trái"
+                    aria-label="Cuộn sang trái"
+                  >
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                </div>
               )}
 
               <div 
@@ -600,6 +634,9 @@ export default function Home() {
                 onMouseMove={handleCatMouseMove}
                 onMouseUp={handleCatMouseUp}
                 onMouseLeave={handleCatMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
                 <div 
                   className={`category-nav-item ${selectedCategory === "all" ? "active" : ""}`}
@@ -625,15 +662,17 @@ export default function Home() {
               </div>
 
               {canScrollRight && (
-                <button
-                  type="button"
-                  className="cat-arrow-btn cat-arrow-right"
-                  onClick={() => scrollCat('right')}
-                  title="Cuộn sang phải"
-                  aria-label="Cuộn sang phải"
-                >
-                  <i className="fas fa-chevron-right"></i>
-                </button>
+                <div className="cat-arrow-wrapper-right">
+                  <button
+                    type="button"
+                    className="cat-arrow-btn cat-arrow-right"
+                    onClick={() => scrollCat('right')}
+                    title="Cuộn sang phải"
+                    aria-label="Cuộn sang phải"
+                  >
+                    <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
               )}
             </div>
           </div>

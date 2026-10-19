@@ -768,48 +768,66 @@ input:focus, select:focus, textarea:focus {
 /* Category Scroll Container */
 .category-scroll-container {
   position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.cat-arrow-wrapper-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 36px;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: flex-start;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 50%, transparent);
+  z-index: 15;
+  pointer-events: none;
+}
+
+.cat-arrow-wrapper-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 50%, transparent);
+  z-index: 15;
+  pointer-events: none;
 }
 
 .cat-arrow-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #ffffff;
-  border: 1.5px solid #bae6fd;
+  border: 1.5px solid #0284c7;
   color: #0284c7;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
   transition: all 0.2s ease;
 }
 
 .cat-arrow-btn:hover {
   background: #0284c7;
   color: #ffffff;
-  border-color: #0284c7;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
-}
-
-.cat-arrow-left {
-  left: -8px;
-}
-
-.cat-arrow-right {
-  right: -8px;
+  transform: scale(1.12);
 }
 
 @media (min-width: 769px) {
+  .cat-arrow-wrapper-left,
+  .cat-arrow-wrapper-right,
   .cat-arrow-btn {
     display: none !important;
   }
@@ -2058,7 +2076,6 @@ input:focus, select:focus, textarea:focus {
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
     position: relative;
-    overflow: hidden;
   }
   .sidebar-box-categories .sidebar-title {
     font-size: 13.5px;
@@ -2068,28 +2085,37 @@ input:focus, select:focus, textarea:focus {
   .category-scroll-container {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
+    max-width: 100%;
+    min-width: 0;
+    display: block;
   }
   .category-nav-list {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     gap: 8px;
     padding: 4px 6px 8px;
     scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
+    scroll-behavior: smooth;
   }
   .category-nav-list:active {
     cursor: grabbing;
   }
   .category-nav-list::-webkit-scrollbar {
     display: none;
+    width: 0;
+    height: 0;
   }
   .category-nav-item {
     white-space: nowrap;
