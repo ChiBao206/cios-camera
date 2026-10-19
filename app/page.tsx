@@ -96,9 +96,13 @@ export default function Home() {
     if (categoryNavRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = categoryNavRef.current;
       setCanScrollLeft(scrollLeft > 6);
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 6);
+      if (scrollWidth > clientWidth + 8) {
+        setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 8);
+      } else {
+        setCanScrollRight(categories.length > 2);
+      }
     }
-  }, []);
+  }, [categories.length]);
 
   useEffect(() => {
     checkCatScroll();
@@ -160,31 +164,43 @@ export default function Home() {
 
   // Hỗ trợ vuốt chạm cảm ứng trên điện thoại
   const touchStartX = useRef(0);
+  const touchScrollLeft = useRef(0);
+  const isTouchingCat = useRef(false);
+
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].pageX;
+    if (!categoryNavRef.current) return;
+    isTouchingCat.current = true;
+    touchStartX.current = e.touches[0].clientX;
+    touchScrollLeft.current = categoryNavRef.current.scrollLeft;
     hasMovedCat.current = false;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    const delta = Math.abs(e.touches[0].pageX - touchStartX.current);
-    if (delta > 6) {
+    if (!categoryNavRef.current || !isTouchingCat.current) return;
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - touchStartX.current;
+    if (Math.abs(deltaX) > 4) {
       hasMovedCat.current = true;
+      categoryNavRef.current.scrollLeft = touchScrollLeft.current - deltaX;
+      checkCatScroll();
     }
-    checkCatScroll();
   };
 
   const handleTouchEnd = () => {
+    isTouchingCat.current = false;
     setTimeout(() => {
       hasMovedCat.current = false;
       checkCatScroll();
-    }, 80);
+    }, 100);
   };
 
   const scrollCat = (direction: 'left' | 'right') => {
     if (categoryNavRef.current) {
-      const scrollStep = Math.max(160, Math.floor(categoryNavRef.current.clientWidth * 0.75));
-      const offset = direction === 'left' ? -scrollStep : scrollStep;
-      categoryNavRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+      const scrollStep = 240;
+      const target = direction === 'left' 
+        ? categoryNavRef.current.scrollLeft - scrollStep 
+        : categoryNavRef.current.scrollLeft + scrollStep;
+      categoryNavRef.current.scrollTo({ left: target, behavior: 'smooth' });
       setTimeout(checkCatScroll, 350);
     }
   };
@@ -608,8 +624,14 @@ export default function Home() {
         <aside className="sidebar-col">
           {/* Box Danh Mục */}
           <div className="sidebar-box-clean sidebar-box-categories">
-            <div className="sidebar-title">
-              <i className="fas fa-th-large"></i> Danh Mục Thiết Bị
+            <div className="sidebar-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <i className="fas fa-th-large" style={{ color: '#0284c7' }}></i>
+                <span>Danh Mục Thiết Bị</span>
+              </div>
+              <span className="cat-swipe-hint">
+                <i className="fas fa-arrows-alt-h"></i> Vuốt ngang
+              </span>
             </div>
             <div className="category-scroll-container">
               {canScrollLeft && (

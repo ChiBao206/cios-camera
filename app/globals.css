@@ -828,7 +828,8 @@ input:focus, select:focus, textarea:focus {
 @media (min-width: 769px) {
   .cat-arrow-wrapper-left,
   .cat-arrow-wrapper-right,
-  .cat-arrow-btn {
+  .cat-arrow-btn,
+  .cat-swipe-hint {
     display: none !important;
   }
 }
@@ -2076,18 +2077,36 @@ input:focus, select:focus, textarea:focus {
     box-shadow: var(--card-shadow);
     border: 1px solid var(--card-border);
     position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .sidebar-box-categories .sidebar-title {
     font-size: 13.5px;
     margin-bottom: 10px;
     padding-bottom: 8px;
   }
+  .cat-swipe-hint {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
   .category-scroll-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    display: block;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .category-nav-list {
     display: flex !important;
@@ -2098,10 +2117,11 @@ input:focus, select:focus, textarea:focus {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    gap: 8px;
-    padding: 4px 6px 8px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    box-sizing: border-box !important;
+    gap: 8px !important;
+    padding: 4px 6px 8px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
     -webkit-overflow-scrolling: touch !important;
     touch-action: pan-x !important;
     cursor: grab;
@@ -2113,9 +2133,9 @@ input:focus, select:focus, textarea:focus {
     cursor: grabbing;
   }
   .category-nav-list::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   .category-nav-item {
     white-space: nowrap;
